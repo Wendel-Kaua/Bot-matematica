@@ -204,5 +204,11 @@
     "topic": "Probabilidade",
     "question": "Uma urna contém cinco cartões numerados de 1 a 5. Retira-se sucessivamente, ao acaso, os cinco cartões e alinha-os formando um número de cinco algarismos. Qual a probabilidade desse número ser divisível por 4?",
     "answer": "1/5 (4 finais possíveis divisíveis por 4: 12, 24, 32, 52; cada um com 3! arranjos → 4·3!/5! = 1/5)"
+  },
+  {
+    "question": "Considere todos os números de três algarismos formados com os dígitos 1, 2, 3 e 4, sem repetição de algarismos. Qual é a soma de todos esses números?",
+    "answer": "A soma é 6660. Cada dígito aparece 6 vezes em cada posição; assim a soma das centenas é (1+2+3+4)·6·100=6000, das dezenas (1+2+3+4)·6·10=600 e das unidades (1+2+3+4)·6=60; total 6660.",
+    "difficulty": "médio",
+    "topic": "adição"
   }
 ]
