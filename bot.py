@@ -10,6 +10,7 @@ import logging
 import re
 import base64
 import asyncio
+import time as time_module
 from datetime import time, timezone, timedelta
 
 import discord
@@ -136,6 +137,8 @@ def github_configured() -> bool:
 
 def push_problems_to_github(problems: list[dict]) -> None:
     """Sobrescreve o problems.json no GitHub com a lista de problemas atual.
+    Tenta de novo automaticamente uma vez se der conflito (409) — geralmente
+    causado por uma pequena inconsistência passageira da API do GitHub.
     Levanta uma exceção se algo der errado (chave inválida, repo errado, etc.)."""
     api_url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_FILE_PATH}"
     headers = {
@@ -143,22 +146,31 @@ def push_problems_to_github(problems: list[dict]) -> None:
         "Accept": "application/vnd.github+json",
     }
 
-    # Precisa do sha atual do arquivo pra poder atualizá-lo.
-    resp = requests.get(api_url, headers=headers, params={"ref": GITHUB_BRANCH}, timeout=20)
-    resp.raise_for_status()
-    sha_atual = resp.json()["sha"]
-
     conteudo = json.dumps(problems, ensure_ascii=False, indent=2)
     conteudo_b64 = base64.b64encode(conteudo.encode("utf-8")).decode("utf-8")
 
-    payload = {
-        "message": "Adiciona problema gerado por IA via bot do Discord",
-        "content": conteudo_b64,
-        "sha": sha_atual,
-        "branch": GITHUB_BRANCH,
-    }
-    put_resp = requests.put(api_url, headers=headers, json=payload, timeout=20)
-    put_resp.raise_for_status()
+    tentativas_maximas = 2
+    for tentativa in range(1, tentativas_maximas + 1):
+        # Precisa do sha atual do arquivo pra poder atualizá-lo.
+        resp = requests.get(api_url, headers=headers, params={"ref": GITHUB_BRANCH}, timeout=20)
+        resp.raise_for_status()
+        sha_atual = resp.json()["sha"]
+
+        payload = {
+            "message": "Adiciona problema gerado por IA via bot do Discord",
+            "content": conteudo_b64,
+            "sha": sha_atual,
+            "branch": GITHUB_BRANCH,
+        }
+        put_resp = requests.put(api_url, headers=headers, json=payload, timeout=20)
+
+        if put_resp.status_code == 409 and tentativa < tentativas_maximas:
+            logger.warning("Conflito (409) ao salvar no GitHub, tentando de novo...")
+            time_module.sleep(1)
+            continue
+
+        put_resp.raise_for_status()
+        return
 
 
 def save_generated_problem(problem: dict) -> tuple[bool, str]:
@@ -186,6 +198,8 @@ def save_generated_problem(problem: dict) -> tuple[bool, str]:
             f"⚠️ Salvei no banco local, mas não consegui sincronizar com o GitHub "
             f"agora ({exc}). Essa adição pode se perder no próximo deploy."
         )
+
+
 def build_problem_embed(problem: dict, numero: int | None = None) -> discord.Embed:
     titulo = "🧮 Problema de Matemática do Dia"
     if numero is not None:
