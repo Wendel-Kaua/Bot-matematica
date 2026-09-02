@@ -7,9 +7,13 @@ import os
 import json
 import random
 import logging
+import re
+import base64
+import asyncio
 from datetime import time, timezone, timedelta
 
 import discord
+import requests
 from discord.ext import commands, tasks
 from dotenv import load_dotenv
 
@@ -20,6 +24,19 @@ load_dotenv()
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 CHANNEL_ID = int(os.getenv("CHANNEL_ID", "0"))
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+# openai/gpt-oss-120b é o modelo "de produção" recomendado atualmente pela Groq
+# para tarefas de propósito geral. Pode ser trocado via variável de ambiente
+# se a Groq aposentar esse modelo no futuro (veja console.groq.com/docs/models).
+GROQ_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
+GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
+
+# Sincronização do banco de problemas com o GitHub (para persistir problemas
+# gerados por IA além do reinício/redeploy do bot).
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+GITHUB_REPO = os.getenv("GITHUB_REPO")  # formato "usuario/repositorio"
+GITHUB_BRANCH = os.getenv("GITHUB_BRANCH", "main")
+GITHUB_FILE_PATH = os.getenv("GITHUB_FILE_PATH", "problems.json")
 
 # Horário (fuso de Brasília, UTC-3) em que o problema é postado todo dia.
 # Exemplo: 8h da manhã em Brasília.
@@ -38,7 +55,11 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-# Guarda o último problema postado (por canal) para o comando !resposta funcionar
+# Histórico de problemas por canal: canal_id -> {numero: problema}
+problem_history_by_channel: dict[int, dict[int, dict]] = {}
+# Próximo número a usar em cada canal
+next_id_by_channel: dict[int, int] = {}
+# Guarda o último problema postado (por canal), pra !resposta sem número continuar funcionando
 last_problem_by_channel: dict[int, dict] = {}
 
 
@@ -47,9 +68,130 @@ def load_problems() -> list[dict]:
         return json.load(f)
 
 
-def build_problem_embed(problem: dict) -> discord.Embed:
+def get_topics() -> list[str]:
+    problems = load_problems()
+    return sorted({p["topic"] for p in problems})
+
+
+def register_problem(channel_id: int, problem: dict) -> int:
+    """Registra o problema no histórico do canal e devolve o número (#ID) atribuído a ele."""
+    numero = next_id_by_channel.get(channel_id, 1)
+    problem_history_by_channel.setdefault(channel_id, {})[numero] = problem
+    next_id_by_channel[channel_id] = numero + 1
+    last_problem_by_channel[channel_id] = problem
+    return numero
+
+
+def generate_ai_problem(tema: str) -> dict:
+    """Gera um problema de matemática novo usando a API da Groq.
+    Levanta RuntimeError com uma mensagem amigável se algo der errado."""
+    if not GROQ_API_KEY:
+        raise RuntimeError(
+            "A geração por IA não está configurada. Defina GROQ_API_KEY no .env do bot."
+        )
+
+    prompt = f"""Crie UM problema de matemática original em português sobre o tema "{tema}",
+adequado para um estudante de ensino médio se preparando para olimpíadas (nível OBMEP).
+
+Responda APENAS com um JSON válido, sem markdown, sem crases, no formato exato:
+{{"question": "enunciado completo do problema", "answer": "resposta final com uma explicação breve de como chegar nela", "difficulty": "fácil, médio ou difícil", "topic": "{tema}"}}"""
+
+    headers = {
+        "Authorization": f"Bearer {GROQ_API_KEY}",
+        "Content-Type": "application/json",
+    }
+    payload = {
+        "model": GROQ_MODEL,
+        "messages": [{"role": "user", "content": prompt}],
+        "response_format": {"type": "json_object"},
+    }
+
+    try:
+        resp = requests.post(GROQ_URL, headers=headers, json=payload, timeout=30)
+        resp.raise_for_status()
+        texto = resp.json()["choices"][0]["message"]["content"].strip()
+    except Exception as exc:  # erro de rede, chave inválida, etc.
+        logger.exception("Erro ao chamar a API da Groq")
+        raise RuntimeError(f"Não consegui falar com a IA agora ({exc}).") from exc
+
+    # Remove blocos de código markdown, caso a IA responda com ```json ... ```
+    texto = re.sub(r"^```(json)?|```$", "", texto, flags=re.MULTILINE).strip()
+
+    try:
+        problem = json.loads(texto)
+    except json.JSONDecodeError as exc:
+        logger.error("Resposta da IA não é um JSON válido: %s", texto)
+        raise RuntimeError("A IA respondeu em um formato inesperado. Tente de novo.") from exc
+
+    for campo in ("question", "answer", "difficulty", "topic"):
+        if campo not in problem:
+            raise RuntimeError("A IA não retornou todos os campos esperados. Tente de novo.")
+
+    return problem
+
+
+def github_configured() -> bool:
+    return bool(GITHUB_TOKEN and GITHUB_REPO)
+
+
+def push_problems_to_github(problems: list[dict]) -> None:
+    """Sobrescreve o problems.json no GitHub com a lista de problemas atual.
+    Levanta uma exceção se algo der errado (chave inválida, repo errado, etc.)."""
+    api_url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_FILE_PATH}"
+    headers = {
+        "Authorization": f"Bearer {GITHUB_TOKEN}",
+        "Accept": "application/vnd.github+json",
+    }
+
+    # Precisa do sha atual do arquivo pra poder atualizá-lo.
+    resp = requests.get(api_url, headers=headers, params={"ref": GITHUB_BRANCH}, timeout=20)
+    resp.raise_for_status()
+    sha_atual = resp.json()["sha"]
+
+    conteudo = json.dumps(problems, ensure_ascii=False, indent=2)
+    conteudo_b64 = base64.b64encode(conteudo.encode("utf-8")).decode("utf-8")
+
+    payload = {
+        "message": "Adiciona problema gerado por IA via bot do Discord",
+        "content": conteudo_b64,
+        "sha": sha_atual,
+        "branch": GITHUB_BRANCH,
+    }
+    put_resp = requests.put(api_url, headers=headers, json=payload, timeout=20)
+    put_resp.raise_for_status()
+
+
+def save_generated_problem(problem: dict) -> tuple[bool, str]:
+    """Adiciona o problema ao banco local (problems.json) e tenta sincronizar
+    com o GitHub, para que a mudança sobreviva ao próximo redeploy.
+    Retorna (sincronizado_com_github, mensagem_de_status)."""
+    problems = load_problems()
+    problems.append(problem)
+    with open(PROBLEMS_FILE, "w", encoding="utf-8") as f:
+        json.dump(problems, f, ensure_ascii=False, indent=2)
+
+    if not github_configured():
+        return False, (
+            "⚠️ Salvei no banco local, mas a sincronização com o GitHub não está "
+            "configurada (faltam GITHUB_TOKEN/GITHUB_REPO) — essa adição pode se "
+            "perder no próximo deploy."
+        )
+
+    try:
+        push_problems_to_github(problems)
+        return True, "✅ Problema salvo no banco e sincronizado com o GitHub."
+    except Exception as exc:
+        logger.exception("Erro ao sincronizar problems.json com o GitHub")
+        return False, (
+            f"⚠️ Salvei no banco local, mas não consegui sincronizar com o GitHub "
+            f"agora ({exc}). Essa adição pode se perder no próximo deploy."
+        )
+def build_problem_embed(problem: dict, numero: int | None = None) -> discord.Embed:
+    titulo = "🧮 Problema de Matemática do Dia"
+    if numero is not None:
+        titulo = f"🧮 Problema #{numero}"
     embed = discord.Embed(
-        title="🧮 Problema de Matemática do Dia",
+        title=titulo,
         description=problem["question"],
         color=discord.Color.blue(),
     )
@@ -65,8 +207,8 @@ def build_problem_embed(problem: dict) -> discord.Embed:
 async def post_daily_problem(channel: discord.abc.Messageable):
     problems = load_problems()
     problem = random.choice(problems)
-    last_problem_by_channel[channel.id] = problem
-    await channel.send(embed=build_problem_embed(problem))
+    numero = register_problem(channel.id, problem)
+    await channel.send(embed=build_problem_embed(problem, numero))
 
 
 @bot.event
@@ -86,23 +228,85 @@ async def daily_problem_task():
 
 
 @bot.command(name="problema")
-async def problema_manual(ctx: commands.Context):
-    """Posta um problema novo na hora, sob demanda (!problema)."""
-    await post_daily_problem(ctx.channel)
+async def problema_manual(ctx: commands.Context, *, tema: str = None):
+    """Posta um problema novo (!problema) ou filtrado por tema (!problema <tema>).
+    Sem tema, mostra a lista de temas disponíveis."""
+    if tema is None:
+        topicos = get_topics()
+        lista = "\n".join(f"• {t}" for t in topicos)
+        embed = discord.Embed(
+            title="📚 Temas disponíveis",
+            description=(
+                "Use `!problema <tema>` para pedir um problema de um tema específico.\n\n"
+                f"{lista}"
+            ),
+            color=discord.Color.gold(),
+        )
+        await ctx.send(embed=embed)
+        return
+
+    problems = load_problems()
+    filtrados = [p for p in problems if tema.lower() in p["topic"].lower()]
+    if not filtrados:
+        await ctx.send(
+            f"Não encontrei nenhum problema com o tema '{tema}'. "
+            "Use `!problema` sem nada para ver os temas disponíveis."
+        )
+        return
+
+    problem = random.choice(filtrados)
+    numero = register_problem(ctx.channel.id, problem)
+    await ctx.send(embed=build_problem_embed(problem, numero))
+
+
+@bot.command(name="gerar")
+async def gerar_problema_ia(ctx: commands.Context, *, tema: str = None):
+    """Gera um problema NOVO com IA sobre o tema pedido (!gerar <tema>) e o
+    adiciona automaticamente ao banco de problemas."""
+    if tema is None:
+        await ctx.send("Me diga sobre qual tema gerar o problema. Exemplo: `!gerar geometria espacial`")
+        return
+
+    async with ctx.typing():
+        try:
+            problem = generate_ai_problem(tema)
+        except RuntimeError as exc:
+            await ctx.send(f"⚠️ {exc}")
+            return
+
+        # Salvar em disco e sincronizar com o GitHub são operações bloqueantes,
+        # então rodam numa thread separada pra não travar o bot.
+        sincronizado, status_msg = await asyncio.to_thread(save_generated_problem, problem)
+
+    numero = register_problem(ctx.channel.id, problem)
+    embed = build_problem_embed(problem, numero)
+    embed.set_footer(text="Gerado por IA (Groq) • Use !resposta para revelar a solução.")
+    await ctx.send(embed=embed)
+
+    if not sincronizado:
+        # Só avisa explicitamente quando algo deu errado — quando funciona,
+        # não precisa poluir o canal com mais uma mensagem de confirmação.
+        await ctx.send(status_msg)
 
 
 @bot.command(name="resposta")
-async def resposta(ctx: commands.Context):
-    """Revela a resposta do último problema postado neste canal (!resposta)."""
-    problem = last_problem_by_channel.get(ctx.channel.id)
+async def resposta(ctx: commands.Context, numero: int = None):
+    """Revela a resposta do último problema (!resposta) ou de um problema específico (!resposta <id>)."""
+    if numero is None:
+        problem = last_problem_by_channel.get(ctx.channel.id)
+    else:
+        problem = problem_history_by_channel.get(ctx.channel.id, {}).get(numero)
+
     if not problem:
-        await ctx.send("Ainda não há nenhum problema postado neste canal. Use `!problema` para gerar um.")
+        await ctx.send(
+            "Não encontrei esse problema neste canal. "
+            "Use `!problema` para gerar um novo, ou confira se o número está certo "
+            "(a numeração reinicia sempre que o bot é reiniciado)."
+        )
         return
-    embed = discord.Embed(
-        title="✅ Resposta",
-        description=problem["answer"],
-        color=discord.Color.green(),
-    )
+
+    titulo = f"✅ Resposta do Problema #{numero}" if numero is not None else "✅ Resposta"
+    embed = discord.Embed(title=titulo, description=problem["answer"], color=discord.Color.green())
     await ctx.send(embed=embed)
 
 
