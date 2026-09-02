@@ -240,5 +240,11 @@
     "answer": "Ele pode fazer 48 porções. Cada porção contém 250 g de cuscuz (12 kg = 12000 g; 12000 ÷ 48 = 250) e 1 ovo (48 ÷ 48 = 1).",
     "difficulty": "médio",
     "topic": "cuscuz com ovo"
+  },
+  {
+    "question": "Um cubo de lado a tem uma esfera inscrita. Um ponto P está na superfície da esfera de modo que a projeção ortogonal de P no plano da base do cubo coincide com o centro da base. Determine, em função de a, a distância entre P e o vértice superior do cubo.",
+    "answer": "A distância é a·√2/2.  Como a projeção de P é o centro da base, P tem coordenadas (a/2,a/2,z). Na esfera de raio a/2 centrada em (a/2,a/2,a/2) tem (z‑a/2)^2=(a/2)^2, logo z=a (ponto superior da esfera). O vértice superior do cubo é (a,a,a). A diferença é (a/2,a/2,0) e seu módulo é √[(a/2)^2+(a/2)^2]=a·√2/2.",
+    "difficulty": "médio",
+    "topic": "geometria espacial"
   }
 ]
