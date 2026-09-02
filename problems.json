@@ -1,0 +1,92 @@
+[
+  {
+    "difficulty": "fácil",
+    "topic": "Aritmética",
+    "question": "Um estacionamento cobra R$ 5,00 pela primeira hora e R$ 2,50 por hora adicional. Quanto custa deixar um carro por 5 horas?",
+    "answer": "R$ 15,00 (5,00 + 4 × 2,50)"
+  },
+  {
+    "difficulty": "fácil",
+    "topic": "Aritmética",
+    "question": "Se 3 cadernos custam R$ 24,00, quanto custam 7 cadernos (mesmo preço unitário)?",
+    "answer": "R$ 56,00 (cada caderno custa R$ 8,00)"
+  },
+  {
+    "difficulty": "médio",
+    "topic": "Funções Quadráticas",
+    "question": "Dada a função f(x) = 2x² - 8x + 6, encontre as raízes usando a fórmula de Bhaskara.",
+    "answer": "x = 1 e x = 3 (Δ = 64 - 48 = 16; x = (8 ± 4)/4)"
+  },
+  {
+    "difficulty": "médio",
+    "topic": "Funções Quadráticas",
+    "question": "Uma parábola tem vértice em (2, -1) e passa pelo ponto (0, 3). Determine o valor de 'a' na forma f(x) = a(x-2)² - 1.",
+    "answer": "a = 1 (substituindo x=0, y=3: 3 = a(4) - 1 → a = 1)"
+  },
+  {
+    "difficulty": "médio",
+    "topic": "Funções Quadráticas",
+    "question": "Olhando o gráfico de uma parábola que corta o eixo x em x=1 e x=5 e passa por (0, 5), escreva a função na forma fatorada e determine 'a'.",
+    "answer": "f(x) = a(x-1)(x-5); em (0,5): 5 = a(-1)(-5) = 5a → a = 1. Logo f(x) = (x-1)(x-5)"
+  },
+  {
+    "difficulty": "difícil",
+    "topic": "OBMEP - Nível 1",
+    "question": "Em uma competição, cada participante joga contra todos os outros exatamente uma vez. Se foram realizados 45 jogos ao todo, quantos participantes havia?",
+    "answer": "10 participantes (C(n,2) = n(n-1)/2 = 45 → n=10)"
+  },
+  {
+    "difficulty": "difícil",
+    "topic": "OBMEP - Nível 1",
+    "question": "Ana tem o dobro da idade que Beto tinha quando Ana tinha a idade que Beto tem hoje. Se a soma das idades atuais é 35 anos, quantos anos tem Ana?",
+    "answer": "20 anos (Beto tem 15, Ana tem 20 — problema clássico de razão de idades)"
+  },
+  {
+    "difficulty": "médio",
+    "topic": "Geometria",
+    "question": "Um retângulo tem perímetro 28 cm e a base mede o dobro da altura. Quais são as dimensões do retângulo?",
+    "answer": "Base = 9,33 cm e altura = 4,67 cm... (na verdade: 2(b+h)=28, b=2h → 2(3h)=28 → h≈4,67cm, b≈9,33cm)"
+  },
+  {
+    "difficulty": "fácil",
+    "topic": "Álgebra",
+    "question": "Resolva a equação: 3(x - 2) + 4 = 2x + 5",
+    "answer": "x = 7 (3x - 6 + 4 = 2x + 5 → 3x - 2 = 2x + 5 → x = 7)"
+  },
+  {
+    "difficulty": "médio",
+    "topic": "Álgebra",
+    "question": "Se x + y = 10 e x - y = 4, quais são os valores de x e y?",
+    "answer": "x = 7 e y = 3"
+  },
+  {
+    "difficulty": "difícil",
+    "topic": "OBMEP - Nível 1",
+    "question": "Quantos números de três algarismos distintos podem ser formados usando apenas os dígitos 1, 2, 3, 4 e 5?",
+    "answer": "60 números (5 × 4 × 3 = 60, arranjo sem repetição)"
+  },
+  {
+    "difficulty": "médio",
+    "topic": "Funções Quadráticas",
+    "question": "Determine o vértice da parábola f(x) = x² - 6x + 5.",
+    "answer": "Vértice = (3, -4) [xv = -b/2a = 6/2 = 3; f(3) = 9-18+5 = -4]"
+  },
+  {
+    "difficulty": "fácil",
+    "topic": "Aritmética",
+    "question": "Um trem percorre 240 km em 3 horas com velocidade constante. Quanto tempo levaria para percorrer 400 km na mesma velocidade?",
+    "answer": "5 horas (velocidade = 80 km/h; 400/80 = 5h)"
+  },
+  {
+    "difficulty": "médio",
+    "topic": "Geometria",
+    "question": "Um triângulo retângulo tem catetos medindo 6 cm e 8 cm. Qual é a medida da hipotenusa?",
+    "answer": "10 cm (Teorema de Pitágoras: 6² + 8² = 36+64 = 100 → √100 = 10)"
+  },
+  {
+    "difficulty": "difícil",
+    "topic": "OBMEP - Nível 1",
+    "question": "A soma de três números inteiros consecutivos é 96. Qual é o maior deles?",
+    "answer": "33 (n + (n+1) + (n+2) = 96 → 3n+3=96 → n=31; maior = 33)"
+  }
+]
