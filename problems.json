@@ -234,5 +234,11 @@
     "answer": "(a) O período T = tempo total / número de revoluções = 30 s / 2 = 15 s. (b) Velocidade angular ω = 2π/T = 2π/15 rad/s; velocidade tangencial v = ω·r = (2π/15)·100 ≈ 41,9 m/s. (c) A aceleração centrípeta a_c = v²/r = (41,9)²/100 ≈ 17,5 m/s². Assim, T=15 s, v≈42 m/s e a_c≈17,5 m/s².",
     "difficulty": "médio",
     "topic": "movimento circular uniforme"
+  },
+  {
+    "question": "Um cozinheiro possui 12 kg de cuscuz e 48 ovos. Ele quer dividir tudo em porções idênticas de cuscuz com ovo, de modo que cada porção tenha a mesma quantidade de cuscuz (em gramas) e o mesmo número de ovos, sem sobrar nada. Qual é o maior número inteiro de porções que ele pode fazer e quantos gramas de cuscuz e quantos ovos compõem cada porção?",
+    "answer": "Ele pode fazer 48 porções. Cada porção contém 250 g de cuscuz (12 kg = 12000 g; 12000 ÷ 48 = 250) e 1 ovo (48 ÷ 48 = 1).",
+    "difficulty": "médio",
+    "topic": "cuscuz com ovo"
   }
 ]
