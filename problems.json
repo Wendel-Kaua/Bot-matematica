@@ -88,5 +88,121 @@
     "topic": "OBMEP - Nível 1",
     "question": "A soma de três números inteiros consecutivos é 96. Qual é o maior deles?",
     "answer": "33 (n + (n+1) + (n+2) = 96 → 3n+3=96 → n=31; maior = 33)"
+  },
+  {
+    "difficulty": "fácil",
+    "topic": "Probabilidade",
+    "question": "Qual a probabilidade de, aleatoriamente, escolhermos um número par dentre os elementos do conjunto {1, 2, 3, 4, ..., 21, 22, 23}?",
+    "answer": "11/23 (há 11 números pares dentre os 23 elementos do conjunto)"
+  },
+  {
+    "difficulty": "médio",
+    "topic": "Probabilidade",
+    "question": "Em uma urna há 72 bolas idênticas, mas com cores diferentes. Há bolas brancas, vermelhas e pretas. Ao sortearmos uma bola da urna, a probabilidade dela ser branca é 1/4 e a probabilidade dela ser vermelha é 1/3. A diferença entre o número de bolas pretas e o número de bolas brancas na urna é: a) 12  b) 10  c) 8  d) 6  e) 4",
+    "answer": "a) 12 (18 brancas, 24 vermelhas, 30 pretas; 30 - 18 = 12)"
+  },
+  {
+    "difficulty": "fácil",
+    "topic": "Probabilidade",
+    "question": "Sandra comprou uma caixa de balas sortidas. Na caixa, havia 8 balas de sabor menta, 6 de morango, 6 de caramelo e 4 de tangerina. A probabilidade de Sandra escolher, ao acaso, uma bala de tangerina é: a) 1/7  b) 1/6  c) 1/5  d) 1/4  e) 1/3",
+    "answer": "b) 1/6 (4 de tangerina em 24 balas no total → 4/24 = 1/6)"
+  },
+  {
+    "difficulty": "médio",
+    "topic": "Probabilidade",
+    "question": "Com dados do último censo, constatou-se que das famílias de uma região, 20% não têm filhos, 30% têm apenas um filho, 35% exatamente dois filhos, e as restantes se dividem igualmente entre três, quatro e cinco filhos. Escolhendo-se uma família aleatoriamente, qual a probabilidade dela ter mais do que três filhos?",
+    "answer": "10% (as famílias restantes somam 15%, divididas igualmente entre 3, 4 e 5 filhos: 5% cada; mais de três filhos = 4 ou 5 filhos = 5% + 5% = 10%)"
+  },
+  {
+    "difficulty": "médio",
+    "topic": "Probabilidade",
+    "question": "Em uma empresa multinacional trabalham 45 funcionários, dos quais 40 sabem falar inglês e 25 sabem falar inglês e espanhol. Escolhendo-se aleatoriamente um funcionário, a probabilidade de que ele fale inglês e não fale espanhol é: a) 2/3  b) 1/2  c) 2/5  d) 1/3  e) 1/5",
+    "answer": "d) 1/3 (40 - 25 = 15 falam só inglês; 15/45 = 1/3)"
+  },
+  {
+    "difficulty": "médio",
+    "topic": "Probabilidade",
+    "question": "Uma classe tem 30 estudantes com fichas numeradas de 1 a 30. Um aluno distraiu os amigos na hora do sorteio e pegou 5 fichas. Qual a probabilidade dele não ser sorteado?",
+    "answer": "5/6 (25 fichas não são dele em 30 no total → 25/30 = 5/6)"
+  },
+  {
+    "difficulty": "difícil",
+    "topic": "Probabilidade",
+    "question": "Marcos e Paulo fazem parte de um grupo de 10 pessoas dispostas aleatoriamente em fila. Qual a probabilidade de haver exatamente 4 pessoas entre Marcos e Paulo?",
+    "answer": "1/9 (5 pares de posições possíveis, 2 ordens cada, 8! permutações do resto: (5·2·8!)/10! = 1/9)"
+  },
+  {
+    "difficulty": "médio",
+    "topic": "Probabilidade",
+    "question": "Numa empresa há 20 trabalhadores, dos quais 8 são eventuais e 12 são efetivos. Deseja-se formar uma comissão de 2 trabalhadores. Qual a probabilidade dos dois escolhidos ao acaso serem efetivos?",
+    "answer": "33/95 (C(12,2)/C(20,2) = 66/190 = 33/95)"
+  },
+  {
+    "difficulty": "médio",
+    "topic": "Probabilidade",
+    "question": "Em um jogo, o atacante lança um dado e o defensor lança outro (dados convencionais, faces de 1 a 6). O atacante vence se seu número for maior que o do defensor. Qual a probabilidade do atacante vencer uma rodada?",
+    "answer": "5/12 (15 pares favoráveis em 36 possíveis → 15/36 = 5/12)"
+  },
+  {
+    "difficulty": "difícil",
+    "topic": "Probabilidade",
+    "question": "Numa urna são depositadas n etiquetas numeradas de 1 a n. Três etiquetas são sorteadas sem reposição. Qual a probabilidade dos números sorteados serem consecutivos?",
+    "answer": "6/(n(n-1)) — fórmula geral: P = (n-2) / C(n,3) = 6/(n(n-1))"
+  },
+  {
+    "difficulty": "difícil",
+    "topic": "Probabilidade",
+    "question": "Um bispo, um padre e mais quatro fiéis estão em uma fila indiana. Supondo que o bispo e o padre não ficam juntos, qual a probabilidade de que as extremidades da fila sejam ocupadas por eles?",
+    "answer": "10% (2·4! casos favoráveis sobre 6! - 2·5! casos possíveis)"
+  },
+  {
+    "difficulty": "médio",
+    "topic": "Probabilidade",
+    "question": "Dois dados são jogados simultaneamente. Qual a probabilidade de se obter soma igual a 10 nas faces voltadas para cima? a) 1/18  b) 1/12  c) 1/10  d) 1/6  e) 1/5",
+    "answer": "b) 1/12 (3 combinações favoráveis em 36 possíveis → 3/36 = 1/12)"
+  },
+  {
+    "difficulty": "difícil",
+    "topic": "Probabilidade",
+    "question": "A escolaridade dos jogadores de futebol dos quatro principais clubes do Rio de Janeiro foi pesquisada com 112 jogadores no total. Olhando o gráfico, se escolhermos ao acaso um dos jogadores pesquisados, qual a probabilidade (aproximada) dele ter concluído o Ensino Médio? a) 14%  b) 48%  c) 54%  d) 60%  e) 68%",
+    "answer": "d) 60% (54 concluíram só o médio + 14 já no superior = 68 de 112 → ≈60%)",
+    "image_url": "https://cdn.discordapp.com/attachments/1279617265565831240/1544537706200170516/ex15_grafico_escolaridade.png?ex=6a98de55&is=6a978cd5&hm=22faf418b902ba374617bfa03023935c9615ab291845eebd406a6e520fae5aab&"
+  },
+  {
+    "difficulty": "difícil",
+    "topic": "Probabilidade",
+    "question": "Um jogo de seis cartas possui três pares de cartas idênticas, somando 10 círculos e 6 triângulos ao todo. Três cartas estão viradas para cima e três para baixo, como na imagem. Virando para cima apenas duas das três cartas voltadas para baixo, qual a probabilidade de que a última carta que restar virada para baixo tenha pelo menos dois círculos? a) 2/3  b) 2/9  c) 1/3  d) 5/6  e) 1/2",
+    "answer": "c) 1/3 (das cartas restantes, só uma tem 2 círculos e nenhum triângulo)",
+    "image_url": "https://cdn.discordapp.com/attachments/1279617265565831240/1544537705898049536/ex16_cartas.png?ex=6a98de55&is=6a978cd5&hm=e2071ff1321ed30d594f3d29288bff3186757ae504bb99972d9579a73335b1f3&s"
+  },
+  {
+    "difficulty": "difícil",
+    "topic": "Probabilidade",
+    "question": "Têm-se 3 urnas inicialmente vazias. Escolhe-se uma delas ao acaso (1/3 de chance cada) e coloca-se uma bola nela. Repete-se o processo até que uma mesma urna tenha duas bolas. Qual a probabilidade de que, quando o processo terminar, o total de bolas em todas as urnas seja igual a 2?",
+    "answer": "1/3 (a segunda bola precisa cair na mesma urna da primeira)"
+  },
+  {
+    "difficulty": "difícil",
+    "topic": "Probabilidade",
+    "question": "Calcule a probabilidade de que um número escolhido aleatoriamente dentre os divisores positivos de 10⁹⁹ seja um número inteiro múltiplo de 10⁸⁸.",
+    "answer": "9/625 (144 múltiplos de 10⁸⁸ entre os 104 divisores de 10⁹⁹... na verdade 144/10.404 = 9/625, considerando os 10.404 divisores)"
+  },
+  {
+    "difficulty": "difícil",
+    "topic": "Probabilidade",
+    "question": "Arnaldo, Bernaldo, Cernaldo e Dernaldo baralharam as 52 cartas de um baralho e distribuíram 13 para cada um. Arnaldo não tinha nenhuma carta de espadas. Qual a probabilidade de Bernaldo também não ter cartas de espadas?",
+    "answer": "C(26,13)/C(39,13) = 26!·26! / (13!·39!) — as 13 cartas de espadas ficam todas com Cernaldo e Dernaldo"
+  },
+  {
+    "difficulty": "médio",
+    "topic": "Probabilidade",
+    "question": "Existem dois tipos de anos bissextos: os múltiplos de 4 que não são de 100, e os múltiplos de 400. Escolhendo aleatoriamente um ano entre 2014 e 2413 (incluindo esses dois), qual a probabilidade do ano ser bissexto?",
+    "answer": "97/400 (400 anos no intervalo, 97 são bissextos, excluindo 2100, 2200 e 2300)"
+  },
+  {
+    "difficulty": "difícil",
+    "topic": "Probabilidade",
+    "question": "Uma urna contém cinco cartões numerados de 1 a 5. Retira-se sucessivamente, ao acaso, os cinco cartões e alinha-os formando um número de cinco algarismos. Qual a probabilidade desse número ser divisível por 4?",
+    "answer": "1/5 (4 finais possíveis divisíveis por 4: 12, 24, 32, 52; cada um com 3! arranjos → 4·3!/5! = 1/5)"
   }
 ]

@@ -56,6 +56,9 @@ def build_problem_embed(problem: dict) -> discord.Embed:
     embed.add_field(name="Dificuldade", value=problem["difficulty"].capitalize(), inline=True)
     embed.add_field(name="Assunto", value=problem["topic"], inline=True)
     embed.set_footer(text="Use !resposta para revelar a solução quando quiser tentar depois de pensar.")
+    image_url = problem.get("image_url")
+    if image_url:
+        embed.set_image(url=image_url)
     return embed
 
 
