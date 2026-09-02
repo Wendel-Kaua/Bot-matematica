@@ -216,5 +216,11 @@
     "answer": "A área de ABD é 2535√3/112 cm² ≈ 39,2 cm². Primeiro calcula‑se a área total de ABC: Área_{ABC}=½·AB·AC·sin60°=½·13·15·(√3/2)=195√3/4. Como AD é bissetriz, as áreas de ABD e ADC são proporcionais aos lados adjacentes: Área_{ABD}:Área_{ADC}=AB:AC=13:15. Logo Área_{ABD}=13/(13+15)·Área_{ABC}=13/28·(195√3/4)=2535√3/112 cm².",
     "difficulty": "difícil",
     "topic": "geometria plana"
+  },
+  {
+    "question": "Considere a função aritmética f(n)=an+b, definida para todo número inteiro n, onde a e b são números inteiros. Sabe‑se que f(3)=12, f(7)=28 e que b é múltiplo de 3. Determine o valor de f(10).",
+    "answer": "Das duas equações 3a+b=12 e 7a+b=28 subtraindo‑se obtém‑se 4a=16, logo a=4. Substituindo em 3a+b=12: 12+b=12, portanto b=0, que é múltiplo de 3. Assim f(10)=4·10+0=40. Portanto, f(10)=40.",
+    "difficulty": "fácil",
+    "topic": "função aritmética"
   }
 ]
