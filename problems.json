@@ -222,5 +222,11 @@
     "answer": "Das duas equações 3a+b=12 e 7a+b=28 subtraindo‑se obtém‑se 4a=16, logo a=4. Substituindo em 3a+b=12: 12+b=12, portanto b=0, que é múltiplo de 3. Assim f(10)=4·10+0=40. Portanto, f(10)=40.",
     "difficulty": "fácil",
     "topic": "função aritmética"
+  },
+  {
+    "question": "Um colecionador possui 4 conjuntos de cartas de personagens do MCU. Cada conjunto contém 5 cartas diferentes. Ele retira aleatoriamente 3 cartas, sem reposição. Qual a probabilidade de que as 3 cartas escolhidas pertençam a conjuntos diferentes?",
+    "answer": "Existem C(20,3)=1140 combinações possíveis. Para ter cartas de conjuntos diferentes escolhem‑se 3 dos 4 conjuntos (C(4,3)=4) e uma carta de cada (5³=125). Assim, combinações favoráveis =4·125=500. A probabilidade é 500/1140=25/57≈0.44.",
+    "difficulty": "médio",
+    "topic": "MCU"
   }
 ]
