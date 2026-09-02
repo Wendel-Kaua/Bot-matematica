@@ -246,5 +246,11 @@
     "answer": "A distância é a·√2/2.  Como a projeção de P é o centro da base, P tem coordenadas (a/2,a/2,z). Na esfera de raio a/2 centrada em (a/2,a/2,a/2) tem (z‑a/2)^2=(a/2)^2, logo z=a (ponto superior da esfera). O vértice superior do cubo é (a,a,a). A diferença é (a/2,a/2,0) e seu módulo é √[(a/2)^2+(a/2)^2]=a·√2/2.",
     "difficulty": "médio",
     "topic": "geometria espacial"
+  },
+  {
+    "question": "Em uma maratona de matemática, os participantes recebem fichas numeradas de 1 a 100. Cada equipe deve escolher um subconjunto de fichas de modo que a soma dos números das fichas escolhidas seja exatamente 2022. Qual o número máximo de fichas que uma equipe pode escolher?",
+    "answer": "O máximo é 63 fichas. A soma mínima de k fichas distintas é 1+2+...+k = k(k+1)/2. Procurando k tal que k(k+1)/2 ≤2022, obtém‑se k=63 (63·64/2=2016). Falta 6 para 2022; substituindo a ficha 1 por 7 (ainda ≤100) aumenta a soma em 6 mantendo 63 fichas. Não é possível usar 64 fichas, pois 1+2+...+64=2080>2022. Portanto, 63 é o máximo.",
+    "difficulty": "difícil",
+    "topic": "adição"
   }
 ]
