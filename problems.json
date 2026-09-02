@@ -210,5 +210,11 @@
     "answer": "A soma é 6660. Cada dígito aparece 6 vezes em cada posição; assim a soma das centenas é (1+2+3+4)·6·100=6000, das dezenas (1+2+3+4)·6·10=600 e das unidades (1+2+3+4)·6=60; total 6660.",
     "difficulty": "médio",
     "topic": "adição"
+  },
+  {
+    "question": "Em um triângulo ABC, AB=13 cm, AC=15 cm e ∠BAC=60°. A reta que parte do vértice A e corta o lado BC no ponto D é a bissetriz interna de ∠BAC. Determine a área do triângulo ABD.",
+    "answer": "A área de ABD é 2535√3/112 cm² ≈ 39,2 cm². Primeiro calcula‑se a área total de ABC: Área_{ABC}=½·AB·AC·sin60°=½·13·15·(√3/2)=195√3/4. Como AD é bissetriz, as áreas de ABD e ADC são proporcionais aos lados adjacentes: Área_{ABD}:Área_{ADC}=AB:AC=13:15. Logo Área_{ABD}=13/(13+15)·Área_{ABC}=13/28·(195√3/4)=2535√3/112 cm².",
+    "difficulty": "difícil",
+    "topic": "geometria plana"
   }
 ]
