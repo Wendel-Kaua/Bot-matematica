@@ -258,5 +258,11 @@
     "answer": "Seja a₁ o primeiro termo e d a razão. A soma total vale S₂₀=10(2a₁+19d)=1160 ⇒ 2a₁+19d=116. A soma dos termos ímpares tem 10 termos, primeiro a₁ e último a₁+18d, logo S_ímpares=10(a₁+9d)=560 ⇒ a₁+9d=56. Subtraindo‑se a segunda equação da primeira (dobrando a segunda): 2a₁+19d−2a₁−18d=116−112 ⇒ d=4. Portanto, a razão da PA é 4.",
     "difficulty": "difícil",
     "topic": "ARITMÉTICA"
+  },
+  {
+    "question": "Um hexágono regular está inscrito em uma circunferência de raio 10 cm. Seja A, B, C, D, E, F os vértices consecutivos. Determine a área do triângulo ACE (formado por vértices alternados).",
+    "answer": "O ângulo central entre dois vértices alternados é 120°, portanto o lado do triângulo ACE vale 2R·sen(60°)=R√3=10√3 cm. O triângulo é equilátero, logo sua área é (√3/4)·(10√3)²=(√3/4)·300=75√3 cm²≈129,9 cm².",
+    "difficulty": "médio",
+    "topic": "GEOMETRIA"
   }
 ]
