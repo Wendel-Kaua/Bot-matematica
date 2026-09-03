@@ -470,7 +470,7 @@ async def resposta(ctx: commands.Context, numero: int = None):
 
     if explicacao:
         passos = formatar_passos(explicacao)
-        descricao = f"**🎯 Resposta:** {valor}\n\n**📝 Como chegar lá:**\n{passos}"
+        descricao = f"** Resposta:** {valor}\n\n** Como chegar lá:**\n{passos}"
     else:
         descricao = resposta_formatada
 
