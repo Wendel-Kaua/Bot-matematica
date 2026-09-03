@@ -234,6 +234,50 @@ def get_dificuldade_estilo(dificuldade: str) -> dict:
     return DIFICULDADE_ESTILO.get(_normalizar(dificuldade), {"emoji": "⚪", "cor": discord.Color.blue()})
 
 
+# Mapa pra converter dígitos/sinais/letras comuns de expoente em Unicode sobrescrito.
+# Cobre os casos mais comuns em problemas de matemática (10^99, x^2, 2^n, a^-1).
+_SUPERSCRITO = str.maketrans({
+    "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴",
+    "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹",
+    "+": "⁺", "-": "⁻", "n": "ⁿ", "i": "ⁱ",
+})
+
+
+def formatar_matematica(texto: str) -> str:
+    """Deixa a notação matemática mais legível no Discord (que não renderiza LaTeX):
+    converte expoentes escritos com "^" em expoente Unicode de verdade
+    (2^10 -> 2¹⁰, x^2 -> x², 10^-3 -> 10⁻³) e sqrt(x) em √x."""
+    # Expoente entre parênteses: base^(expr)
+    texto = re.sub(
+        r"\^\(([\d+\-ni]+)\)",
+        lambda m: m.group(1).translate(_SUPERSCRITO),
+        texto,
+    )
+    # Expoente simples: base^expr
+    texto = re.sub(
+        r"\^([\d+\-ni]+)",
+        lambda m: m.group(1).translate(_SUPERSCRITO),
+        texto,
+    )
+    # Raiz quadrada: sqrt(x) -> √x
+    texto = re.sub(r"sqrt\(([^()]+)\)", r"√(\1)", texto, flags=re.IGNORECASE)
+    return texto
+
+
+def formatar_passos(explicacao: str) -> str:
+    """Quebra uma explicação corrida em passos numerados e espaçados, em vez de
+    um parágrafo único difícil de acompanhar."""
+    # Separa em frases sempre que um "." ou ";" é seguido de espaço e uma letra
+    # maiúscula/dígito — tenta não quebrar no meio de números ou fórmulas.
+    partes = re.split(r"(?<=[.;])\s+(?=[A-ZÀ-Ú0-9])", explicacao.strip())
+    partes = [p.strip().rstrip(".;").strip() for p in partes if p.strip()]
+
+    if len(partes) <= 1:
+        return explicacao
+
+    return "\n\n".join(f"**{i}.** {parte}." for i, parte in enumerate(partes, start=1))
+
+
 def build_problem_embed(problem: dict, numero: int | None = None) -> discord.Embed:
     topico_emoji = get_topico_emoji(problem["topic"])
     estilo = get_dificuldade_estilo(problem["difficulty"])
@@ -244,7 +288,8 @@ def build_problem_embed(problem: dict, numero: int | None = None) -> discord.Emb
 
     # Bloco de citação deixa o enunciado visualmente destacado do resto do card,
     # o que ajuda a distinguir a fórmula/pergunta do texto de apoio.
-    enunciado_formatado = "\n".join(f"> {linha}" for linha in problem["question"].splitlines())
+    enunciado = formatar_matematica(problem["question"])
+    enunciado_formatado = "\n".join(f"> {linha}" for linha in enunciado.splitlines())
 
     embed = discord.Embed(
         title=titulo,
@@ -256,7 +301,7 @@ def build_problem_embed(problem: dict, numero: int | None = None) -> discord.Emb
         value=f"{estilo['emoji']} {problem['difficulty'].capitalize()}",
         inline=True,
     )
-    embed.add_field(name="Assunto", value=f"{topico_emoji} {problem['topic']}", inline=True)
+    embed.add_field(name="Assunto", value=problem["topic"].upper(), inline=True)
     embed.set_footer(text="Use !resposta para revelar a solução quando quiser tentar depois de pensar.")
     image_url = problem.get("image_url")
     if image_url:
@@ -293,7 +338,7 @@ async def problema_manual(ctx: commands.Context, *, tema: str = None):
     Sem tema, mostra a lista de temas disponíveis."""
     if tema is None:
         topicos = get_topics()
-        lista = "\n".join(f"• {t}" for t in topicos)
+        lista = "\n".join(f"• {t.upper()}" for t in topicos)
         embed = discord.Embed(
             title="📚 Temas disponíveis",
             description=(
@@ -366,19 +411,21 @@ async def resposta(ctx: commands.Context, numero: int = None):
         return
 
     # Muitas respostas seguem o padrão "valor final (explicação de como chegar nele)".
-    # Quando dá pra separar, o valor fica em destaque e a explicação em itálico.
-    match = re.match(r"^(.*?)\s*\((.*)\)$", problem["answer"].strip(), re.DOTALL)
+    # Quando dá pra separar, o valor fica em destaque no topo e a explicação vira
+    # uma lista de passos numerados e espaçados, em vez de um parágrafo só.
+    resposta_formatada = formatar_matematica(problem["answer"])
+    match = re.match(r"^(.*?)\s*\((.*)\)$", resposta_formatada.strip(), re.DOTALL)
     if match:
         valor, explicacao = match.group(1).strip(), match.group(2).strip()
-        descricao = f"**{valor}**\n\n*{explicacao}*"
+        passos = formatar_passos(explicacao)
+        descricao = f"**🎯 Resposta:** {valor}\n\n**📝 Como chegar lá:**\n{passos}"
     else:
-        descricao = problem["answer"]
+        descricao = resposta_formatada
 
     estilo = get_dificuldade_estilo(problem["difficulty"])
-    topico_emoji = get_topico_emoji(problem["topic"])
     titulo = f"✅ Resposta do Problema #{numero}" if numero is not None else "✅ Resposta"
     embed = discord.Embed(title=titulo, description=descricao, color=estilo["cor"])
-    embed.set_footer(text=f"{topico_emoji} {problem['topic']}")
+    embed.set_footer(text=problem["topic"].upper())
     await ctx.send(embed=embed)
 
 
