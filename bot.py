@@ -103,6 +103,13 @@ def generate_ai_problem(tema: str, nivel: str | None = None) -> dict:
     prompt = f"""Crie UM problema de matemática original em português sobre o tema "{tema}",
 adequado para um estudante de ensino médio se preparando para olimpíadas (nível OBMEP).{instrucao_nivel}
 
+IMPORTANTE sobre a formatação do texto (question e answer):
+- NUNCA use notação LaTeX (nada de \\ge, \\le, \\frac, \\cdot, \\times, chaves {{}} pra expoente/índice, cifrão $, etc.)
+- Para expoentes, escreva com "^" normal (ex: x^2, 2^10) — NÃO escreva x^{{2}}
+- Para índices de sequência, escreva com "_" simples e sem chaves (ex: a_n, a_1, a_n+1) — NÃO escreva a_{{n+1}}
+- Para desigualdades e símbolos, use os caracteres prontos: ≥ ≤ ≠ × ÷ π √ ± ao invés de escrever o nome do comando
+- Escreva como um enunciado de prova real, direto e sem jargão de código
+
 Responda APENAS com um JSON válido, sem markdown, sem crases, no formato exato:
 {{"question": "enunciado completo do problema", "answer": "resposta final com uma explicação breve de como chegar nela", "difficulty": "fácil, médio ou difícil", "topic": "{tema}"}}"""
 
@@ -293,23 +300,54 @@ _SUPERSCRITO = str.maketrans({
     "+": "⁺", "-": "⁻", "n": "ⁿ", "i": "ⁱ",
 })
 
+# Mesma ideia, mas pra índices (subscritos) — usado em sequências tipo a_n, a_1.
+_SUBSCRITO = str.maketrans({
+    "0": "₀", "1": "₁", "2": "₂", "3": "₃", "4": "₄",
+    "5": "₅", "6": "₆", "7": "₇", "8": "₈", "9": "₉",
+    "+": "₊", "-": "₋", "n": "ₙ", "i": "ᵢ", "a": "ₐ",
+    "k": "ₖ", "m": "ₘ", "j": "ⱼ", "x": "ₓ",
+})
+
+# Comandos LaTeX que a IA às vezes usa mesmo quando pedimos pra não usar —
+# rede de segurança pra converter em texto/símbolo normal de qualquer jeito.
+_LATEX_COMANDOS = [
+    (r"\\ge\b", "≥"), (r"\\geq\b", "≥"),
+    (r"\\le\b", "≤"), (r"\\leq\b", "≤"),
+    (r"\\neq\b", "≠"), (r"\\ne\b", "≠"),
+    (r"\\times\b", "×"), (r"\\cdot\b", "·"),
+    (r"\\pm\b", "±"), (r"\\infty\b", "∞"),
+    (r"\\pi\b", "π"), (r"\\sqrt", "√"),
+]
+
 
 def formatar_matematica(texto: str) -> str:
     """Deixa a notação matemática mais legível no Discord (que não renderiza LaTeX):
-    converte expoentes escritos com "^" em expoente Unicode de verdade
-    (2^10 -> 2¹⁰, x^2 -> x², 10^-3 -> 10⁻³) e sqrt(x) em √x."""
-    # Expoente entre parênteses: base^(expr)
-    texto = re.sub(
-        r"\^\(([\d+\-ni]+)\)",
-        lambda m: m.group(1).translate(_SUPERSCRITO),
-        texto,
-    )
+    converte expoentes (x^2 -> x²), índices de sequência (a_n -> aₙ), raiz
+    quadrada (sqrt(x) -> √x) e comandos LaTeX comuns (\\ge -> ≥) que a IA
+    às vezes usa mesmo quando instruída a não usar."""
+    # Comandos LaTeX soltos (rede de segurança)
+    for padrao, substituto in _LATEX_COMANDOS:
+        texto = re.sub(padrao, substituto, texto)
+
+    # \frac{a}{b} -> a/b
+    texto = re.sub(r"\\frac\{([^{}]+)\}\{([^{}]+)\}", r"\1/\2", texto)
+
+    # Expoente entre parênteses ou chaves: base^(expr) ou base^{expr}
+    texto = re.sub(r"\^\{([\d+\-ni]+)\}", lambda m: m.group(1).translate(_SUPERSCRITO), texto)
+    texto = re.sub(r"\^\(([\d+\-ni]+)\)", lambda m: m.group(1).translate(_SUPERSCRITO), texto)
     # Expoente simples: base^expr
-    texto = re.sub(
-        r"\^([\d+\-ni]+)",
-        lambda m: m.group(1).translate(_SUPERSCRITO),
-        texto,
-    )
+    texto = re.sub(r"\^([\d+\-ni]+)", lambda m: m.group(1).translate(_SUPERSCRITO), texto)
+
+    # Índice entre chaves ou parênteses: a_{expr} ou a_(expr)
+    texto = re.sub(r"_\{([\w+\-]+)\}", lambda m: m.group(1).translate(_SUBSCRITO), texto)
+    texto = re.sub(r"_\(([\w+\-]+)\)", lambda m: m.group(1).translate(_SUBSCRITO), texto)
+    # Índice simples: a_expr (só letra/dígito — "a_n+4" não deve virar "a" com
+    # índice "n+4"; o "+4" ali normalmente é uma soma separada, não parte do índice)
+    texto = re.sub(r"_([a-zA-Z0-9]+)", lambda m: m.group(1).translate(_SUBSCRITO), texto)
+    # Chaves "soltas" que sobraram (ex: a{n+1} sem o "_" na frente) — depois dos
+    # casos acima, qualquer {...} restante também é tratado como índice.
+    texto = re.sub(r"\{([\w+\-]+)\}", lambda m: m.group(1).translate(_SUBSCRITO), texto)
+
     # Raiz quadrada: sqrt(x) -> √x
     texto = re.sub(r"sqrt\(([^()]+)\)", r"√(\1)", texto, flags=re.IGNORECASE)
     return texto
@@ -514,6 +552,48 @@ async def resposta(ctx: commands.Context, numero: int = None):
     titulo = f"✅ Resposta do Problema #{numero}" if numero is not None else "✅ Resposta"
     embed = discord.Embed(title=titulo, description=descricao, color=estilo["cor"])
     embed.set_footer(text=padronizar_assunto(problem["topic"]))
+    await ctx.send(embed=embed)
+
+
+@bot.command(name="ajuda")
+async def ajuda(ctx: commands.Context):
+    """Mostra a lista de comandos disponíveis (!ajuda)."""
+    embed = discord.Embed(
+        title="📖 Comandos do bot de matemática",
+        description="Tudo o que você pode pedir aqui no servidor:",
+        color=discord.Color.blurple(),
+    )
+    embed.add_field(
+        name="🧮 !problema",
+        value="Sorteia um problema aleatório do banco (qualquer assunto e dificuldade).",
+        inline=False,
+    )
+    embed.add_field(
+        name="🎯 !problema <tema>",
+        value="Sorteia um problema de um assunto específico. Sem o tema, mostra a lista de assuntos disponíveis.",
+        inline=False,
+    )
+    embed.add_field(
+        name="🤖 !gerar <tema>",
+        value="Gera um problema **novo**, na hora, com IA sobre o tema pedido — e já salva no banco.",
+        inline=False,
+    )
+    embed.add_field(
+        name="✅ !resposta",
+        value="Mostra a resposta do último problema postado neste canal.",
+        inline=False,
+    )
+    embed.add_field(
+        name="🔢 !resposta <id>",
+        value="Mostra a resposta de um problema específico pelo número (ex: `!resposta 3`).",
+        inline=False,
+    )
+    embed.add_field(
+        name="📖 !ajuda",
+        value="Mostra esta lista de comandos.",
+        inline=False,
+    )
+    embed.set_footer(text="Todo dia às " + f"{POST_HOUR:02d}:{POST_MINUTE:02d}" + " o bot também posta um problema automático de nível avançado.")
     await ctx.send(embed=embed)
 
 
