@@ -270,5 +270,11 @@
     "answer": "Existem 5 combinações que tornam a expressão verdadeira: (1,0,0), (1,0,1), (0,1,0), (0,1,1) e (1,1,1). Assim, a resposta é 5. (Para encontrar, avalie a expressão para as 8 combinações possíveis ou simplifique-a.)",
     "difficulty": "médio",
     "topic": "algebra boleana"
+  },
+  {
+    "question": "Considere os vetores u=(1,2,-1), v=(3,k,2) e w=(2,-1,m) em R³. Determine a condição que os parâmetros k e m devem satisfazer para que u, v e w sejam linearmente dependentes.",
+    "answer": "Os vetores são linearmente dependentes quando o determinante da matriz cujas colunas são u, v e w é zero. \\nDeterminante =\\n| 1  3  2 |\n| 2  k -1 |\n| -1 2  m | = (k-6)m +2k +13.\\nPortanto, a condição é (k-6)m +2k +13 = 0, ou equivalentemente (k-6)m = -2k -13. Qualquer par (k,m) que satisfaça essa equação torna os três vetores dependentes.",
+    "difficulty": "médio",
+    "topic": "algebra linear"
   }
 ]
