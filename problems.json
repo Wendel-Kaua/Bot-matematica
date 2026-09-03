@@ -294,5 +294,11 @@
     "answer": "Calculando os termos: a_1=2; a_2=3·2+4=10; a_3=3·10+4=34; a_4=3·34+4=106; a_5=3·106+4=322; a_6=3·322+4=970; a_7=3·970+4=2914 >1000. Assim, o menor n é 7. (Basta gerar os termos até ultrapassar 1000.)",
     "difficulty": "médio",
     "topic": "ÁLGEBRA"
+  },
+  {
+    "question": "Considere o polinômio p(x)=x^3-6x^2+kx+8, onde k é um número inteiro. Sabendo que p(x) possui ao menos uma raiz inteira, determine todos os possíveis valores de k e, para cada valor encontrado, indique a raiz inteira correspondente.",
+    "answer": "Pela propriedade dos divisores inteiros do termo constante, a raiz inteira r deve dividir 8, logo r∈{±1,±2,±4,±8}. Substituindo r em p(r)=0 e resolvendo para k obtém‑se k=-(r^3-6r^2+8)/r. Os pares (k,r) resultantes são: k=-3 (r=1), k=1 (r=-1), k=4 (r=2), k=-12 (r=-2), k=6 (r=4), k=-38 (r=-4), k=-17 (r=8), k=-111 (r=-8). Assim os valores possíveis de k são -111, -38, -17, -12, -3, 1, 4 e 6.",
+    "difficulty": "médio",
+    "topic": "ÁLGEBRA"
   }
 ]
