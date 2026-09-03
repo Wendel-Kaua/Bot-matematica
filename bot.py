@@ -453,13 +453,22 @@ async def resposta(ctx: commands.Context, numero: int = None):
         )
         return
 
-    # Muitas respostas seguem o padrão "valor final (explicação de como chegar nele)".
-    # Quando dá pra separar, o valor fica em destaque no topo e a explicação vira
-    # uma lista de passos numerados e espaçados, em vez de um parágrafo só.
-    resposta_formatada = formatar_matematica(problem["answer"])
-    match = re.match(r"^(.*?)\s*\((.*)\)$", resposta_formatada.strip(), re.DOTALL)
+    # Tenta separar "valor final" de "explicação de como chegar nele" de duas formas:
+    # 1) formato "valor (explicação)" — comum nos problemas do banco fixo
+    # 2) primeira frase como conclusão + o resto como explicação — usado quando
+    #    a resposta não vem entre parênteses (ex: respostas geradas por IA)
+    resposta_formatada = formatar_matematica(problem["answer"]).strip()
+    match = re.match(r"^(.*?)\s*\((.*)\)$", resposta_formatada, re.DOTALL)
     if match:
         valor, explicacao = match.group(1).strip(), match.group(2).strip()
+    else:
+        partes = re.split(r"(?<=[.;])\s+(?=[A-ZÀ-Ú0-9])", resposta_formatada, maxsplit=1)
+        if len(partes) == 2:
+            valor, explicacao = partes[0].strip().rstrip(".;"), partes[1].strip()
+        else:
+            valor, explicacao = resposta_formatada, ""
+
+    if explicacao:
         passos = formatar_passos(explicacao)
         descricao = f"**🎯 Resposta:** {valor}\n\n**📝 Como chegar lá:**\n{passos}"
     else:
