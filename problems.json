@@ -270,5 +270,11 @@
     "answer": "Primeiro, determine a constante de proporcionalidade k: D = k·t·v². Assim, k = 150 km / (5 h·30²) = 150 / (5·900) = 150 / 4500 = 1/30. Para o novo cenário: D = (1/30)·7 h·40² = (1/30)·7·1600 = 11200/30 ≈ 373,33 km. Portanto, ele percorreria aproximadamente 373,33 km.",
     "difficulty": "difícil",
     "topic": "MATEMÁTICA"
+  },
+  {
+    "question": "Determine todos os números inteiros x que satisfazem que (x^2 - 5x + 6) é divisor de (x^3 - 8x^2 + 23x - 18).",
+    "answer": "Os valores são x=2 e x=3. Como (x^2-5x+6)=(x-2)(x-3), ao dividir o cúbico por esse quadrático o resto é zero apenas quando x=2 ou x=3, logo são as únicas soluções inteiras.",
+    "difficulty": "médio",
+    "topic": "ÁLGEBRA"
   }
 ]
