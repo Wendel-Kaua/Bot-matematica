@@ -200,17 +200,63 @@ def save_generated_problem(problem: dict) -> tuple[bool, str]:
         )
 
 
+def _normalizar(texto: str) -> str:
+    """Remove acentos simples pra facilitar comparação de strings (fácil -> facil)."""
+    substituicoes = str.maketrans("áàâãéêíóôõúçÁÀÂÃÉÊÍÓÔÕÚÇ", "aaaaeeiooouc" + "AAAAEEIOOOUC".lower())
+    return texto.translate(substituicoes).lower()
+
+
+TOPICO_EMOJI = {
+    "probabilidade": "🎲",
+    "geometria": "📐",
+    "aritmetica": "➗",
+    "algebra": "🧮",
+    "funcoes quadraticas": "📊",
+    "obmep": "🏆",
+}
+
+DIFICULDADE_ESTILO = {
+    "facil": {"emoji": "🟢", "cor": discord.Color.green()},
+    "medio": {"emoji": "🟡", "cor": discord.Color.orange()},
+    "dificil": {"emoji": "🔴", "cor": discord.Color.red()},
+}
+
+
+def get_topico_emoji(topico: str) -> str:
+    topico_normalizado = _normalizar(topico)
+    for chave, emoji in TOPICO_EMOJI.items():
+        if chave in topico_normalizado:
+            return emoji
+    return "🧮"
+
+
+def get_dificuldade_estilo(dificuldade: str) -> dict:
+    return DIFICULDADE_ESTILO.get(_normalizar(dificuldade), {"emoji": "⚪", "cor": discord.Color.blue()})
+
+
 def build_problem_embed(problem: dict, numero: int | None = None) -> discord.Embed:
-    titulo = "🧮 Problema de Matemática do Dia"
+    topico_emoji = get_topico_emoji(problem["topic"])
+    estilo = get_dificuldade_estilo(problem["difficulty"])
+
+    titulo = f"{topico_emoji} Problema de Matemática do Dia"
     if numero is not None:
-        titulo = f"🧮 Problema #{numero}"
+        titulo = f"{topico_emoji} Problema #{numero}"
+
+    # Bloco de citação deixa o enunciado visualmente destacado do resto do card,
+    # o que ajuda a distinguir a fórmula/pergunta do texto de apoio.
+    enunciado_formatado = "\n".join(f"> {linha}" for linha in problem["question"].splitlines())
+
     embed = discord.Embed(
         title=titulo,
-        description=problem["question"],
-        color=discord.Color.blue(),
+        description=enunciado_formatado,
+        color=estilo["cor"],
     )
-    embed.add_field(name="Dificuldade", value=problem["difficulty"].capitalize(), inline=True)
-    embed.add_field(name="Assunto", value=problem["topic"], inline=True)
+    embed.add_field(
+        name="Dificuldade",
+        value=f"{estilo['emoji']} {problem['difficulty'].capitalize()}",
+        inline=True,
+    )
+    embed.add_field(name="Assunto", value=f"{topico_emoji} {problem['topic']}", inline=True)
     embed.set_footer(text="Use !resposta para revelar a solução quando quiser tentar depois de pensar.")
     image_url = problem.get("image_url")
     if image_url:
@@ -319,8 +365,20 @@ async def resposta(ctx: commands.Context, numero: int = None):
         )
         return
 
+    # Muitas respostas seguem o padrão "valor final (explicação de como chegar nele)".
+    # Quando dá pra separar, o valor fica em destaque e a explicação em itálico.
+    match = re.match(r"^(.*?)\s*\((.*)\)$", problem["answer"].strip(), re.DOTALL)
+    if match:
+        valor, explicacao = match.group(1).strip(), match.group(2).strip()
+        descricao = f"**{valor}**\n\n*{explicacao}*"
+    else:
+        descricao = problem["answer"]
+
+    estilo = get_dificuldade_estilo(problem["difficulty"])
+    topico_emoji = get_topico_emoji(problem["topic"])
     titulo = f"✅ Resposta do Problema #{numero}" if numero is not None else "✅ Resposta"
-    embed = discord.Embed(title=titulo, description=problem["answer"], color=discord.Color.green())
+    embed = discord.Embed(title=titulo, description=descricao, color=estilo["cor"])
+    embed.set_footer(text=f"{topico_emoji} {problem['topic']}")
     await ctx.send(embed=embed)
 
 
