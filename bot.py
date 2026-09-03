@@ -83,16 +83,25 @@ def register_problem(channel_id: int, problem: dict) -> int:
     return numero
 
 
-def generate_ai_problem(tema: str) -> dict:
+def generate_ai_problem(tema: str, nivel: str | None = None) -> dict:
     """Gera um problema de matemática novo usando a API da Groq.
+    'nivel', se informado, força um grau de dificuldade específico no prompt
+    (ex: nível OBMEP 3 / ITA, pra questões bem mais avançadas que o padrão).
     Levanta RuntimeError com uma mensagem amigável se algo der errado."""
     if not GROQ_API_KEY:
         raise RuntimeError(
             "A geração por IA não está configurada. Defina GROQ_API_KEY no .env do bot."
         )
 
+    instrucao_nivel = (
+        f'\n\nO problema DEVE ter o nível de dificuldade de "{nivel}" — ou seja, '
+        "bem avançado e desafiador, nada trivial ou de nível básico."
+        if nivel
+        else ""
+    )
+
     prompt = f"""Crie UM problema de matemática original em português sobre o tema "{tema}",
-adequado para um estudante de ensino médio se preparando para olimpíadas (nível OBMEP).
+adequado para um estudante de ensino médio se preparando para olimpíadas (nível OBMEP).{instrucao_nivel}
 
 Responda APENAS com um JSON válido, sem markdown, sem crases, no formato exato:
 {{"question": "enunciado completo do problema", "answer": "resposta final com uma explicação breve de como chegar nela", "difficulty": "fácil, médio ou difícil", "topic": "{tema}"}}"""
@@ -351,9 +360,36 @@ def build_problem_embed(problem: dict, numero: int | None = None) -> discord.Emb
     return embed
 
 
-async def post_daily_problem(channel: discord.abc.Messageable):
+# Temas sorteados pro problema diário, e o nível de dificuldade exigido —
+# o objetivo aqui é sempre nível avançado (OBMEP Fase 3 / vestibular do ITA),
+# bem mais puxado que o padrão dos outros comandos.
+TEMAS_DIARIOS = ["geometria", "álgebra", "aritmética", "funções quadráticas", "probabilidade", "combinatória"]
+NIVEL_DIARIO = "OBMEP Nível 3 (fase avançada) ou de vestibular do ITA"
+
+
+def escolher_problema_diario() -> dict:
+    """Escolhe o problema do dia: tenta gerar um novo em nível avançado via IA;
+    se a IA não estiver configurada ou falhar, cai pra um problema difícil já
+    existente no banco local (ou qualquer um, se não houver nenhum difícil)."""
+    if GROQ_API_KEY:
+        tema = random.choice(TEMAS_DIARIOS)
+        try:
+            problem = generate_ai_problem(tema, nivel=NIVEL_DIARIO)
+            problem["difficulty"] = "difícil"  # garante a tag certa independente do que a IA disser
+            sincronizado, status_msg = save_generated_problem(problem)
+            if not sincronizado:
+                logger.warning("Problema diário gerado mas não sincronizado com o GitHub: %s", status_msg)
+            return problem
+        except RuntimeError:
+            logger.exception("Falha ao gerar problema diário via IA, usando o banco local como alternativa.")
+
     problems = load_problems()
-    problem = random.choice(problems)
+    dificeis = [p for p in problems if _normalizar(p["difficulty"]) == "dificil"]
+    return random.choice(dificeis or problems)
+
+
+async def post_daily_problem(channel: discord.abc.Messageable):
+    problem = await asyncio.to_thread(escolher_problema_diario)
     numero = register_problem(channel.id, problem)
     await channel.send(embed=build_problem_embed(problem, numero))
 
@@ -470,7 +506,7 @@ async def resposta(ctx: commands.Context, numero: int = None):
 
     if explicacao:
         passos = formatar_passos(explicacao)
-        descricao = f"** Resposta:** {valor}\n\n** Como chegar lá:**\n{passos}"
+        descricao = f"**🎯 Resposta:** {valor}\n\n**📝 Como chegar lá:**\n{passos}"
     else:
         descricao = resposta_formatada
 
