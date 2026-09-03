@@ -252,5 +252,11 @@
     "answer": "O máximo é 63 fichas. A soma mínima de k fichas distintas é 1+2+...+k = k(k+1)/2. Procurando k tal que k(k+1)/2 ≤2022, obtém‑se k=63 (63·64/2=2016). Falta 6 para 2022; substituindo a ficha 1 por 7 (ainda ≤100) aumenta a soma em 6 mantendo 63 fichas. Não é possível usar 64 fichas, pois 1+2+...+64=2080>2022. Portanto, 63 é o máximo.",
     "difficulty": "difícil",
     "topic": "adição"
+  },
+  {
+    "question": "Considere a função quadrática f(x)=ax^2+bx+c, onde a,b,c são números inteiros e a≠0. Sabe‑se que f(0)=3, f(1)=6 e que o eixo de simetria da parábola passa pelo ponto (2,‑1). Determine o valor de a+b+c.",
+    "answer": "Do eixo de simetria temos -b/(2a)=2 ⇒ b=-4a. De f(0)=c=3. De f(1)=a+b+c=6 substituindo b e c: a-4a+3=6 ⇒ -3a=3 ⇒ a=-1. Assim b=-4(-1)=4 e c=3. Portanto a+b+c = -1+4+3 = 6.",
+    "difficulty": "médio",
+    "topic": "função quadrática"
   }
 ]
