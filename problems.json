@@ -246,6 +246,6 @@
     "answer": "A maior soma possível é (S=23). Para que a soma de quaisquer dois algarismos seja prima, os algarismos admissíveis são apenas 1, 2, 4 e 6, pois: 1+2=3, 1+4=5, 1+6=7, 2+4=6 (não primo) – logo 2 e 4 não podem coexistir; 2+6=8 (não primo) – logo 2 e 6 não podem coexistir; 4+6=10 (não primo) – logo 4 e 6 não podem coexistir. Assim, os únicos pares compatíveis são {1,2}, {1,4} e {1,6}. O conjunto que permite a maior soma contém três algarismos “1” (para manter a condição com todos os pares) e um algarismo “6”, resultando no número 1116 (ou permutações) e soma (1+1+1+6=9). Contudo, ao usar dois algarismos “1”, um “2” e um “4”, temos o número 1124 cujas somas de pares são 1+2=3, 1+4=5, 2+4=6 (não primo). Portanto, a única combinação viável que maximiza a soma é três “1” e um “6”, dando (S=9). Porém, verificando novamente, percebemos que podemos usar os algarismos 2,3,5,7 (todos primos) pois 2+3=5, 2+5=7, 2+7=9 (não primo) – logo 2 e 7 não podem estar juntos. A combinação máxima que satisfaz todas as somas primas é {2,3,5,5}: 2+3=5, 2+5=7, 3+5=8 (não primo). Assim, a única solução viável é {1,2,4,6} que gera soma 13, mas 2+4=6 não é primo. Conclui‑se que o maior valor viável é obtido com os algarismos 1,1,1,6, dando (S=9). Portanto, a resposta correta é 9.",
     "difficulty": "difícil",
     "topic": "adição"
-  },
+  }
 
 ]
