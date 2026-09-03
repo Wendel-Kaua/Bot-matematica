@@ -276,5 +276,11 @@
     "answer": "Os valores são x=2 e x=3. Como (x^2-5x+6)=(x-2)(x-3), ao dividir o cúbico por esse quadrático o resto é zero apenas quando x=2 ou x=3, logo são as únicas soluções inteiras.",
     "difficulty": "médio",
     "topic": "ÁLGEBRA"
+  },
+  {
+    "question": "Em um quadrado ABCD de lado 1, o ponto E está sobre o lado AB de modo que AE = 2/5 AB, e o ponto F está sobre o lado CD de modo que CF = 3/5 CD. As retas CE e BF se intersectam no ponto P. Determine a razão entre as áreas dos triângulos PAB e PDC.",
+    "answer": "As áreas são iguais, logo a razão é 1. (Usando coordenadas: A(0,0), B(1,0), C(1,1), D(0,1), obtém‑se P(7/10,1/2); a área de PAB é ½·1·1/2=1/4 e a de PDC também ½·1·1/2=1/4, portanto razão 1.)",
+    "difficulty": "médio",
+    "topic": "GEOMETRIA"
   }
 ]
