@@ -71,7 +71,7 @@ def load_problems() -> list[dict]:
 
 def get_topics() -> list[str]:
     problems = load_problems()
-    return sorted({p["topic"] for p in problems})
+    return sorted({padronizar_assunto(p["topic"]) for p in problems})
 
 
 def register_problem(channel_id: int, problem: dict) -> int:
@@ -127,6 +127,15 @@ Responda APENAS com um JSON válido, sem markdown, sem crases, no formato exato:
     for campo in ("question", "answer", "difficulty", "topic"):
         if campo not in problem:
             raise RuntimeError("A IA não retornou todos os campos esperados. Tente de novo.")
+
+    # A IA às vezes devolve "\n" como texto literal (duas letras: barra e "n")
+    # em vez de uma quebra de linha de verdade. Troca isso por uma quebra real.
+    for campo in ("question", "answer"):
+        problem[campo] = problem[campo].replace("\\n", "\n").strip()
+
+    # Padroniza o assunto pra uma das categorias fixas do bot, em vez de deixar
+    # a IA inventar um nome novo a cada vez.
+    problem["topic"] = padronizar_assunto(problem["topic"])
 
     return problem
 
@@ -206,13 +215,39 @@ def _normalizar(texto: str) -> str:
     return texto.translate(substituicoes).lower()
 
 
+# Categorias fixas de assunto. Qualquer tópico (inclusive os gerados por IA,
+# que variam muito: "geometria espacial", "função quadrática", "adição"...)
+# é padronizado pra uma dessas, tanto na exibição quanto ao salvar problemas
+# novos. O que não se encaixa em nenhuma vira "MATEMÁTICA" (categoria genérica) —
+# isso também cobre temas fora do escopo de matemática que a IA às vezes
+# inventa (física, respostas sem sentido, etc.).
+CATEGORIAS_PADRAO = [
+    ("probabilidade", "PROBABILIDADE"),
+    ("geometria", "GEOMETRIA"),
+    ("obmep", "OBMEP"),
+    ("funcao quadratica", "FUNÇÕES QUADRÁTICAS"),
+    ("funcoes quadraticas", "FUNÇÕES QUADRÁTICAS"),
+    ("quadratica", "FUNÇÕES QUADRÁTICAS"),
+    ("adicao", "ARITMÉTICA"),
+    ("subtracao", "ARITMÉTICA"),
+    ("multiplicacao", "ARITMÉTICA"),
+    ("divisao", "ARITMÉTICA"),
+    ("aritmetica", "ARITMÉTICA"),
+    ("algebra", "ÁLGEBRA"),
+]
+
+# Temas que contêm uma palavra-chave acima mas devem ficar de fora mesmo assim
+# (ex: "álgebra booleana" não é o assunto de matemática que interessa aqui).
+ASSUNTOS_EXCLUIDOS = ["booleana", "boolean"]
+
 TOPICO_EMOJI = {
-    "probabilidade": "🎲",
-    "geometria": "📐",
-    "aritmetica": "➗",
-    "algebra": "🧮",
-    "funcoes quadraticas": "📊",
-    "obmep": "🏆",
+    "PROBABILIDADE": "🎲",
+    "GEOMETRIA": "📐",
+    "ARITMÉTICA": "➗",
+    "ÁLGEBRA": "🧮",
+    "FUNÇÕES QUADRÁTICAS": "📊",
+    "OBMEP": "🏆",
+    "MATEMÁTICA": "🧮",
 }
 
 DIFICULDADE_ESTILO = {
@@ -222,12 +257,19 @@ DIFICULDADE_ESTILO = {
 }
 
 
+def padronizar_assunto(topico: str) -> str:
+    """Mapeia qualquer texto de assunto pra uma das categorias fixas."""
+    normalizado = _normalizar(topico)
+    if any(excluido in normalizado for excluido in ASSUNTOS_EXCLUIDOS):
+        return "MATEMÁTICA"
+    for chave, categoria in CATEGORIAS_PADRAO:
+        if chave in normalizado:
+            return categoria
+    return "MATEMÁTICA"
+
+
 def get_topico_emoji(topico: str) -> str:
-    topico_normalizado = _normalizar(topico)
-    for chave, emoji in TOPICO_EMOJI.items():
-        if chave in topico_normalizado:
-            return emoji
-    return "🧮"
+    return TOPICO_EMOJI.get(padronizar_assunto(topico), "🧮")
 
 
 def get_dificuldade_estilo(dificuldade: str) -> dict:
@@ -301,7 +343,7 @@ def build_problem_embed(problem: dict, numero: int | None = None) -> discord.Emb
         value=f"{estilo['emoji']} {problem['difficulty'].capitalize()}",
         inline=True,
     )
-    embed.add_field(name="Assunto", value=problem["topic"].upper(), inline=True)
+    embed.add_field(name="Assunto", value=padronizar_assunto(problem["topic"]), inline=True)
     embed.set_footer(text="Use !resposta para revelar a solução quando quiser tentar depois de pensar.")
     image_url = problem.get("image_url")
     if image_url:
@@ -338,7 +380,7 @@ async def problema_manual(ctx: commands.Context, *, tema: str = None):
     Sem tema, mostra a lista de temas disponíveis."""
     if tema is None:
         topicos = get_topics()
-        lista = "\n".join(f"• {t.upper()}" for t in topicos)
+        lista = "\n".join(f"• {t}" for t in topicos)
         embed = discord.Embed(
             title="📚 Temas disponíveis",
             description=(
@@ -351,7 +393,8 @@ async def problema_manual(ctx: commands.Context, *, tema: str = None):
         return
 
     problems = load_problems()
-    filtrados = [p for p in problems if tema.lower() in p["topic"].lower()]
+    categoria_pedida = padronizar_assunto(tema)
+    filtrados = [p for p in problems if padronizar_assunto(p["topic"]) == categoria_pedida]
     if not filtrados:
         await ctx.send(
             f"Não encontrei nenhum problema com o tema '{tema}'. "
@@ -425,7 +468,7 @@ async def resposta(ctx: commands.Context, numero: int = None):
     estilo = get_dificuldade_estilo(problem["difficulty"])
     titulo = f"✅ Resposta do Problema #{numero}" if numero is not None else "✅ Resposta"
     embed = discord.Embed(title=titulo, description=descricao, color=estilo["cor"])
-    embed.set_footer(text=problem["topic"].upper())
+    embed.set_footer(text=padronizar_assunto(problem["topic"]))
     await ctx.send(embed=embed)
 
 
