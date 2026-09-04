@@ -330,5 +330,11 @@
     "answer": "Primeiro calcula‑se xy = ((x + y)^2 – (x^2 + y^2))/2 = (9 – 7)/2 = 1. Em seguida usa‑se a identidade x^3 + y^3 = (x + y)^3 – 3xy(x + y). Substituindo: (3)^3 – 3·1·3 = 27 – 9 = 18. Portanto x^3 + y^3 = 18.",
     "difficulty": "médio",
     "topic": "ÁLGEBRA"
+  },
+  {
+    "question": "Um retângulo tem perímetro 54 cm. O comprimento é 3 cm a mais que o dobro da largura. Qual é a área do retângulo em cm²?",
+    "answer": "Seja w a largura. Então o comprimento c = 2w+3. O perímetro dá 2(c+w)=54 ⇒ c+w=27. Substituindo c, temos (2w+3)+w=27 ⇒ 3w=24 ⇒ w=8 cm e c=19 cm. A área é w·c=8·19=152 cm².",
+    "difficulty": "fácil",
+    "topic": "ÁLGEBRA"
   }
 ]
