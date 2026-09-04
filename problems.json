@@ -372,5 +372,11 @@
     "answer": "O menor N é 23. Primeiro resolvemos N≡2 (mod3) e N≡3 (mod5). O número que satisfaz ambas as congruências é N≡8 (mod15). Escrevendo N=8+15k e impondo N≡2 (mod7) temos 8+15k≡2 (mod7) → 15k≡1 (mod7). Como 15≡1 (mod7), resulta k≡1 (mod7). O menor k positivo é 1, logo N=8+15·1=23.",
     "difficulty": "médio",
     "topic": "OBMEP"
+  },
+  {
+    "question": "Considere um triângulo ABC cujos lados satisfazem AB = 13, AC = 15 e ∠BAC = 2·∠ABC. Seja I o incentro do triângulo e r o raio da sua circunferência inscrita. Determine o valor exato de r.",
+    "answer": "Primeiro, denote ∠ABC = x, logo ∠BAC = 2x e ∠ACB = 180°‑3x. Pela lei dos senos: 13/ sin(3x) = 15/ sin x → 13 sin x = 15 sin 3x = 15(3 sin x – 4 sin³x). Obtém‑se sin²x = 8/15. Assim sin x = √(8/15) e cos x = √(7/15). Calcula‑se sin 2x = 2 sin x cos x = 4√14 /15 e sin 3x = 13√(8/15)/15. O terceiro lado BC vale BC = (AB/ sin 3x)·sin 2x = 2√105. O semiperímetro é s = (13+15+2√105)/2 = 14+√105. A área do triângulo pode ser encontrada por Δ = ½·AB·AC·sin 2x = ½·13·15·(4√14/15) = 26√14. Finalmente, r = Δ / s = (26√14)/(14+√105).",
+    "difficulty": "difícil",
+    "topic": "GEOMETRIA"
   }
 ]
