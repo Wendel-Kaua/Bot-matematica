@@ -366,5 +366,11 @@
     "answer": "Como a soma dos algarismos é 27, que já é múltiplo de 9, a condição de múltiplo de 9 é automática. Assim, basta contar os 6‑digitos a_1…a_6 com a_1≠0, 0≤a_i≤9 e a_1+…+a_6=27. Usando estrelas‑e‑barras e inclusão‑exclusão: total sem restrição de limite = C(32,5)=201376. Subtraindo as soluções onde algum algarismo ≥10 (6×C(22,5)=158004) e somando as intersecções de dois algarismos ≥10 (+15×C(12,5)=11880) obtem‑se 55 252 soluções com 0≤a_i≤9. Contamos agora as que têm a_1=0: para a_2+…+a_6=27 com 0≤a_i≤9, o mesmo procedimento dá 4 840 soluções. Portanto, N com 6 algarismos válidos = 55 252‑4 840 = 50 412. Resposta: 50 412.",
     "difficulty": "médio",
     "topic": "OBMEP"
+  },
+  {
+    "question": "Um número natural N satisfaz as seguintes condições: ao ser dividido por 3 deixa resto 2; ao ser dividido por 5 deixa resto 3; ao ser dividido por 7 deixa resto 2. Determine o menor valor positivo de N que cumpre todas as condições.",
+    "answer": "O menor N é 23. Primeiro resolvemos N≡2 (mod3) e N≡3 (mod5). O número que satisfaz ambas as congruências é N≡8 (mod15). Escrevendo N=8+15k e impondo N≡2 (mod7) temos 8+15k≡2 (mod7) → 15k≡1 (mod7). Como 15≡1 (mod7), resulta k≡1 (mod7). O menor k positivo é 1, logo N=8+15·1=23.",
+    "difficulty": "médio",
+    "topic": "OBMEP"
   }
 ]
