@@ -318,5 +318,11 @@
     "answer": "O expoente y deve dividir 2, logo y = 1 ou 2. Para y = 1 temos (x^2 - 4x + 3) = 2^3 = 8, o que leva a x^2 - 4x - 5 = 0 e resulta em x = 5 ou x = -1; como x deve ser positivo, x = 5. Para y = 2, (x^2 - 4x + 3) = 2^2 = 4 gera x^2 - 4x - 1 = 0, que não tem solução inteira. Assim o único par de inteiros positivos é (5, 1), que é o menor em ordem lexicográfica.",
     "difficulty": "difícil",
     "topic": "ÁLGEBRA"
+  },
+  {
+    "question": "Considere a equação 3x - 7 = 2x + 5. Determine o valor de x e verifique se ele satisfaz a condição x > 0.",
+    "answer": "Subtraindo 2x de ambos os lados obtém‑se x - 7 = 5; somando 7 resulta x = 12. Como 12 > 0, a solução válida é x = 12.",
+    "difficulty": "fácil",
+    "topic": "ÁLGEBRA"
   }
 ]
