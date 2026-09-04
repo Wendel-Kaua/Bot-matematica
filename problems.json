@@ -300,5 +300,11 @@
     "answer": "Pela propriedade dos divisores inteiros do termo constante, a raiz inteira r deve dividir 8, logo r∈{±1,±2,±4,±8}. Substituindo r em p(r)=0 e resolvendo para k obtém‑se k=-(r^3-6r^2+8)/r. Os pares (k,r) resultantes são: k=-3 (r=1), k=1 (r=-1), k=4 (r=2), k=-12 (r=-2), k=6 (r=4), k=-38 (r=-4), k=-17 (r=8), k=-111 (r=-8). Assim os valores possíveis de k são -111, -38, -17, -12, -3, 1, 4 e 6.",
     "difficulty": "médio",
     "topic": "ÁLGEBRA"
+  },
+  {
+    "question": "Resolva o sistema de equações 3x - 2y = 4 e x^2 + y = 5 nos números inteiros. Qual o par (x, y) que satisfaz ambas as equações?",
+    "answer": "Da primeira equação obtemos y = (3x - 4)/2. Como y deve ser inteiro, 3x - 4 precisa ser par, logo x é par. Testando valores pares, para x = 2 temos y = (6 - 4)/2 = 1 e verifica‑se 2^2 + 1 = 5. Nenhum outro valor inteiro de x satisfaz a segunda equação. Portanto, (x, y) = (2, 1).",
+    "difficulty": "médio",
+    "topic": "ÁLGEBRA"
   }
 ]
