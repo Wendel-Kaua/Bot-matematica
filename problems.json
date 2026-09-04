@@ -324,5 +324,11 @@
     "answer": "Subtraindo 2x de ambos os lados obtém‑se x - 7 = 5; somando 7 resulta x = 12. Como 12 > 0, a solução válida é x = 12.",
     "difficulty": "fácil",
     "topic": "ÁLGEBRA"
+  },
+  {
+    "question": "Sejam x e y números reais que satisfazem o sistema: x + y = 3 e x^2 + y^2 = 7. Determine o valor de x^3 + y^3.",
+    "answer": "Primeiro calcula‑se xy = ((x + y)^2 – (x^2 + y^2))/2 = (9 – 7)/2 = 1. Em seguida usa‑se a identidade x^3 + y^3 = (x + y)^3 – 3xy(x + y). Substituindo: (3)^3 – 3·1·3 = 27 – 9 = 18. Portanto x^3 + y^3 = 18.",
+    "difficulty": "médio",
+    "topic": "ÁLGEBRA"
   }
 ]
