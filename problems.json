@@ -336,5 +336,11 @@
     "answer": "Seja w a largura. Então o comprimento c = 2w+3. O perímetro dá 2(c+w)=54 ⇒ c+w=27. Substituindo c, temos (2w+3)+w=27 ⇒ 3w=24 ⇒ w=8 cm e c=19 cm. A área é w·c=8·19=152 cm².",
     "difficulty": "fácil",
     "topic": "ÁLGEBRA"
+  },
+  {
+    "question": "Encontre todos os valores inteiros de n tais que o produto de dois inteiros consecutivos acrescido de 1 resulta em um quadrado perfeito, ou seja, satisfaça n·(n+1)+1 = m^2 para algum inteiro m.",
+    "answer": "Os únicos valores são n = 0 e n = -1. Para resolver, escrevemos n·(n+1)+1 = n^2+n+1 = m^2. Multiplicando por 4 obtém‑se (2n+1)^2+3 = (2m)^2, que equivale a (2m)^2-(2n+1)^2 = 3. Factorizando: (2m-(2n+1))(2m+(2n+1)) = 3. Como 3 é primo, os pares de fatores possíveis são (1,3) ou (-1,-3), conduzindo a n = 0 ou n = -1.",
+    "difficulty": "médio",
+    "topic": "ÁLGEBRA"
   }
 ]
