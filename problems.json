@@ -360,5 +360,11 @@
     "answer": "A única possibilidade de produto das raízes r·s·t = -6. Testando as combinações de inteiros cujo produto é -6, só o trio {1,2,-3} satisfaz as relações de Vieta. Sua soma é 0, logo k = (1+2-3)/3 = 0, que é inteiro, e r·s + r·t + s·t = -7 = 3·0^2 - 7. Portanto k = 0 e as raízes são 1, 2 e -3.",
     "difficulty": "difícil",
     "topic": "ÁLGEBRA"
+  },
+  {
+    "question": "Um número inteiro positivo N possui exatamente 6 algarismos. Sabe‑se que a soma dos seus algarismos é 27 e que N é múltiplo de 9. Quantos números diferentes N satisfazem essas condições?",
+    "answer": "Como a soma dos algarismos é 27, que já é múltiplo de 9, a condição de múltiplo de 9 é automática. Assim, basta contar os 6‑digitos a_1…a_6 com a_1≠0, 0≤a_i≤9 e a_1+…+a_6=27. Usando estrelas‑e‑barras e inclusão‑exclusão: total sem restrição de limite = C(32,5)=201376. Subtraindo as soluções onde algum algarismo ≥10 (6×C(22,5)=158004) e somando as intersecções de dois algarismos ≥10 (+15×C(12,5)=11880) obtem‑se 55 252 soluções com 0≤a_i≤9. Contamos agora as que têm a_1=0: para a_2+…+a_6=27 com 0≤a_i≤9, o mesmo procedimento dá 4 840 soluções. Portanto, N com 6 algarismos válidos = 55 252‑4 840 = 50 412. Resposta: 50 412.",
+    "difficulty": "médio",
+    "topic": "OBMEP"
   }
 ]
