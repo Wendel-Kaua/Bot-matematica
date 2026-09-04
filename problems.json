@@ -348,5 +348,11 @@
     "answer": "Usando a fórmula AI = sqrt(b·c·[1 - a^2/(b+c)^2]), onde a, b, c são os lados opostos a A, B, C respectivamente, temos a = 14, b = 15, c = 13. Então b·c = 195, b+c = 28 e a^2/(b+c)^2 = 196/784 = 0,25. Logo AI = sqrt(195·0,75) = sqrt(585/4) = sqrt(585)/2 ≈ 12,09 cm.",
     "difficulty": "médio",
     "topic": "GEOMETRIA"
+  },
+  {
+    "question": "Em uma mesa redonda sentam‑se 8 casais (cada casal formado por um homem e uma mulher, todos distintos). As disposições devem satisfazer duas condições: (i) nenhum homem pode ficar ao lado de outro homem; (ii) nenhum casal pode ficar lado a lado. Quantas disposições diferentes são possíveis, considerando duas disposições equivalentes se podem ser obtidas uma da outra por rotação da mesa?",
+    "answer": "Primeiro fixamos a posição de um homem para eliminar a simetria de rotação. Os demais 7 homens podem ser arranjados em 7! maneiras, formando uma sequência alternada homem‑mulher ao redor da mesa. Cada homem tem dois assentos vizinhos, ambos ocupados por mulheres; assim, os 8 assentos disponíveis para as mulheres correspondem a uma permutação dos 8 mulheres. A condição (ii) impede que a mulher sentada ao lado de um homem seja a sua companheira, ou seja, precisamos de uma permutação sem pontos fixos (derangement) dos 8 mulheres em relação aos 8 posições. O número de derangements de 8 elementos é !8 = 14833. Logo, o total de disposições é 7! × !8 = 5040 × 14833 = 74 758 320.",
+    "difficulty": "difícil",
+    "topic": "MATEMÁTICA"
   }
 ]
