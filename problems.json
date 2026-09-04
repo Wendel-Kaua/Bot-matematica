@@ -354,5 +354,11 @@
     "answer": "Primeiro fixamos a posição de um homem para eliminar a simetria de rotação. Os demais 7 homens podem ser arranjados em 7! maneiras, formando uma sequência alternada homem‑mulher ao redor da mesa. Cada homem tem dois assentos vizinhos, ambos ocupados por mulheres; assim, os 8 assentos disponíveis para as mulheres correspondem a uma permutação dos 8 mulheres. A condição (ii) impede que a mulher sentada ao lado de um homem seja a sua companheira, ou seja, precisamos de uma permutação sem pontos fixos (derangement) dos 8 mulheres em relação aos 8 posições. O número de derangements de 8 elementos é !8 = 14833. Logo, o total de disposições é 7! × !8 = 5040 × 14833 = 74 758 320.",
     "difficulty": "difícil",
     "topic": "MATEMÁTICA"
+  },
+  {
+    "question": "Determine todos os valores inteiros de k para os quais a equação x^3 - 3k x^2 + (3k^2 - 7) x + 6 = 0 possui três raízes inteiras distintas. Para cada k encontrado, indique as raízes.",
+    "answer": "A única possibilidade de produto das raízes r·s·t = -6. Testando as combinações de inteiros cujo produto é -6, só o trio {1,2,-3} satisfaz as relações de Vieta. Sua soma é 0, logo k = (1+2-3)/3 = 0, que é inteiro, e r·s + r·t + s·t = -7 = 3·0^2 - 7. Portanto k = 0 e as raízes são 1, 2 e -3.",
+    "difficulty": "difícil",
+    "topic": "ÁLGEBRA"
   }
 ]
