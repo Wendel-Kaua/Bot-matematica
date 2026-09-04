@@ -342,5 +342,11 @@
     "answer": "Os únicos valores são n = 0 e n = -1. Para resolver, escrevemos n·(n+1)+1 = n^2+n+1 = m^2. Multiplicando por 4 obtém‑se (2n+1)^2+3 = (2m)^2, que equivale a (2m)^2-(2n+1)^2 = 3. Factorizando: (2m-(2n+1))(2m+(2n+1)) = 3. Como 3 é primo, os pares de fatores possíveis são (1,3) ou (-1,-3), conduzindo a n = 0 ou n = -1.",
     "difficulty": "médio",
     "topic": "ÁLGEBRA"
+  },
+  {
+    "question": "Em um triângulo ABC, os lados medem AB = 13 cm, BC = 14 cm e CA = 15 cm. As bissetrizes internas dos ângulos B e C intersectam‑se no ponto I (in­centro do triângulo). Determine o comprimento do segmento AI.",
+    "answer": "Usando a fórmula AI = sqrt(b·c·[1 - a^2/(b+c)^2]), onde a, b, c são os lados opostos a A, B, C respectivamente, temos a = 14, b = 15, c = 13. Então b·c = 195, b+c = 28 e a^2/(b+c)^2 = 196/784 = 0,25. Logo AI = sqrt(195·0,75) = sqrt(585/4) = sqrt(585)/2 ≈ 12,09 cm.",
+    "difficulty": "médio",
+    "topic": "GEOMETRIA"
   }
 ]
