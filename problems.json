@@ -306,5 +306,11 @@
     "answer": "Da primeira equação obtemos y = (3x - 4)/2. Como y deve ser inteiro, 3x - 4 precisa ser par, logo x é par. Testando valores pares, para x = 2 temos y = (6 - 4)/2 = 1 e verifica‑se 2^2 + 1 = 5. Nenhum outro valor inteiro de x satisfaz a segunda equação. Portanto, (x, y) = (2, 1).",
     "difficulty": "médio",
     "topic": "ÁLGEBRA"
+  },
+  {
+    "question": "Sejam p e q números reais que satisfazem p+q = 4 e p^3 + q^3 = 28. Determine o valor de p^5 + q^5.",
+    "answer": "Usando s1=p+q=4 e a identidade p^3+q^3 = (p+q)^3 -3pq(p+q) obtemos pq=3. Assim s2 = p^2+q^2 = (p+q)^2 -2pq = 16-6 =10. Para as somas de potências vale a recorrência s_n = (p+q)s_{n-1} - pq s_{n-2}. Calculando: s3 =28 (dado), s4 =4·28 -3·10 =82, s5 =4·82 -3·28 =244. Portanto p^5+q^5 = 244.",
+    "difficulty": "difícil",
+    "topic": "ÁLGEBRA"
   }
 ]
