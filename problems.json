@@ -378,5 +378,11 @@
     "answer": "Primeiro, denote ∠ABC = x, logo ∠BAC = 2x e ∠ACB = 180°‑3x. Pela lei dos senos: 13/ sin(3x) = 15/ sin x → 13 sin x = 15 sin 3x = 15(3 sin x – 4 sin³x). Obtém‑se sin²x = 8/15. Assim sin x = √(8/15) e cos x = √(7/15). Calcula‑se sin 2x = 2 sin x cos x = 4√14 /15 e sin 3x = 13√(8/15)/15. O terceiro lado BC vale BC = (AB/ sin 3x)·sin 2x = 2√105. O semiperímetro é s = (13+15+2√105)/2 = 14+√105. A área do triângulo pode ser encontrada por Δ = ½·AB·AC·sin 2x = ½·13·15·(4√14/15) = 26√14. Finalmente, r = Δ / s = (26√14)/(14+√105).",
     "difficulty": "difícil",
     "topic": "GEOMETRIA"
+  },
+  {
+    "question": "Uma caixa contém 5 bolas vermelhas, 4 bolas azuis e 3 bolas verdes. São retiradas, sem reposição, 3 bolas. Qual a probabilidade de que exatamente duas sejam vermelhas?",
+    "answer": "A probabilidade é (C(5,2)*C(7,1))/C(12,3)=70/220=7/22≈0,318. Primeiro escolhe‑se 2 das 5 vermelhas (C(5,2)) e 1 das restantes 7 bolas de outra cor (C(7,1)). Divide‑se pelo total de combinações de 3 bolas entre 12 (C(12,3)).",
+    "difficulty": "médio",
+    "topic": "PROBABILIDADE"
   }
 ]
