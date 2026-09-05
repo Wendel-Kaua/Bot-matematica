@@ -384,5 +384,11 @@
     "answer": "A probabilidade é (C(5,2)*C(7,1))/C(12,3)=70/220=7/22≈0,318. Primeiro escolhe‑se 2 das 5 vermelhas (C(5,2)) e 1 das restantes 7 bolas de outra cor (C(7,1)). Divide‑se pelo total de combinações de 3 bolas entre 12 (C(12,3)).",
     "difficulty": "médio",
     "topic": "PROBABILIDADE"
+  },
+  {
+    "question": "Em um plano, considere o quadrilátero convexo ABCD com as seguintes propriedades: AB = BC = CD; o ângulo interno em B (∠ABC) mede 120°; o ângulo interno em C (∠BCD) mede 90°; e a diagonal AC tem comprimento 10 unidades. Calcule a área do quadrilátero ABCD.",
+    "answer": "Colocando B na origem, BC ao longo do eixo x e usando as medidas dadas obtém‑se AB = BC = CD = 10/√3. As coordenadas são A(‑s/2, s√3/2), B(0,0), C(s,0) e D(s,s), onde s = 10/√3. Aplicando a fórmula de Shoelace, a área vale s^2(3+√3)/4 = (100/3)(3+√3)/4 = 25/3·(3+√3) ≈ 39,43 unidades de área.",
+    "difficulty": "difícil",
+    "topic": "GEOMETRIA"
   }
 ]
