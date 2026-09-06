@@ -426,5 +426,11 @@
     "answer": "Passo 1 – Hipotenusa:\nComo sin30 = ½, substituímos em **BC = AB / sin30**:\n**BC = 10 / 0,5 = 20** unidades.\n\nPasso 2 – Outro cateto:\ncot30 = √3, portanto em **AC = AB * cot30**:\n**AC = 10 * √3 ≈ 17,32** unidades.\n\nPasso 3 – Altura BD sobre a hipotenusa:\nEm um triângulo retângulo, a altitude relativa à hipotenusa satisfaz:\n**BD = (AB * AC) / BC**.\nSubstituindo os valores:\n**BD = (10 * 17,32) / 20 ≈ 8,66** unidades.\n\nPasso 4 – Área da região solicitada:\nA região é um triângulo de base BC e altura BD, logo:\n**Área = (BC * BD) / 2 = (20 * 8,66) / 2 ≈ 86,6** unidades quadradas.\n\nResposta final:\n1) BC = 20;\n2) AC ≈ 17,32;\n3) Área ≈ 86,6 unidades².",
     "difficulty": 9.0,
     "topic": "Trigonometria Dificuldade 10"
+  },
+  {
+    "question": "Um clube esportivo paga a seus atletas um bônus mensal que aumenta de forma constante a cada mês. No primeiro mês, o bônus foi de 1.200 reais, e no décimo‑segundo mês o bônus foi de 2.100 reais.\n\n**a_1 = 1200**\n**a_12 = 2100**\n\nConsiderando que a sequência dos bônus forma uma progressão aritmética, determine:\n1. O valor da razão da PA.\n2. O valor do bônus no décimo mês.\n3. O total pago ao longo dos 12 meses.\n4. Em que mês o bônus ultrapassará 1.800 reais?",
+    "answer": "A sequência é uma PA, logo a razão d é dada por:\n**d = (a_12 - a_1) / (12 - 1) = (2100 - 1200) / 11 = 900 / 11 ≈ 81,82**\n\n1. **Razão d = 900/11 ≈ 81,82**.\n\n2. O décimo termo:\n**a_10 = a_1 + 9d = 1200 + 9·(900/11) = 1200 + 8100/11 = 21300/11 ≈ 1.936,36**.\n\n3. Soma dos 12 termos:\n**S_12 = (12/2)·(a_1 + a_12) = 6·(1200 + 2100) = 6·3300 = 19.800**.\n\n4. Para encontrar o primeiro mês k em que a_k > 1800:\n**a_k = a_1 + (k-1)d > 1800**\n**1200 + (k-1)·(900/11) > 1800**\n**(k-1) > (1800 - 1200)·11/900 = 600·11/900 = 22/3 ≈ 7,33**\nPortanto **k > 8,33**, logo o primeiro mês inteiro que satisfaz a condição é o **nono mês**.\n\nResposta resumida:\n- Razão ≈ 81,82\n- Décimo bônus ≈ 1.936,36 reais\n- Soma dos 12 bônus = 19.800 reais\n- O bônus ultrapassa 1.800 reais no 9.º mês.",
+    "difficulty": 6.3,
+    "topic": "6.3 Progressões Aritméticas"
   }
 ]
