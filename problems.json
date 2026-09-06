@@ -402,5 +402,11 @@
     "answer": "Passo 1 – Calcular o total de formas de escolher 3 bolas dentre 12:\n**C(12,3) = 12·11·10 / (3·2·1) = 220**\n\nPasso 2 – Calcular as formas de escolher 3 bolas que não sejam vermelhas (ou seja, apenas das 7 bolas azuis e verdes):\n**C(7,3) = 7·6·5 / (3·2·1) = 35**\n\nPasso 3 – A probabilidade de não sair nenhuma vermelha é:\n**P(nenhuma vermelha) = C(7,3) / C(12,3) = 35 / 220**\n\nPasso 4 – A probabilidade de sair ao menos uma vermelha é o complemento:\n**P(pelo menos uma vermelha) = 1 - 35/220 = 185/220 = 37/44 ≈ 0,84**\n\nPortanto, a probabilidade pedida é 37/44, ou aproximadamente 84 %.",
     "difficulty": 6.5,
     "topic": "Probabilidade"
+  },
+  {
+    "question": "Um prisma reto de base triangular equilátera tem lado da base igual a 6 cm e altura igual a 10 cm. Uma esfera está inscrita no prisma, tocando as três faces laterais e as duas bases. Calcule o raio da esfera.",
+    "answer": "Primeiro calculamos o raio que pode ser inscrito na base triangular. **r_tri = a·√3 / 6** onde a = 6 cm. Assim **r_tri = 6·√3 / 6 = √3 cm ≈ 1,73 cm**. O raio também não pode exceder a metade da altura do prisma, pois a esfera deve tocar ambas as bases: **r_h = h / 2 = 10 / 2 = 5 cm**. O raio da esfera inscrita será o menor entre r_tri e r_h. Como **√3 ≈ 1,73 cm < 5 cm**, temos **r = √3 cm ≈ 1,73 cm**. Portanto o raio da esfera inscrita é aproximadamente **1,73 cm**.",
+    "difficulty": 7.5,
+    "topic": "Geometria Espacial"
   }
 ]
