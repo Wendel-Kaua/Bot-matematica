@@ -390,5 +390,11 @@
     "answer": "Colocando B na origem, BC ao longo do eixo x e usando as medidas dadas obtém‑se AB = BC = CD = 10/√3. As coordenadas são A(‑s/2, s√3/2), B(0,0), C(s,0) e D(s,s), onde s = 10/√3. Aplicando a fórmula de Shoelace, a área vale s^2(3+√3)/4 = (100/3)(3+√3)/4 = 25/3·(3+√3) ≈ 39,43 unidades de área.",
     "difficulty": "difícil",
     "topic": "GEOMETRIA"
+  },
+  {
+    "question": "Contexto: Maria está estudando divisão de polinômios. Ela tem o polinômio cúbico **p(x) = 2x^3 - 5x^2 + 4x - 7** e o polinômio quadrático **q(x) = x^2 - 3x + 2**.\nDados: Deseja encontrar o resto da divisão de p(x) por q(x) e, em seguida, determinar a raiz (ou raízes) do resto.\nPergunta: Qual é o resto da divisão de **p(x)** por **q(x)** e qual o valor de x que zera esse resto?",
+    "answer": "Passo 1 – Divisão polinomial:\n- Primeiro termo do quociente: **2x** porque 2x^3 ÷ x^2 = 2x.\n- Multiplicamos **q(x)** por 2x: **2x^3 - 6x^2 + 4x**.\n- Subtraímos do dividendo: (2x^3 - 5x^2 + 4x) - (2x^3 - 6x^2 + 4x) = **x^2**.\n- Baixamos o termo constante -7, obtendo **x^2 - 7**.\n- Segundo termo do quociente: **1** porque x^2 ÷ x^2 = 1.\n- Multiplicamos **q(x)** por 1: **x^2 - 3x + 2**.\n- Subtraímos: (x^2 - 7) - (x^2 - 3x + 2) = **3x - 9**.\nComo o grau de **3x - 9** (grau 1) é menor que o grau de **q(x)** (grau 2), a divisão termina.\n\nPasso 2 – Resto:\n**r(x) = 3x - 9**\n\nPasso 3 – Raiz do resto:\nPara que o resto seja zero, resolvemos **3x - 9 = 0**.\nDividindo por 3: **x - 3 = 0** → **x = 3**.\n\nResposta final: O resto da divisão é **3x - 9** e ele se anula em **x = 3**.",
+    "difficulty": 7.5,
+    "topic": "Álgebra E Polinômios"
   }
 ]
