@@ -414,5 +414,11 @@
     "answer": "Primeiro, usamos a definição de tangente:\n\n**tan 45° = h / d** → como tan 45° = 1, obtém‑se **h = d**.\n\nSubstituindo h por d na primeira equação:\n\n**tan 30° = d / (d + 200)**.\n\nSabendo que tan 30° = 1/√3, temos:\n\n**1/√3 = d / (d + 200)** → **√3·d = d + 200** → **(√3 – 1)·d = 200**.\n\nIsolando d:\n\n**d = 200 / (√3 – 1)**.\n\nCalculando (√3 ≈ 1.732):\n\n**d ≈ 200 / 0.732 ≈ 273.22 metros**.\n\nComo h = d, a altura do farol é:\n\n**h ≈ 273.22 metros**.\n\nPortanto, a altura do farol é aproximadamente 273 metros.",
     "difficulty": 7.5,
     "topic": "Trigonometria"
+  },
+  {
+    "question": "Considere o triângulo ABC, onde:\n- lado a = BC = 7 unidades,\n- lado b = AC = 9 unidades,\n- ângulo A = 45°.\nO ângulo B é desconhecido e o lado c = AB deve ser encontrado.\n\nUtilize a lei dos senos para determinar o ângulo B, o ângulo C e o comprimento do lado c.\n\n**a / sin(A) = b / sin(B) = c / sin(C)**\n**sin(B) = b·sin(A)/a**\n**C = 180° – A – B**\n**c = sin(C)·a / sin(A)**",
+    "answer": "Aplicando a lei dos senos:\n**sin(B) = b·sin(A)/a**\nSubstituindo os valores: sin(B) = 9·sin(45°)/7 ≈ 9·0.7071/7 ≈ 0.9091.\nPortanto B ≈ arcsin(0.9091) ≈ 65.5°.\n\nO ângulo restante:\n**C = 180° – A – B**\nC = 180° – 45° – 65.5° ≈ 69.5°.\n\nAgora calculamos o lado c:\n**c = sin(C)·a / sin(A)**\nsin(C) ≈ sin(69.5°) ≈ 0.936.\nsin(A) = sin(45°) ≈ 0.7071.\nAssim, c ≈ 0.936·7 / 0.7071 ≈ 9.27 unidades.\n\nResposta: ângulo B ≈ 65.5°, ângulo C ≈ 69.5° e lado c ≈ 9.27 unidades.",
+    "difficulty": 7.5,
+    "topic": "Trigonometria 10"
   }
 ]
