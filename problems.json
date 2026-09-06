@@ -408,5 +408,11 @@
     "answer": "Primeiro calculamos o raio que pode ser inscrito na base triangular. **r_tri = a·√3 / 6** onde a = 6 cm. Assim **r_tri = 6·√3 / 6 = √3 cm ≈ 1,73 cm**. O raio também não pode exceder a metade da altura do prisma, pois a esfera deve tocar ambas as bases: **r_h = h / 2 = 10 / 2 = 5 cm**. O raio da esfera inscrita será o menor entre r_tri e r_h. Como **√3 ≈ 1,73 cm < 5 cm**, temos **r = √3 cm ≈ 1,73 cm**. Portanto o raio da esfera inscrita é aproximadamente **1,73 cm**.",
     "difficulty": 7.5,
     "topic": "Geometria Espacial"
+  },
+  {
+    "question": "Um observador está em um ponto A no solo, a 50 metros horizontalmente do pé de uma torre B. Ele mede o ângulo de elevação ao topo da torre como 30°. \n**tan 30° = h / 50**\nSabendo que tan 30° = √3/3 ≈ 0.577, calcule: \n1) a altura h da torre; \n2) se o observador se afastar mais 20 metros (distância total 70 m), qual será o novo ângulo de elevação θ ao topo? \n**tan θ = h / 70**",
+    "answer": "1) Usando a relação trigonométrica da tangente:\n**h = 50 × tan 30°**\nSubstituindo tan 30° ≈ 0.577:\n**h ≈ 50 × 0.577 = 28.85 m**\nPortanto, a torre tem aproximadamente 28.9 m de altura.\n\n2) Com a nova distância horizontal de 70 m, aplicamos novamente a tangente:\n**tan θ = h / 70**\nSubstituindo h ≈ 28.85 m:\n**tan θ ≈ 28.85 / 70 ≈ 0.412**\nPara encontrar θ, usamos a função arco‑tangente:\n**θ = arctan 0.412**\nCalculando, θ ≈ 22.4°.\n\nAssim, o ângulo de elevação diminui para aproximadamente **22.4°** quando o observador se afasta 20 m adicionais.",
+    "difficulty": 7.5,
+    "topic": "Trigonometria"
   }
 ]
