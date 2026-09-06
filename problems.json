@@ -410,8 +410,8 @@
     "topic": "Geometria Espacial"
   },
   {
-    "question": "Um observador está em um ponto A no solo, a 50 metros horizontalmente do pé de uma torre B. Ele mede o ângulo de elevação ao topo da torre como 30°. \n**tan 30° = h / 50**\nSabendo que tan 30° = √3/3 ≈ 0.577, calcule: \n1) a altura h da torre; \n2) se o observador se afastar mais 20 metros (distância total 70 m), qual será o novo ângulo de elevação θ ao topo? \n**tan θ = h / 70**",
-    "answer": "1) Usando a relação trigonométrica da tangente:\n**h = 50 × tan 30°**\nSubstituindo tan 30° ≈ 0.577:\n**h ≈ 50 × 0.577 = 28.85 m**\nPortanto, a torre tem aproximadamente 28.9 m de altura.\n\n2) Com a nova distância horizontal de 70 m, aplicamos novamente a tangente:\n**tan θ = h / 70**\nSubstituindo h ≈ 28.85 m:\n**tan θ ≈ 28.85 / 70 ≈ 0.412**\nPara encontrar θ, usamos a função arco‑tangente:\n**θ = arctan 0.412**\nCalculando, θ ≈ 22.4°.\n\nAssim, o ângulo de elevação diminui para aproximadamente **22.4°** quando o observador se afasta 20 m adicionais.",
+    "question": "Um observador está a uma certa distância d+200 metros do farol. Quando está nessa posição, o ângulo de elevação ao topo do farol é 30°. Ele então caminha 200 metros em direção ao farol, ficando a distância d metros, e o ângulo de elevação passa a 45°. Determine a altura h do farol.\n\n**tan 30° = h / (d + 200)**\n\n**tan 45° = h / d**",
+    "answer": "Primeiro, usamos a definição de tangente:\n\n**tan 45° = h / d** → como tan 45° = 1, obtém‑se **h = d**.\n\nSubstituindo h por d na primeira equação:\n\n**tan 30° = d / (d + 200)**.\n\nSabendo que tan 30° = 1/√3, temos:\n\n**1/√3 = d / (d + 200)** → **√3·d = d + 200** → **(√3 – 1)·d = 200**.\n\nIsolando d:\n\n**d = 200 / (√3 – 1)**.\n\nCalculando (√3 ≈ 1.732):\n\n**d ≈ 200 / 0.732 ≈ 273.22 metros**.\n\nComo h = d, a altura do farol é:\n\n**h ≈ 273.22 metros**.\n\nPortanto, a altura do farol é aproximadamente 273 metros.",
     "difficulty": 7.5,
     "topic": "Trigonometria"
   }
