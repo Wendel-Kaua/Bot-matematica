@@ -396,5 +396,11 @@
     "answer": "Passo 1 – Divisão polinomial:\n- Primeiro termo do quociente: **2x** porque 2x^3 ÷ x^2 = 2x.\n- Multiplicamos **q(x)** por 2x: **2x^3 - 6x^2 + 4x**.\n- Subtraímos do dividendo: (2x^3 - 5x^2 + 4x) - (2x^3 - 6x^2 + 4x) = **x^2**.\n- Baixamos o termo constante -7, obtendo **x^2 - 7**.\n- Segundo termo do quociente: **1** porque x^2 ÷ x^2 = 1.\n- Multiplicamos **q(x)** por 1: **x^2 - 3x + 2**.\n- Subtraímos: (x^2 - 7) - (x^2 - 3x + 2) = **3x - 9**.\nComo o grau de **3x - 9** (grau 1) é menor que o grau de **q(x)** (grau 2), a divisão termina.\n\nPasso 2 – Resto:\n**r(x) = 3x - 9**\n\nPasso 3 – Raiz do resto:\nPara que o resto seja zero, resolvemos **3x - 9 = 0**.\nDividindo por 3: **x - 3 = 0** → **x = 3**.\n\nResposta final: O resto da divisão é **3x - 9** e ele se anula em **x = 3**.",
     "difficulty": 7.5,
     "topic": "Álgebra E Polinômios"
+  },
+  {
+    "question": "Contexto: Uma caixa contém 5 bolas vermelhas, 4 bolas azuis e 3 bolas verdes, totalizando 12 bolas.\n\nDados: São retiradas 3 bolas da caixa, uma após a outra, sem reposição.\n\nPergunta: Qual a probabilidade de que, entre as 3 bolas retiradas, haja ao menos uma bola vermelha?\n\n**Número total de combinações possíveis = C(12,3)**\n**Número de combinações sem nenhuma bola vermelha = C(7,3)**\n**P(pelo menos uma vermelha) = 1 - C(7,3) / C(12,3)**",
+    "answer": "Passo 1 – Calcular o total de formas de escolher 3 bolas dentre 12:\n**C(12,3) = 12·11·10 / (3·2·1) = 220**\n\nPasso 2 – Calcular as formas de escolher 3 bolas que não sejam vermelhas (ou seja, apenas das 7 bolas azuis e verdes):\n**C(7,3) = 7·6·5 / (3·2·1) = 35**\n\nPasso 3 – A probabilidade de não sair nenhuma vermelha é:\n**P(nenhuma vermelha) = C(7,3) / C(12,3) = 35 / 220**\n\nPasso 4 – A probabilidade de sair ao menos uma vermelha é o complemento:\n**P(pelo menos uma vermelha) = 1 - 35/220 = 185/220 = 37/44 ≈ 0,84**\n\nPortanto, a probabilidade pedida é 37/44, ou aproximadamente 84 %.",
+    "difficulty": 6.5,
+    "topic": "Probabilidade"
   }
 ]
