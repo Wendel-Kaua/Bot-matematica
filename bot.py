@@ -1,8 +1,3 @@
-"""
-Bot de Discord que posta um problema de matemática diariamente
-no canal configurado, e permite ver a resposta e pedir um problema extra.
-"""
-
 import os
 import json
 import random
@@ -18,35 +13,26 @@ import requests
 from discord.ext import commands, tasks
 from dotenv import load_dotenv
 
-# ------------------------------------------------------------------
-# Configuração
-# ------------------------------------------------------------------
 load_dotenv()
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 CHANNEL_ID = int(os.getenv("CHANNEL_ID", "0"))
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-# openai/gpt-oss-120b é o modelo "de produção" recomendado atualmente pela Groq
-# para tarefas de propósito geral. Pode ser trocado via variável de ambiente
-# se a Groq aposentar esse modelo no futuro (veja console.groq.com/docs/models).
 GROQ_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
 GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 
-# Sincronização do banco de problemas com o GitHub (para persistir problemas
-# gerados por IA além do reinício/redeploy do bot).
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-GITHUB_REPO = os.getenv("GITHUB_REPO")  # formato "usuario/repositorio"
+GITHUB_REPO = os.getenv("GITHUB_REPO")
 GITHUB_BRANCH = os.getenv("GITHUB_BRANCH", "main")
 GITHUB_FILE_PATH = os.getenv("GITHUB_FILE_PATH", "problems.json")
 
-# Horário (fuso de Brasília, UTC-3) em que o problema é postado todo dia.
-# Exemplo: 8h da manhã em Brasília.
 POST_HOUR = int(os.getenv("POST_HOUR", "8"))
 POST_MINUTE = int(os.getenv("POST_MINUTE", "0"))
 BRASILIA_TZ = timezone(timedelta(hours=-3))
 POST_TIME = time(hour=POST_HOUR, minute=POST_MINUTE, tzinfo=BRASILIA_TZ)
 
 PROBLEMS_FILE = os.path.join(os.path.dirname(__file__), "problems.json")
+CHANNEL_HISTORY_FILE = os.path.join(os.path.dirname(__file__), "channel_history.json")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("math-bot")
@@ -56,62 +42,77 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-# Histórico de problemas por canal: canal_id -> {numero: problema}
-problem_history_by_channel: dict[int, dict[int, dict]] = {}
-# Próximo número a usar em cada canal
-next_id_by_channel: dict[int, int] = {}
-# Guarda o último problema postado (por canal), pra !resposta sem número continuar funcionando
-last_problem_by_channel: dict[int, dict] = {}
-
 
 def load_problems() -> list[dict]:
+    if not os.path.exists(PROBLEMS_FILE):
+        return []
     with open(PROBLEMS_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
-def get_topics() -> list[str]:
-    problems = load_problems()
-    return sorted({padronizar_assunto(p["topic"]) for p in problems})
+def load_channel_history() -> dict:
+    if not os.path.exists(CHANNEL_HISTORY_FILE):
+        return {}
+    try:
+        with open(CHANNEL_HISTORY_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def save_channel_history(data: dict) -> None:
+    try:
+        with open(CHANNEL_HISTORY_FILE, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+    except Exception as exc:
+        logger.error("Erro ao persistir histórico dos canais: %s", exc)
 
 
 def register_problem(channel_id: int, problem: dict) -> int:
-    """Registra o problema no histórico do canal e devolve o número (#ID) atribuído a ele."""
-    numero = next_id_by_channel.get(channel_id, 1)
-    problem_history_by_channel.setdefault(channel_id, {})[numero] = problem
-    next_id_by_channel[channel_id] = numero + 1
-    last_problem_by_channel[channel_id] = problem
-    return numero
+    channel_key = str(channel_id)
+    history = load_channel_history()
+    channel_data = history.setdefault(channel_key, {"last_id": 0, "problems": {}})
+    
+    existing_ids = [int(k) for k in channel_data.get("problems", {}).keys()]
+    current_max = max(existing_ids) if existing_ids else channel_data.get("last_id", 0)
+    next_id = current_max + 1
+
+    channel_data["last_id"] = next_id
+    channel_data["problems"][str(next_id)] = problem
+    save_channel_history(history)
+    return next_id
 
 
-def generate_ai_problem(tema: str, nivel: str | None = None) -> dict:
-    """Gera um problema de matemática novo usando a API da Groq.
-    'nivel', se informado, força um grau de dificuldade específico no prompt
-    (ex: nível OBMEP 3 / ITA, pra questões bem mais avançadas que o padrão).
-    Levanta RuntimeError com uma mensagem amigável se algo der errado."""
+def normalizar_dificuldade(valor) -> float:
+    try:
+        num = float(str(valor).replace(",", ".").split("/")[0].strip())
+        return max(0.0, min(10.0, round(num, 1)))
+    except (ValueError, TypeError):
+        return 5.0
+
+
+def generate_ai_problem(tema: str, nivel_descricao: str | None = None) -> dict:
     if not GROQ_API_KEY:
-        raise RuntimeError(
-            "A geração por IA não está configurada. Defina GROQ_API_KEY no .env do bot."
-        )
+        raise RuntimeError("A geração por IA não está configurada. Defina GROQ_API_KEY no .env do bot.")
 
     instrucao_nivel = (
-        f'\n\nO problema DEVE ter o nível de dificuldade de "{nivel}" — ou seja, '
-        "bem avançado e desafiador, nada trivial ou de nível básico."
-        if nivel
-        else ""
+        f'\n- O nível de dificuldade deve ser: {nivel_descricao}'
+        if nivel_descricao
+        else "\n- Atribua uma dificuldade realista de 0.0 a 10.0 adequada ao tema."
     )
 
-    prompt = f"""Crie UM problema de matemática original em português sobre o tema "{tema}",
-adequado para um estudante de ensino médio se preparando para olimpíadas (nível OBMEP).{instrucao_nivel}
+    prompt = f"""Crie UM problema de matemática original em português sobre o tema "{tema}".{instrucao_nivel}
 
-IMPORTANTE sobre a formatação do texto (question e answer):
-- NUNCA use notação LaTeX (nada de \\ge, \\le, \\frac, \\cdot, \\times, chaves {{}} pra expoente/índice, cifrão $, etc.)
-- Para expoentes, escreva com "^" normal (ex: x^2, 2^10) — NÃO escreva x^{{2}}
-- Para índices de sequência, escreva com "_" simples e sem chaves (ex: a_n, a_1, a_n+1) — NÃO escreva a_{{n+1}}
-- Para desigualdades e símbolos, use os caracteres prontos: ≥ ≤ ≠ × ÷ π √ ± ao invés de escrever o nome do comando
-- Escreva como um enunciado de prova real, direto e sem jargão de código
+IMPORTANTE sobre a formatação matemática:
+- NUNCA use comandos LaTeX crus (como \\ge, \\le, \\frac, \\cdot, \\times, chaves {{}}, cifrões $, etc.).
+- Para expoentes use potências legíveis como x^2 ou 2^10.
+- Para índices use sublinhado simples como a_n ou a_1.
+- Use símbolos normais: ≥ ≤ ≠ × ÷ π √ ±.
+- DESTAQUE TODAS AS EQUAÇÕES, EXPRESSÕES E FÓRMULAS PRINCIPAIS: coloque-as em linhas separadas e em negrito (exemplo: **x² - 6x + 8 = 0** ou **f(x) = 2x + 1**) para destacá-las do texto descritivo.
+- Separe o enunciado em parágrafos claros: contexto, equações/dados e a pergunta.
 
-Responda APENAS com um JSON válido, sem markdown, sem crases, no formato exato:
-{{"question": "enunciado completo do problema", "answer": "resposta final com uma explicação breve de como chegar nela", "difficulty": "fácil, médio ou difícil", "topic": "{tema}"}}"""
+Responda APENAS com um JSON válido, sem markdown ou crases, no formato exato:
+{{"question": "enunciado com equações destacadas em negrito e em linhas separadas", "answer": "resposta final e explicação do passo a passo com fórmulas destacadas", "difficulty": 7.5, "topic": "{tema}"}}"""
 
     headers = {
         "Authorization": f"Bearer {GROQ_API_KEY}",
@@ -127,11 +128,10 @@ Responda APENAS com um JSON válido, sem markdown, sem crases, no formato exato:
         resp = requests.post(GROQ_URL, headers=headers, json=payload, timeout=30)
         resp.raise_for_status()
         texto = resp.json()["choices"][0]["message"]["content"].strip()
-    except Exception as exc:  # erro de rede, chave inválida, etc.
+    except Exception as exc:
         logger.exception("Erro ao chamar a API da Groq")
         raise RuntimeError(f"Não consegui falar com a IA agora ({exc}).") from exc
 
-    # Remove blocos de código markdown, caso a IA responda com ```json ... ```
     texto = re.sub(r"^```(json)?|```$", "", texto, flags=re.MULTILINE).strip()
 
     try:
@@ -144,14 +144,11 @@ Responda APENAS com um JSON válido, sem markdown, sem crases, no formato exato:
         if campo not in problem:
             raise RuntimeError("A IA não retornou todos os campos esperados. Tente de novo.")
 
-    # A IA às vezes devolve "\n" como texto literal (duas letras: barra e "n")
-    # em vez de uma quebra de linha de verdade. Troca isso por uma quebra real.
     for campo in ("question", "answer"):
-        problem[campo] = problem[campo].replace("\\n", "\n").strip()
+        problem[campo] = str(problem[campo]).replace("\\n", "\n").strip()
 
-    # Padroniza o assunto pra uma das categorias fixas do bot, em vez de deixar
-    # a IA inventar um nome novo a cada vez.
-    problem["topic"] = padronizar_assunto(problem["topic"])
+    problem["difficulty"] = normalizar_dificuldade(problem["difficulty"])
+    problem["topic"] = str(problem.get("topic", tema)).strip().title()
 
     return problem
 
@@ -161,10 +158,6 @@ def github_configured() -> bool:
 
 
 def push_problems_to_github(problems: list[dict]) -> None:
-    """Sobrescreve o problems.json no GitHub com a lista de problemas atual.
-    Tenta de novo automaticamente uma vez se der conflito (409) — geralmente
-    causado por uma pequena inconsistência passageira da API do GitHub.
-    Levanta uma exceção se algo der errado (chave inválida, repo errado, etc.)."""
     api_url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_FILE_PATH}"
     headers = {
         "Authorization": f"Bearer {GITHUB_TOKEN}",
@@ -176,7 +169,6 @@ def push_problems_to_github(problems: list[dict]) -> None:
 
     tentativas_maximas = 2
     for tentativa in range(1, tentativas_maximas + 1):
-        # Precisa do sha atual do arquivo pra poder atualizá-lo.
         resp = requests.get(api_url, headers=headers, params={"ref": GITHUB_BRANCH}, timeout=20)
         resp.raise_for_status()
         sha_atual = resp.json()["sha"]
@@ -190,7 +182,6 @@ def push_problems_to_github(problems: list[dict]) -> None:
         put_resp = requests.put(api_url, headers=headers, json=payload, timeout=20)
 
         if put_resp.status_code == 409 and tentativa < tentativas_maximas:
-            logger.warning("Conflito (409) ao salvar no GitHub, tentando de novo...")
             time_module.sleep(1)
             continue
 
@@ -199,9 +190,6 @@ def push_problems_to_github(problems: list[dict]) -> None:
 
 
 def save_generated_problem(problem: dict) -> tuple[bool, str]:
-    """Adiciona o problema ao banco local (problems.json) e tenta sincronizar
-    com o GitHub, para que a mudança sobreviva ao próximo redeploy.
-    Retorna (sincronizado_com_github, mensagem_de_status)."""
     problems = load_problems()
     problems.append(problem)
     with open(PROBLEMS_FILE, "w", encoding="utf-8") as f:
@@ -210,8 +198,7 @@ def save_generated_problem(problem: dict) -> tuple[bool, str]:
     if not github_configured():
         return False, (
             "⚠️ Salvei no banco local, mas a sincronização com o GitHub não está "
-            "configurada (faltam GITHUB_TOKEN/GITHUB_REPO) — essa adição pode se "
-            "perder no próximo deploy."
+            "configurada (faltam GITHUB_TOKEN/GITHUB_REPO)."
         )
 
     try:
@@ -219,88 +206,45 @@ def save_generated_problem(problem: dict) -> tuple[bool, str]:
         return True, "✅ Problema salvo no banco e sincronizado com o GitHub."
     except Exception as exc:
         logger.exception("Erro ao sincronizar problems.json com o GitHub")
-        return False, (
-            f"⚠️ Salvei no banco local, mas não consegui sincronizar com o GitHub "
-            f"agora ({exc}). Essa adição pode se perder no próximo deploy."
-        )
+        return False, f"⚠️ Salvei no banco local, mas não consegui sincronizar com o GitHub ({exc})."
 
 
 def _normalizar(texto: str) -> str:
-    """Remove acentos simples pra facilitar comparação de strings (fácil -> facil)."""
     substituicoes = str.maketrans("áàâãéêíóôõúçÁÀÂÃÉÊÍÓÔÕÚÇ", "aaaaeeiooouc" + "AAAAEEIOOOUC".lower())
     return texto.translate(substituicoes).lower()
 
 
-# Categorias fixas de assunto. Qualquer tópico (inclusive os gerados por IA,
-# que variam muito: "geometria espacial", "função quadrática", "adição"...)
-# é padronizado pra uma dessas, tanto na exibição quanto ao salvar problemas
-# novos. O que não se encaixa em nenhuma vira "MATEMÁTICA" (categoria genérica) —
-# isso também cobre temas fora do escopo de matemática que a IA às vezes
-# inventa (física, respostas sem sentido, etc.).
-CATEGORIAS_PADRAO = [
-    ("probabilidade", "PROBABILIDADE"),
-    ("geometria", "GEOMETRIA"),
-    ("obmep", "OBMEP"),
-    ("funcao quadratica", "FUNÇÕES QUADRÁTICAS"),
-    ("funcoes quadraticas", "FUNÇÕES QUADRÁTICAS"),
-    ("quadratica", "FUNÇÕES QUADRÁTICAS"),
-    ("adicao", "ARITMÉTICA"),
-    ("subtracao", "ARITMÉTICA"),
-    ("multiplicacao", "ARITMÉTICA"),
-    ("divisao", "ARITMÉTICA"),
-    ("aritmetica", "ARITMÉTICA"),
-    ("algebra", "ÁLGEBRA"),
-]
-
-# Temas que contêm uma palavra-chave acima mas devem ficar de fora mesmo assim
-# (ex: "álgebra booleana" não é o assunto de matemática que interessa aqui).
-ASSUNTOS_EXCLUIDOS = ["booleana", "boolean"]
-
-TOPICO_EMOJI = {
-    "PROBABILIDADE": "🎲",
-    "GEOMETRIA": "📐",
-    "ARITMÉTICA": "➗",
-    "ÁLGEBRA": "🧮",
-    "FUNÇÕES QUADRÁTICAS": "📊",
-    "OBMEP": "🏆",
-    "MATEMÁTICA": "🧮",
-}
-
-DIFICULDADE_ESTILO = {
-    "facil": {"emoji": "🟢", "cor": discord.Color.green()},
-    "medio": {"emoji": "🟡", "cor": discord.Color.orange()},
-    "dificil": {"emoji": "🔴", "cor": discord.Color.red()},
-}
-
-
-def padronizar_assunto(topico: str) -> str:
-    """Mapeia qualquer texto de assunto pra uma das categorias fixas."""
-    normalizado = _normalizar(topico)
-    if any(excluido in normalizado for excluido in ASSUNTOS_EXCLUIDOS):
-        return "MATEMÁTICA"
-    for chave, categoria in CATEGORIAS_PADRAO:
-        if chave in normalizado:
-            return categoria
-    return "MATEMÁTICA"
-
-
 def get_topico_emoji(topico: str) -> str:
-    return TOPICO_EMOJI.get(padronizar_assunto(topico), "🧮")
+    t = _normalizar(topico)
+    if any(k in t for k in ["geometr", "triang", "angulo", "circulo"]):
+        return "📐"
+    if any(k in t for k in ["probab", "combinat", "arranjo", "dado"]):
+        return "🎲"
+    if any(k in t for k in ["algebra", "equac", "polinom", "funcao", "matriz"]):
+        return "📊"
+    if any(k in t for k in ["aritmet", "numero", "primo", "divis"]):
+        return "🔢"
+    return "🧮"
 
 
-def get_dificuldade_estilo(dificuldade: str) -> dict:
-    return DIFICULDADE_ESTILO.get(_normalizar(dificuldade), {"emoji": "⚪", "cor": discord.Color.blue()})
+def get_dificuldade_estilo(dificuldade) -> dict:
+    nota = normalizar_dificuldade(dificuldade)
+    if nota < 4.0:
+        return {"emoji": "🟢", "cor": discord.Color.green(), "rotulo": f"{nota:.1f}/10.0 (Fácil)"}
+    elif nota < 7.0:
+        return {"emoji": "🟡", "cor": discord.Color.gold(), "rotulo": f"{nota:.1f}/10.0 (Médio)"}
+    elif nota < 8.5:
+        return {"emoji": "🟠", "cor": discord.Color.orange(), "rotulo": f"{nota:.1f}/10.0 (Difícil)"}
+    else:
+        return {"emoji": "🔴", "cor": discord.Color.red(), "rotulo": f"{nota:.1f}/10.0 (Muito Difícil / Olímpico)"}
 
 
-# Mapa pra converter dígitos/sinais/letras comuns de expoente em Unicode sobrescrito.
-# Cobre os casos mais comuns em problemas de matemática (10^99, x^2, 2^n, a^-1).
 _SUPERSCRITO = str.maketrans({
     "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴",
     "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹",
     "+": "⁺", "-": "⁻", "n": "ⁿ", "i": "ⁱ",
 })
 
-# Mesma ideia, mas pra índices (subscritos) — usado em sequências tipo a_n, a_1.
 _SUBSCRITO = str.maketrans({
     "0": "₀", "1": "₁", "2": "₂", "3": "₃", "4": "₄",
     "5": "₅", "6": "₆", "7": "₇", "8": "₈", "9": "₉",
@@ -308,8 +252,6 @@ _SUBSCRITO = str.maketrans({
     "k": "ₖ", "m": "ₘ", "j": "ⱼ", "x": "ₓ",
 })
 
-# Comandos LaTeX que a IA às vezes usa mesmo quando pedimos pra não usar —
-# rede de segurança pra converter em texto/símbolo normal de qualquer jeito.
 _LATEX_COMANDOS = [
     (r"\\ge\b", "≥"), (r"\\geq\b", "≥"),
     (r"\\le\b", "≤"), (r"\\leq\b", "≤"),
@@ -321,43 +263,41 @@ _LATEX_COMANDOS = [
 
 
 def formatar_matematica(texto: str) -> str:
-    """Deixa a notação matemática mais legível no Discord (que não renderiza LaTeX):
-    converte expoentes (x^2 -> x²), índices de sequência (a_n -> aₙ), raiz
-    quadrada (sqrt(x) -> √x) e comandos LaTeX comuns (\\ge -> ≥) que a IA
-    às vezes usa mesmo quando instruída a não usar."""
-    # Comandos LaTeX soltos (rede de segurança)
     for padrao, substituto in _LATEX_COMANDOS:
         texto = re.sub(padrao, substituto, texto)
 
-    # \frac{a}{b} -> a/b
-    texto = re.sub(r"\\frac\{([^{}]+)\}\{([^{}]+)\}", r"\1/\2", texto)
-
-    # Expoente entre parênteses ou chaves: base^(expr) ou base^{expr}
+    texto = re.sub(r"\\frac\{([^{}]+)\}\{([^{}]+)\}", r"(\1 / \2)", texto)
     texto = re.sub(r"\^\{([\d+\-ni]+)\}", lambda m: m.group(1).translate(_SUPERSCRITO), texto)
     texto = re.sub(r"\^\(([\d+\-ni]+)\)", lambda m: m.group(1).translate(_SUPERSCRITO), texto)
-    # Expoente simples: base^expr
     texto = re.sub(r"\^([\d+\-ni]+)", lambda m: m.group(1).translate(_SUPERSCRITO), texto)
 
-    # Índice entre chaves ou parênteses: a_{expr} ou a_(expr)
     texto = re.sub(r"_\{([\w+\-]+)\}", lambda m: m.group(1).translate(_SUBSCRITO), texto)
     texto = re.sub(r"_\(([\w+\-]+)\)", lambda m: m.group(1).translate(_SUBSCRITO), texto)
-    # Índice simples: a_expr (só letra/dígito — "a_n+4" não deve virar "a" com
-    # índice "n+4"; o "+4" ali normalmente é uma soma separada, não parte do índice)
     texto = re.sub(r"_([a-zA-Z0-9]+)", lambda m: m.group(1).translate(_SUBSCRITO), texto)
-    # Chaves "soltas" que sobraram (ex: a{n+1} sem o "_" na frente) — depois dos
-    # casos acima, qualquer {...} restante também é tratado como índice.
-    texto = re.sub(r"\{([\w+\-]+)\}", lambda m: m.group(1).translate(_SUBSCRITO), texto)
-
-    # Raiz quadrada: sqrt(x) -> √x
     texto = re.sub(r"sqrt\(([^()]+)\)", r"√(\1)", texto, flags=re.IGNORECASE)
-    return texto
+
+    linhas = []
+    for linha in texto.splitlines():
+        linha_limpa = linha.strip()
+        if not linha_limpa:
+            linhas.append("")
+            continue
+
+        eh_equacao_isolada = (
+            any(op in linha_limpa for op in ["=", "≥", "≤", "<", ">", "≠"])
+            and len(linha_limpa) <= 80
+            and not linha_limpa.endswith(".")
+        )
+
+        if eh_equacao_isolada and not (linha_limpa.startswith("**") and linha_limpa.endswith("**")):
+            linha_limpa = f"**{linha_limpa}**"
+
+        linhas.append(linha_limpa)
+
+    return "\n".join(linhas)
 
 
 def formatar_passos(explicacao: str) -> str:
-    """Quebra uma explicação corrida em passos numerados e espaçados, em vez de
-    um parágrafo único difícil de acompanhar."""
-    # Separa em frases sempre que um "." ou ";" é seguido de espaço e uma letra
-    # maiúscula/dígito — tenta não quebrar no meio de números ou fórmulas.
     partes = re.split(r"(?<=[.;])\s+(?=[A-ZÀ-Ú0-9])", explicacao.strip())
     partes = [p.strip().rstrip(".;").strip() for p in partes if p.strip()]
 
@@ -368,17 +308,20 @@ def formatar_passos(explicacao: str) -> str:
 
 
 def build_problem_embed(problem: dict, numero: int | None = None) -> discord.Embed:
-    topico_emoji = get_topico_emoji(problem["topic"])
+    topico = str(problem.get("topic", "Matemática"))
+    topico_emoji = get_topico_emoji(topico)
     estilo = get_dificuldade_estilo(problem["difficulty"])
 
-    titulo = f"{topico_emoji} Problema de Matemática do Dia"
-    if numero is not None:
-        titulo = f"{topico_emoji} Problema #{numero}"
+    titulo = f"{topico_emoji} Problema #{numero}" if numero is not None else f"{topico_emoji} Desafio de Matemática"
 
-    # Bloco de citação deixa o enunciado visualmente destacado do resto do card,
-    # o que ajuda a distinguir a fórmula/pergunta do texto de apoio.
     enunciado = formatar_matematica(problem["question"])
-    enunciado_formatado = "\n".join(f"> {linha}" for linha in enunciado.splitlines())
+    linhas_formatadas = []
+    for linha in enunciado.splitlines():
+        if linha.strip():
+            linhas_formatadas.append(f"> {linha}")
+        else:
+            linhas_formatadas.append(">")
+    enunciado_formatado = "\n".join(linhas_formatadas)
 
     embed = discord.Embed(
         title=titulo,
@@ -387,43 +330,57 @@ def build_problem_embed(problem: dict, numero: int | None = None) -> discord.Emb
     )
     embed.add_field(
         name="Dificuldade",
-        value=f"{estilo['emoji']} {problem['difficulty'].capitalize()}",
+        value=f"{estilo['emoji']} **{estilo['rotulo']}**",
         inline=True,
     )
-    embed.add_field(name="Assunto", value=padronizar_assunto(problem["topic"]), inline=True)
-    embed.set_footer(text="Use !resposta para revelar a solução quando quiser tentar depois de pensar.")
+    embed.add_field(name="Assunto", value=f"**{topico}**", inline=True)
+    embed.set_footer(text="Use !resposta para conferir a resolução.")
     image_url = problem.get("image_url")
     if image_url:
         embed.set_image(url=image_url)
     return embed
 
 
-# Temas sorteados pro problema diário, e o nível de dificuldade exigido —
-# o objetivo aqui é sempre nível avançado (OBMEP Fase 3 / vestibular do ITA),
-# bem mais puxado que o padrão dos outros comandos.
-TEMAS_DIARIOS = ["geometria", "álgebra", "aritmética", "funções quadráticas", "probabilidade", "combinatória"]
-NIVEL_DIARIO = "OBMEP Nível 3 (fase avançada) ou de vestibular do ITA"
+TEMAS_SUGERIDOS = [
+    "Geometria Plana",
+    "Álgebra e Polinômios",
+    "Teoria dos Números",
+    "Análise Combinatória",
+    "Probabilidade",
+    "Trigonometria",
+    "Geometria Espacial",
+    "Sequências e Progressões",
+    "Equações Diofantinas",
+    "Funções e Gráficos"
+]
 
 
 def escolher_problema_diario() -> dict:
-    """Escolhe o problema do dia: tenta gerar um novo em nível avançado via IA;
-    se a IA não estiver configurada ou falhar, cai pra um problema difícil já
-    existente no banco local (ou qualquer um, se não houver nenhum difícil)."""
     if GROQ_API_KEY:
-        tema = random.choice(TEMAS_DIARIOS)
+        tema = random.choice(TEMAS_SUGERIDOS)
         try:
-            problem = generate_ai_problem(tema, nivel=NIVEL_DIARIO)
-            problem["difficulty"] = "difícil"  # garante a tag certa independente do que a IA disser
+            problem = generate_ai_problem(
+                tema,
+                nivel_descricao="Nível muito avançado (OBMEP Fase 3 ou vestibular do ITA), nota de dificuldade entre 8.5 e 10.0"
+            )
             sincronizado, status_msg = save_generated_problem(problem)
             if not sincronizado:
-                logger.warning("Problema diário gerado mas não sincronizado com o GitHub: %s", status_msg)
+                logger.warning("Problema diário não sincronizado: %s", status_msg)
             return problem
         except RuntimeError:
-            logger.exception("Falha ao gerar problema diário via IA, usando o banco local como alternativa.")
+            logger.exception("Falha ao gerar problema diário via IA, recorrendo ao banco local.")
 
     problems = load_problems()
-    dificeis = [p for p in problems if _normalizar(p["difficulty"]) == "dificil"]
-    return random.choice(dificeis or problems)
+    if problems:
+        dificeis = [p for p in problems if normalizar_dificuldade(p.get("difficulty", 0)) >= 7.0]
+        return random.choice(dificeis or problems)
+
+    return {
+        "question": "Resolva a equação nos reais:\n\n**x² - 5x + 6 = 0**",
+        "answer": "x = 2 ou x = 3 (Fatorando: (x - 2)(x - 3) = 0).",
+        "difficulty": 3.0,
+        "topic": "Álgebra"
+    }
 
 
 async def post_daily_problem(channel: discord.abc.Messageable):
@@ -443,95 +400,81 @@ async def on_ready():
 async def daily_problem_task():
     channel = bot.get_channel(CHANNEL_ID)
     if channel is None:
-        logger.warning("CHANNEL_ID inválido ou bot sem acesso ao canal.")
+        logger.warning("CHANNEL_ID inválido ou inacessível.")
         return
     await post_daily_problem(channel)
 
 
 @bot.command(name="problema")
 async def problema_manual(ctx: commands.Context, *, tema: str = None):
-    """Posta um problema novo (!problema) ou filtrado por tema (!problema <tema>).
-    Sem tema, mostra a lista de temas disponíveis."""
-    if tema is None:
-        topicos = get_topics()
-        lista = "\n".join(f"• {t}" for t in topicos)
-        embed = discord.Embed(
-            title="📚 Temas disponíveis",
-            description=(
-                "Use `!problema <tema>` para pedir um problema de um tema específico.\n\n"
-                f"{lista}"
-            ),
-            color=discord.Color.gold(),
-        )
-        await ctx.send(embed=embed)
-        return
+    tema_escolhido = tema.strip() if tema else random.choice(TEMAS_SUGERIDOS)
 
-    problems = load_problems()
-    categoria_pedida = padronizar_assunto(tema)
-    filtrados = [p for p in problems if padronizar_assunto(p["topic"]) == categoria_pedida]
-    if not filtrados:
-        await ctx.send(
-            f"Não encontrei nenhum problema com o tema '{tema}'. "
-            "Use `!problema` sem nada para ver os temas disponíveis."
-        )
-        return
+    async with ctx.typing():
+        try:
+            problem = await asyncio.to_thread(generate_ai_problem, tema_escolhido)
+            await asyncio.to_thread(save_generated_problem, problem)
+        except RuntimeError:
+            problems = load_problems()
+            if tema:
+                filtrados = [p for p in problems if _normalizar(tema) in _normalizar(str(p.get("topic", "")))]
+            else:
+                filtrados = problems
 
-    problem = random.choice(filtrados)
+            if not filtrados:
+                await ctx.send(f"Não consegui gerar uma questão com a IA e não há problemas salvos sobre '{tema_escolhido}'.")
+                return
+            problem = random.choice(filtrados)
+
     numero = register_problem(ctx.channel.id, problem)
     await ctx.send(embed=build_problem_embed(problem, numero))
 
 
 @bot.command(name="gerar")
 async def gerar_problema_ia(ctx: commands.Context, *, tema: str = None):
-    """Gera um problema NOVO com IA sobre o tema pedido (!gerar <tema>) e o
-    adiciona automaticamente ao banco de problemas."""
-    if tema is None:
-        await ctx.send("Me diga sobre qual tema gerar o problema. Exemplo: `!gerar geometria espacial`")
+    if not tema:
+        await ctx.send("Informe o tema desejado. Exemplo: `!gerar trigonometria avançada` ou `!gerar matrizes`")
         return
 
     async with ctx.typing():
         try:
-            problem = generate_ai_problem(tema)
+            problem = await asyncio.to_thread(generate_ai_problem, tema.strip())
         except RuntimeError as exc:
             await ctx.send(f"⚠️ {exc}")
             return
 
-        # Salvar em disco e sincronizar com o GitHub são operações bloqueantes,
-        # então rodam numa thread separada pra não travar o bot.
         sincronizado, status_msg = await asyncio.to_thread(save_generated_problem, problem)
 
     numero = register_problem(ctx.channel.id, problem)
     embed = build_problem_embed(problem, numero)
-    embed.set_footer(text="Gerado por IA (Groq) • Use !resposta para revelar a solução.")
+    embed.set_footer(text="Gerado sob demanda • Use !resposta para conferir a resolução.")
     await ctx.send(embed=embed)
 
     if not sincronizado:
-        # Só avisa explicitamente quando algo deu errado — quando funciona,
-        # não precisa poluir o canal com mais uma mensagem de confirmação.
         await ctx.send(status_msg)
 
 
 @bot.command(name="resposta")
 async def resposta(ctx: commands.Context, numero: int = None):
-    """Revela a resposta do último problema (!resposta) ou de um problema específico (!resposta <id>)."""
+    history = load_channel_history()
+    channel_data = history.get(str(ctx.channel.id), {})
+    problems_map = channel_data.get("problems", {})
+
     if numero is None:
-        problem = last_problem_by_channel.get(ctx.channel.id)
+        target_id = channel_data.get("last_id")
+        if not target_id:
+            await ctx.send("Nenhum problema foi registrado neste canal ainda. Use `!problema` ou `!gerar <tema>`.")
+            return
+        problem = problems_map.get(str(target_id))
+        numero_exibicao = target_id
     else:
-        problem = problem_history_by_channel.get(ctx.channel.id, {}).get(numero)
+        problem = problems_map.get(str(numero))
+        numero_exibicao = numero
 
     if not problem:
-        await ctx.send(
-            "Não encontrei esse problema neste canal. "
-            "Use `!problema` para gerar um novo, ou confira se o número está certo "
-            "(a numeração reinicia sempre que o bot é reiniciado)."
-        )
+        await ctx.send(f"Não encontrei o problema #{numero} neste canal.")
         return
 
-    # Tenta separar "valor final" de "explicação de como chegar nele" de duas formas:
-    # 1) formato "valor (explicação)" — comum nos problemas do banco fixo
-    # 2) primeira frase como conclusão + o resto como explicação — usado quando
-    #    a resposta não vem entre parênteses (ex: respostas geradas por IA)
-    resposta_formatada = formatar_matematica(problem["answer"]).strip()
+    resposta_formatada = formatar_matematica(str(problem["answer"])).strip()
     match = re.match(r"^(.*?)\s*\((.*)\)$", resposta_formatada, re.DOTALL)
     if match:
         valor, explicacao = match.group(1).strip(), match.group(2).strip()
@@ -544,56 +487,53 @@ async def resposta(ctx: commands.Context, numero: int = None):
 
     if explicacao:
         passos = formatar_passos(explicacao)
-        descricao = f"**🎯 Resposta:** {valor}\n\n**📝 Como chegar lá:**\n{passos}"
+        descricao = f"**🎯 Resposta:**\n{valor}\n\n**📝 Como chegar lá:**\n{passos}"
     else:
-        descricao = resposta_formatada
+        descricao = f"**🎯 Resposta:**\n{resposta_formatada}"
 
     estilo = get_dificuldade_estilo(problem["difficulty"])
-    titulo = f"✅ Resposta do Problema #{numero}" if numero is not None else "✅ Resposta"
-    embed = discord.Embed(title=titulo, description=descricao, color=estilo["cor"])
-    embed.set_footer(text=padronizar_assunto(problem["topic"]))
+    embed = discord.Embed(
+        title=f"✅ Resposta do Problema #{numero_exibicao}",
+        description=descricao,
+        color=estilo["cor"]
+    )
+    embed.set_footer(text=f"Tema: {problem.get('topic', 'Matemática')} • Dificuldade: {estilo['rotulo']}")
     await ctx.send(embed=embed)
 
 
 @bot.command(name="ajuda")
 async def ajuda(ctx: commands.Context):
-    """Mostra a lista de comandos disponíveis (!ajuda)."""
     embed = discord.Embed(
-        title="📖 Comandos do bot de matemática",
-        description="Tudo o que você pode pedir aqui no servidor:",
+        title="📖 Comandos do Bot de Matemática",
+        description="Comandos disponíveis para estudo e resolução de desafios:",
         color=discord.Color.blurple(),
     )
     embed.add_field(
         name="🧮 !problema",
-        value="Sorteia um problema aleatório do banco (qualquer assunto e dificuldade).",
+        value="Gera um problema sobre um tema aleatório.",
         inline=False,
     )
     embed.add_field(
         name="🎯 !problema <tema>",
-        value="Sorteia um problema de um assunto específico. Sem o tema, mostra a lista de assuntos disponíveis.",
+        value="Gera um problema com IA sobre qualquer assunto informado (ex: `!problema matrizes`).",
         inline=False,
     )
     embed.add_field(
         name="🤖 !gerar <tema>",
-        value="Gera um problema **novo**, na hora, com IA sobre o tema pedido — e já salva no banco.",
+        value="Cria um desafio específico sob demanda (ex: `!gerar geometria analítica`).",
         inline=False,
     )
     embed.add_field(
         name="✅ !resposta",
-        value="Mostra a resposta do último problema postado neste canal.",
+        value="Mostra a resposta e a resolução do último problema postado neste canal.",
         inline=False,
     )
     embed.add_field(
         name="🔢 !resposta <id>",
-        value="Mostra a resposta de um problema específico pelo número (ex: `!resposta 3`).",
+        value="Mostra a resolução de um problema anterior pelo ID contínuo do canal (ex: `!resposta 4`).",
         inline=False,
     )
-    embed.add_field(
-        name="📖 !ajuda",
-        value="Mostra esta lista de comandos.",
-        inline=False,
-    )
-    embed.set_footer(text="Todo dia às " + f"{POST_HOUR:02d}:{POST_MINUTE:02d}" + " o bot também posta um problema automático de nível avançado.")
+    embed.set_footer(text=f"Desafio diário postado automaticamente às {POST_HOUR:02d}:{POST_MINUTE:02d}.")
     await ctx.send(embed=embed)
 
 
