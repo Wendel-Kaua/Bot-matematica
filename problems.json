@@ -456,5 +456,11 @@
     "answer": "Para cada área consideramos todas as possibilidades de escolher um subconjunto não‑vazio dos seus projetos. Se uma área tem n projetos, o número de subconjuntos não vazios é 2^n − 1.\n\nPortanto, o número total de equipes possíveis é o produto desses valores para as cinco áreas:\n**total = (2^3 − 1) × (2^2 − 1) × (2^4 − 1) × (2^1 − 1) × (2^2 − 1)**\n\nCalculando cada fator:\n2^3 − 1 = 8 − 1 = 7\n2^2 − 1 = 4 − 1 = 3\n2^4 − 1 = 16 − 1 = 15\n2^1 − 1 = 2 − 1 = 1\n2^2 − 1 = 4 − 1 = 3\n\nMultiplicando:\n**total = 7 × 3 × 15 × 1 × 3 = 945**\n\nLogo, existem **945** equipes diferentes que contêm ao menos um projeto de cada área.",
     "difficulty": 7.5,
     "topic": "Tudo"
+  },
+  {
+    "question": "Contexto: Uma fábrica produz dois produtos, P e Q. Cada unidade de P usa 3 horas da máquina M1 e 2 horas da máquina M2. Cada unidade de Q usa 4 horas da máquina M1 e 1 hora da máquina M2. A disponibilidade semanal é 240 horas em M1 e 180 horas em M2. O lucro por unidade é 50 reais para P e 70 reais para Q. Além disso, as quantidades produzidas devem obedecer a equação **x^3 - 6x^2 + 11x - 6 = y**.\n\nDados:\n**3x + 4y ≤ 240**\n**2x + y ≤ 180**\n**L = 50x + 70y**\n\nPergunta: Determine as quantidades inteiras de P (x) e Q (y) que maximizam o lucro L respeitando todas as restrições.",
+    "answer": "Primeiro factoriza‑se o polinômio da relação entre x e y:\n**x^3 - 6x^2 + 11x - 6 = (x-1)(x-2)(x-3)**\nPortanto\n**y = (x-1)(x-2)(x-3)**\nComo x e y representam quantidades, consideram‑se valores inteiros não‑negativos para x que gerem y ≥ 0. Avaliando:\nx=1 → y=0 ; x=2 → y=0 ; x=3 → y=0 ; x=4 → y=6 ; x=5 → y=24 ; x=6 → y=60 …\nVerifica‑se cada par (x,y) nas restrições de capacidade:\nPara x=4, y=6:\n**3·4 + 4·6 = 36 ≤ 240** e **2·4 + 6 = 14 ≤ 180** – viável.\nLucro: **L = 50·4 + 70·6 = 620**.\nPara x=5, y=24:\n**3·5 + 4·24 = 111 ≤ 240** e **2·5 + 24 = 34 ≤ 180** – viável.\nLucro: **L = 50·5 + 70·24 = 1930**.\nPara x=6, y=60:\n**3·6 + 4·60 = 258 > 240** – inviável (excede M1).\nValores maiores de x produzem y ainda maiores e também violam as restrições.\nAssim, o maior lucro dentro das restrições ocorre em x=5, y=24.\nResposta: produzir 5 unidades de P e 24 unidades de Q, obtendo lucro máximo de 1930 reais.",
+    "difficulty": 9.8,
+    "topic": "Dificuldade 10/10"
   }
 ]
