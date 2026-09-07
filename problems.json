@@ -462,5 +462,11 @@
     "answer": "Primeiro factoriza‑se o polinômio da relação entre x e y:\n**x^3 - 6x^2 + 11x - 6 = (x-1)(x-2)(x-3)**\nPortanto\n**y = (x-1)(x-2)(x-3)**\nComo x e y representam quantidades, consideram‑se valores inteiros não‑negativos para x que gerem y ≥ 0. Avaliando:\nx=1 → y=0 ; x=2 → y=0 ; x=3 → y=0 ; x=4 → y=6 ; x=5 → y=24 ; x=6 → y=60 …\nVerifica‑se cada par (x,y) nas restrições de capacidade:\nPara x=4, y=6:\n**3·4 + 4·6 = 36 ≤ 240** e **2·4 + 6 = 14 ≤ 180** – viável.\nLucro: **L = 50·4 + 70·6 = 620**.\nPara x=5, y=24:\n**3·5 + 4·24 = 111 ≤ 240** e **2·5 + 24 = 34 ≤ 180** – viável.\nLucro: **L = 50·5 + 70·24 = 1930**.\nPara x=6, y=60:\n**3·6 + 4·60 = 258 > 240** – inviável (excede M1).\nValores maiores de x produzem y ainda maiores e também violam as restrições.\nAssim, o maior lucro dentro das restrições ocorre em x=5, y=24.\nResposta: produzir 5 unidades de P e 24 unidades de Q, obtendo lucro máximo de 1930 reais.",
     "difficulty": 9.8,
     "topic": "Dificuldade 10/10"
+  },
+  {
+    "question": "Um concurso de matemática propõe o seguinte desafio: você deve encontrar todos os inteiros positivos n que satisfazem simultaneamente as duas condições abaixo.\n**n^2 - 2023·n + 2022 = 0**\n**Σ_{k=1}^{n} k^3 = m·(m+1) , onde m é inteiro positivo**\nAlém disso, n deve ser múltiplo de 7 e menor que 10^4.\nQual(is) valor(es) de n atendem a todas essas exigências?",
+    "answer": "Primeiro resolvemos a equação quadrática.\n**n = [2023 ± √(2023^2 - 4·2022)] ÷ 2**\nCalculando o discriminante:\n**2023^2 - 4·2022 = 4092529 - 8088 = 4084441**\nA raiz quadrada de 4084441 é 2021, pois 2021^2 = 4084441.\nEntão:\n**n1 = (2023 + 2021) ÷ 2 = 2022**\n**n2 = (2023 - 2021) ÷ 2 = 1**\nOs candidatos são n=1 e n=2022. O requisito n<10^4 elimina nenhum dos dois, mas n deve ser múltiplo de 7.\n1 não é múltiplo de 7, já 2022 ÷ 7 = 288,8… não é inteiro. Portanto nenhum dos valores obtidos pela quadrática satisfaz a condição de ser múltiplo de 7. Como a primeira condição já determina todos os possíveis n, concluímos que não existe inteiro positivo n que cumpra simultaneamente as três exigências.\nPortanto, **não há solução**.",
+    "difficulty": 9.2,
+    "topic": "Dificuldade 10/10"
   }
 ]
