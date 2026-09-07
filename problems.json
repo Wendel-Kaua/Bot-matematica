@@ -468,5 +468,11 @@
     "answer": "Primeiro resolvemos a equação quadrática.\n**n = [2023 ± √(2023^2 - 4·2022)] ÷ 2**\nCalculando o discriminante:\n**2023^2 - 4·2022 = 4092529 - 8088 = 4084441**\nA raiz quadrada de 4084441 é 2021, pois 2021^2 = 4084441.\nEntão:\n**n1 = (2023 + 2021) ÷ 2 = 2022**\n**n2 = (2023 - 2021) ÷ 2 = 1**\nOs candidatos são n=1 e n=2022. O requisito n<10^4 elimina nenhum dos dois, mas n deve ser múltiplo de 7.\n1 não é múltiplo de 7, já 2022 ÷ 7 = 288,8… não é inteiro. Portanto nenhum dos valores obtidos pela quadrática satisfaz a condição de ser múltiplo de 7. Como a primeira condição já determina todos os possíveis n, concluímos que não existe inteiro positivo n que cumpra simultaneamente as três exigências.\nPortanto, **não há solução**.",
     "difficulty": 9.2,
     "topic": "Dificuldade 10/10"
+  },
+  {
+    "question": "Contexto: Uma cultura de bactérias cresce segundo a lei exponencial P(t)=P0*a^t, onde t é o tempo em dias e a é o fator de crescimento diário.\nDados: No instante inicial (t=0) há P0=200 bactérias. Após 3 dias (t=3) a população é de 1600 bactérias.\nPergunta: Determine o valor do fator de crescimento a e calcule quantas bactérias haverá após 7 dias.\n\n**P(t) = P0 × a^t**\n**P(3) = 200 × a^3 = 1600**\n**P(7) = 200 × a^7 = ?**",
+    "answer": "Primeiro, usamos a informação de t=3:\n**200 × a^3 = 1600**\nDividindo ambos os lados por 200:\n**a^3 = 8**\nExtraindo a raiz cúbica:\n**a = 2**\nCom a encontrado, calculamos a população em t=7:\n**P(7) = 200 × 2^7**\n**2^7 = 128**\nPortanto:\n**P(7) = 200 × 128 = 25600**\nAssim, o fator de crescimento diário é a = 2 e após 7 dias haverá 25600 bactérias.",
+    "difficulty": 6.5,
+    "topic": "Função Exponencial"
   }
 ]
