@@ -438,5 +438,11 @@
     "answer": "Primeiro calculamos a metade da diferença entre as bases: **(14‑8)/2 = 3 cm**.\n\nEm seguida, usando o triângulo retângulo formado pela altura, a metade da diferença das bases e o lado não‑paralelo, aplicamos o teorema de Pitágoras:\n\n**h = √(10^2 - 3^2) = √(100 - 9) = √91 ≈ 9,54 cm**.\n\nCom a altura conhecida, a área do trapézio é:\n\n**A = ((8 + 14) * h) / 2 = (22 * 9,54) / 2 ≈ 105,0 cm²**.\n\nPortanto, a área do trapézio é aproximadamente **105 cm²**.",
     "difficulty": 5.5,
     "topic": "Geometria Plana"
+  },
+  {
+    "question": "Em uma feira de ciências, três estandes são dedicados a diferentes temas. O número de visitantes ao primeiro tema foi 120.\n**n2 = 1,20 × n1**\nO número de visitantes ao segundo tema é 20% maior que ao primeiro.\n**n3 = 2 × n2**\nO número de visitantes ao terceiro tema é o dobro do número ao segundo.\nPergunta: Quantos visitantes, no total, participaram da feira e que porcentagem do total corresponde ao terceiro tema?",
+    "answer": "Primeiro, n1 = 120.\n**n2 = 1,20 × 120 = 144**\n**n3 = 2 × 144 = 288**\nTotal de visitantes = 120 + 144 + 288 = 552.\nA porcentagem do terceiro tema sobre o total é:\n**%C = 288 ÷ 552 × 100 ≈ 52,17**\nPortanto, 552 visitantes participaram da feira e aproximadamente 52,17% deles foram ao terceiro tema.",
+    "difficulty": 4.3,
+    "topic": "Tema"
   }
 ]
