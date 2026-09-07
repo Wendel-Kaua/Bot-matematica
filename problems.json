@@ -444,5 +444,11 @@
     "answer": "Primeiro, n1 = 120.\n**n2 = 1,20 × 120 = 144**\n**n3 = 2 × 144 = 288**\nTotal de visitantes = 120 + 144 + 288 = 552.\nA porcentagem do terceiro tema sobre o total é:\n**%C = 288 ÷ 552 × 100 ≈ 52,17**\nPortanto, 552 visitantes participaram da feira e aproximadamente 52,17% deles foram ao terceiro tema.",
     "difficulty": 4.3,
     "topic": "Tema"
+  },
+  {
+    "question": "Em uma seleção para a equipe da IMO, os organizadores propõem o seguinte desafio. Seja a sequência (a_n) definida por:\n**a_1 = 1**\n**a_{n+1} = a_n + n^2 + 1**\npara todo n ≥ 1. Determine o menor valor inteiro positivo de n para o qual a_n é múltiplo de 2023.",
+    "answer": "Primeiro somamos a relação de recorrência:\n**a_n = 1 + Σ_{k=1}^{n-1}(k^2 + 1)**\nO somatório de k^2 vale Σ_{k=1}^{n-1}k^2 = (n-1)n(2n-1)/6. Assim:\n**a_n = 1 + (n-1)n(2n-1)/6 + (n-1)**\nReagrupando termos:\n**a_n = (n-1)n(2n-1)/6 + n**\nFactorizando n:\n**a_n = n\\left[1 + (n-1)(2n-1)/6\\right]**\nPara que a_n seja múltiplo de 2023 é necessário que 2023 divida n ou o fator entre colchetes. Verifica‑se que, para 1 ≤ n < 2023, o termo entre colchetes nunca é múltiplo de 2023 (ele está entre 1 e 2023 e não pode ser zero módulo 2023). Portanto o menor n que satisfaz a condição é o menor múltiplo positivo de 2023, ou seja:\n**n = 2023**\nCom n = 2023 tem‑se a_n ≡ 0 (mod 2023), confirmando a solução.",
+    "difficulty": 7.0,
+    "topic": "Imo"
   }
 ]
