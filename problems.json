@@ -432,5 +432,11 @@
     "answer": "A sequência é uma PA, logo a razão d é dada por:\n**d = (a_12 - a_1) / (12 - 1) = (2100 - 1200) / 11 = 900 / 11 ≈ 81,82**\n\n1. **Razão d = 900/11 ≈ 81,82**.\n\n2. O décimo termo:\n**a_10 = a_1 + 9d = 1200 + 9·(900/11) = 1200 + 8100/11 = 21300/11 ≈ 1.936,36**.\n\n3. Soma dos 12 termos:\n**S_12 = (12/2)·(a_1 + a_12) = 6·(1200 + 2100) = 6·3300 = 19.800**.\n\n4. Para encontrar o primeiro mês k em que a_k > 1800:\n**a_k = a_1 + (k-1)d > 1800**\n**1200 + (k-1)·(900/11) > 1800**\n**(k-1) > (1800 - 1200)·11/900 = 600·11/900 = 22/3 ≈ 7,33**\nPortanto **k > 8,33**, logo o primeiro mês inteiro que satisfaz a condição é o **nono mês**.\n\nResposta resumida:\n- Razão ≈ 81,82\n- Décimo bônus ≈ 1.936,36 reais\n- Soma dos 12 bônus = 19.800 reais\n- O bônus ultrapassa 1.800 reais no 9.º mês.",
     "difficulty": 6.3,
     "topic": "6.3 Progressões Aritméticas"
+  },
+  {
+    "question": "Um trapézio isósceles tem bases de 8 cm e 14 cm e cada lado não‑paralelo mede 10 cm.\n\nDetermine a altura do trapézio e, a partir dela, calcule a sua área.\n\n**h = √(10^2 - ((14-8)/2)^2)**\n\n**A = ((8 + 14) * h) / 2**",
+    "answer": "Primeiro calculamos a metade da diferença entre as bases: **(14‑8)/2 = 3 cm**.\n\nEm seguida, usando o triângulo retângulo formado pela altura, a metade da diferença das bases e o lado não‑paralelo, aplicamos o teorema de Pitágoras:\n\n**h = √(10^2 - 3^2) = √(100 - 9) = √91 ≈ 9,54 cm**.\n\nCom a altura conhecida, a área do trapézio é:\n\n**A = ((8 + 14) * h) / 2 = (22 * 9,54) / 2 ≈ 105,0 cm²**.\n\nPortanto, a área do trapézio é aproximadamente **105 cm²**.",
+    "difficulty": 5.5,
+    "topic": "Geometria Plana"
   }
 ]
