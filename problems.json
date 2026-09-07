@@ -450,5 +450,11 @@
     "answer": "Primeiro somamos a relação de recorrência:\n**a_n = 1 + Σ_{k=1}^{n-1}(k^2 + 1)**\nO somatório de k^2 vale Σ_{k=1}^{n-1}k^2 = (n-1)n(2n-1)/6. Assim:\n**a_n = 1 + (n-1)n(2n-1)/6 + (n-1)**\nReagrupando termos:\n**a_n = (n-1)n(2n-1)/6 + n**\nFactorizando n:\n**a_n = n\\left[1 + (n-1)(2n-1)/6\\right]**\nPara que a_n seja múltiplo de 2023 é necessário que 2023 divida n ou o fator entre colchetes. Verifica‑se que, para 1 ≤ n < 2023, o termo entre colchetes nunca é múltiplo de 2023 (ele está entre 1 e 2023 e não pode ser zero módulo 2023). Portanto o menor n que satisfaz a condição é o menor múltiplo positivo de 2023, ou seja:\n**n = 2023**\nCom n = 2023 tem‑se a_n ≡ 0 (mod 2023), confirmando a solução.",
     "difficulty": 7.0,
     "topic": "Imo"
+  },
+  {
+    "question": "Um instituto de pesquisa possui 5 áreas distintas de estudo: A, B, C, D e E. Cada área desenvolve um certo número de projetos simultâneos: \nA: 3 projetos\nB: 2 projetos\nC: 4 projetos\nD: 1 projeto\nE: 2 projetos\n\nPrecisamos formar uma equipe que inclua **pelo menos um** projeto de **toda** as áreas (ou seja, de A, B, C, D e E). Quantas equipes diferentes podem ser constituídas se a ordem dos projetos dentro da equipe não importa?",
+    "answer": "Para cada área consideramos todas as possibilidades de escolher um subconjunto não‑vazio dos seus projetos. Se uma área tem n projetos, o número de subconjuntos não vazios é 2^n − 1.\n\nPortanto, o número total de equipes possíveis é o produto desses valores para as cinco áreas:\n**total = (2^3 − 1) × (2^2 − 1) × (2^4 − 1) × (2^1 − 1) × (2^2 − 1)**\n\nCalculando cada fator:\n2^3 − 1 = 8 − 1 = 7\n2^2 − 1 = 4 − 1 = 3\n2^4 − 1 = 16 − 1 = 15\n2^1 − 1 = 2 − 1 = 1\n2^2 − 1 = 4 − 1 = 3\n\nMultiplicando:\n**total = 7 × 3 × 15 × 1 × 3 = 945**\n\nLogo, existem **945** equipes diferentes que contêm ao menos um projeto de cada área.",
+    "difficulty": 7.5,
+    "topic": "Tudo"
   }
 ]
