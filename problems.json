@@ -492,5 +492,11 @@
     "answer": "Primeiro calculamos os termos usando a relação de recorrência.\n**t_2 = 2 × t_1 + 5 = 2 × 3 + 5 = 11**\n**t_3 = 2 × t_2 + 5 = 2 × 11 + 5 = 27**\n**t_4 = 2 × t_3 + 5 = 2 × 27 + 5 = 59**\n**t_5 = 2 × t_4 + 5 = 2 × 59 + 5 = 123**\nAgora a soma dos cinco primeiros termos:\n**S_5 = t_1 + t_2 + t_3 + t_4 + t_5 = 3 + 11 + 27 + 59 + 123 = 223**\nPortanto, t_5 = 123 e S_5 = 223.",
     "difficulty": 5.5,
     "topic": "Tn"
+  },
+  {
+    "question": "Contexto: Considere o ponto fixo A(2,3) e a reta l: 4x + 3y - 12 = 0 no plano cartesiano.\nDados: O conjunto de pontos P(x,y) que satisfazem a condição de que a distância de P a A é igual à distância de P à reta l.\nPergunta: Determine a equação cartesiana do lugar geométrico dos pontos P que verificam essa condição, identifique o tipo de curva e escreva sua equação reduzida.\n\n**Distância(P,A) = √[(x-2)^2+(y-3)^2]**\n**Distância(P,l) = |4x+3y-12| / √(4^2+3^2) = |4x+3y-12| / 5**\n**(x-2)^2+(y-3)^2 = (4x+3y-12)^2 / 25**",
+    "answer": "Passo 1: Igualar as distâncias e eliminar a raiz quadrada multiplicando por 25.\n**25[(x-2)^2+(y-3)^2] = (4x+3y-12)^2**\nPasso 2: Expandir os termos.\n**25[x^2+y^2-4x-6y+13] = 16x^2+24xy+9y^2-96x-72y+144**\nPasso 3: Distribuir o 25 e reorganizar.\n**25x^2+25y^2-100x-150y+325 = 16x^2+24xy+9y^2-96x-72y+144**\nPasso 4: Trazer tudo para o lado esquerdo.\n**9x^2 -24xy +16y^2 -4x -78y +181 = 0**\nPasso 5: Identificar o tipo de lugar geométrico. O discriminante B^2-4AC = (-24)^2-4·9·16 = 576-576 = 0, portanto a curva é uma parábola.\nConclusão: O lugar geométrico dos pontos P é a parábola descrita por **9x^2 -24xy +16y^2 -4x -78y +181 = 0**.",
+    "difficulty": 6.5,
+    "topic": "Lugares Geométricos"
   }
 ]
