@@ -480,5 +480,11 @@
     "answer": "1. Use a equação do refrigerante para encontrar y:\n   **0.20y = 1** → y = 1 ÷ 0.20 = 5 L.\n\n2. Substitua y na equação da soma dos volumes:\n   **x + y = 10** → x + 5 = 10 → x = 5 L.\n\n3. Verifique na equação do suco que a solução satisfaz a condição desejada:\n   **0.30x + 0.50y = 0.30·5 + 0.50·5 = 1.5 + 2.5 = 4**, que corresponde a 40 % de 10 L.\n\nPortanto, o barman deve usar **5 litros da Receita A** e **5 litros da Receita B** para obter a mistura desejada.",
     "difficulty": 6.8,
     "topic": "Sla Mistura Um Monte De Coisa Ai"
+  },
+  {
+    "question": "Enunciado: Um código alfanumérico é dado como **rt7uyhu765467ui8uyt598u7y6e02prikr=2**. Considere apenas as letras do código e atribua a cada letra seu valor posicional no alfabeto (a=1, b=2, ..., z=26). Calcule a soma S desses valores. Sabendo que S é o dobro de um número inteiro x, encontre x.\n\nDados:\n**S = 2 × x**",
+    "answer": "Passo 1: Listar as letras do código: r, t, u, y, h, u, u, i, u, y, t, u, y, e, p, r, i, k, r.\nPasso 2: Substituir cada letra pelo seu valor posicional:\n**r = 18, t = 20, u = 21, y = 25, h = 8, i = 9, e = 5, p = 16, k = 11**.\nPasso 3: Somar todos os valores:\n**S = 18+20+21+25+8+21+21+9+21+25+20+21+25+5+16+18+9+11+18 = 332**.\nPasso 4: Usar a relação dada:\n**332 = 2 × x**\nPasso 5: Isolar x:\n**x = 332 ÷ 2 = 166**.\nResposta: x = 166.",
+    "difficulty": 5.3,
+    "topic": "Rt7Uyhu765467Ui8Uyt598U7Y6E02Prikr=2"
   }
 ]
