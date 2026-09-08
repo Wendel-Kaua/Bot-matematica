@@ -486,5 +486,11 @@
     "answer": "Passo 1: Listar as letras do código: r, t, u, y, h, u, u, i, u, y, t, u, y, e, p, r, i, k, r.\nPasso 2: Substituir cada letra pelo seu valor posicional:\n**r = 18, t = 20, u = 21, y = 25, h = 8, i = 9, e = 5, p = 16, k = 11**.\nPasso 3: Somar todos os valores:\n**S = 18+20+21+25+8+21+21+9+21+25+20+21+25+5+16+18+9+11+18 = 332**.\nPasso 4: Usar a relação dada:\n**332 = 2 × x**\nPasso 5: Isolar x:\n**x = 332 ÷ 2 = 166**.\nResposta: x = 166.",
     "difficulty": 5.3,
     "topic": "Rt7Uyhu765467Ui8Uyt598U7Y6E02Prikr=2"
+  },
+  {
+    "question": "Contexto: Considere a sequência (t_n) definida recursivamente.\nEquações:\n**t_1 = 3**\n**t_{n+1} = 2 × t_n + 5**\nPergunta: Calcule o valor de t_5 e a soma S_5 = Σ_{k=1}^{5} t_k.",
+    "answer": "Primeiro calculamos os termos usando a relação de recorrência.\n**t_2 = 2 × t_1 + 5 = 2 × 3 + 5 = 11**\n**t_3 = 2 × t_2 + 5 = 2 × 11 + 5 = 27**\n**t_4 = 2 × t_3 + 5 = 2 × 27 + 5 = 59**\n**t_5 = 2 × t_4 + 5 = 2 × 59 + 5 = 123**\nAgora a soma dos cinco primeiros termos:\n**S_5 = t_1 + t_2 + t_3 + t_4 + t_5 = 3 + 11 + 27 + 59 + 123 = 223**\nPortanto, t_5 = 123 e S_5 = 223.",
+    "difficulty": 5.5,
+    "topic": "Tn"
   }
 ]
