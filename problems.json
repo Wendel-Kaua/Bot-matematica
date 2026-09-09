@@ -564,5 +564,11 @@
     "answer": "Primeiro, denote o lado menor por x (em metros). O lado maior será x+1.\n\nO perímetro de um retângulo é dado por **P = 2(lado1 + lado2)**. Substituindo P = 30 e os lados:\n\n**2(x + (x+1)) = 30**\n\nDistribuindo:\n\n**2(2x+1) = 30** → **4x + 2 = 30**\n\nIsolando x:\n\n**4x = 28** → **x = 7**\n\nPortanto, os lados são **7 m** e **7+1 = 8 m**.\n\nA área A de um retângulo é **A = base × altura**:\n\n**A = 7 × 8 = 56 m²**\n\nAssim, o jardim mede 7 metros por 8 metros e sua área é 56 metros quadrados.",
     "difficulty": 3.0,
     "topic": "1"
+  },
+  {
+    "question": "Considere uma lanchonete que vende três sabores de suco: A, B e C. Cada cliente pode escolher exatamente duas porções, podendo ser do mesmo sabor ou de sabores diferentes.\n\n**Número de pares diferentes de sabores distintos = 3**\n**C(3,2) = 3**\n**Número de pares iguais = 3** (AA, BB, CC)\n\nQuantas combinações distintas de duas porções podem ser feitas?",
+    "answer": "Primeiro contamos as combinações com sabores diferentes: \n**C(3,2) = 3**.\nEm seguida somamos as combinações onde os dois sucos são do mesmo sabor: há um para cada sabor, portanto **3**.\nO total é \n**3 + 3 = 6** combinações distintas.\nAssim, há **6** possibilidades diferentes.",
+    "difficulty": 2.0,
+    "topic": "Trivial"
   }
 ]
