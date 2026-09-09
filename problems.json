@@ -552,5 +552,11 @@
     "answer": "**5000 = 800·2^(t/5)**\nIsolando a potência: **2^(t/5) = 5000/800 = 6.25**\nAplicando logaritmo base 2: **t/5 = log2(6.25)**\nPortanto: **t = 5·log2(6.25)**\nCalculando log2(6.25): **log2(6.25) = ln(6.25)/ln(2) ≈ 1.8326/0.6931 ≈ 2.64**\nAssim, **t ≈ 5·2.64 ≈ 13.2** horas.\n\nPara 20000 bactérias:\n**20000 = 800·2^(t/5)**\n**2^(t/5) = 20000/800 = 25**\n**t/5 = log2(25)**\n**t = 5·log2(25)**\n**log2(25) = ln(25)/ln(2) ≈ 3.2189/0.6931 ≈ 4.64**\n**t ≈ 5·4.64 ≈ 23.2** horas.\n\nPortanto, os tempos são aproximadamente **13.2 h** para 5000 bactérias e **23.2 h** para 20000 bactérias.",
     "difficulty": 7.5,
     "topic": "Função Exponencial E Logarítmica"
+  },
+  {
+    "question": "Considere a equação quadrática:\n**x^2 - (a+4)x + (2a+3) = 0**\n\nDetermine todos os valores reais de **a** para que a equação possua duas raízes reais distintas e ambas positivas.\n\nPara garantir duas raízes reais distintas e positivas, devemos exigir:\n**Δ = (a+4)^2 - 4·(2a+3) > 0**\n**Soma = a+4 > 0**\n**Produto = 2a+3 > 0**",
+    "answer": "Para a equação **x^2 - (a+4)x + (2a+3) = 0** calculamos o discriminante:\n**Δ = (a+4)^2 - 4·(2a+3)**\nDesenvolvendo:\n**Δ = a^2 + 8a + 16 - 8a - 12 = a^2 + 4**\nComo **a^2 + 4 > 0** para todo a∈ℝ, a condição de duas raízes distintas está sempre satisfeita.\n\nAs raízes serão positivas se a soma e o produto forem positivos:\n**Soma = a+4 > 0** → **a > -4**\n**Produto = 2a+3 > 0** → **a > -3/2**\n\nA condição mais restritiva é **a > -3/2**. Portanto, todos os valores reais de **a** maiores que -1,5 atendem ao pedido.\n\nResposta: **a > -3/2**",
+    "difficulty": 7.5,
+    "topic": "A"
   }
 ]
