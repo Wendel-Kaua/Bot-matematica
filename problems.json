@@ -534,5 +534,11 @@
     "answer": "Primeiro calculamos os comprimentos dos lados:\n**IT = √((8-0)^2 + (0-0)^2) = 8**\n**IA = √((0-0)^2 + (6-0)^2) = 6**\n**TA = √((8-0)^2 + (0-6)^2) = √100 = 10**\nA área do triângulo retângulo é:\n**Área = (IT * IA)/2 = (8*6)/2 = 24**\nO semiperímetro é:\n**s = (IT + IA + TA)/2 = (8+6+10)/2 = 12**\nO raio da circunferência inscrita segue r = Área / s, portanto:\n**r = 24 / 12 = 2**\nAssim, o raio da circunferência inscrita é 2 unidades.",
     "difficulty": 5.5,
     "topic": "Ita"
+  },
+  {
+    "question": "Um engenheiro precisa otimizar a energia potencial de uma estrutura elástica. A energia potencial é modelada por **U(x,y)=3×x^2+4×x×y+2×y^2**. O ponto (x,y) deve pertencer ao círculo unitário, descrito por **C(x,y): x^2+y^2=1**. Determine os valores de (x,y) que maximizam **U** sob a restrição dada e calcule o valor máximo de **U**.",
+    "answer": "Para maximizar **U** com a restrição **C** usamos o multiplicador de Lagrange.\n**L(x,y,λ)=3×x^2+4×x×y+2×y^2-λ( x^2+y^2-1 )**\nDerivamos em relação a x, y e λ e igualamos a zero:\n**∂L/∂x = 6×x+4×y-2λ×x = 0**\n**∂L/∂y = 4×x+4×y-2λ×y = 0**\n**∂L/∂λ = -( x^2+y^2-1 ) = 0**\nDas duas primeiras equações isolamos λ:\nDe **∂L/∂x**: **λ = (6×x+4×y)/(2×x)**\nDe **∂L/∂y**: **λ = (4×x+4×y)/(2×y)**\nIgualando as expressões para λ obtém‑se **(6×x+4×y)/x = (4×x+4×y)/y**.\nMultiplicando por xy e simplificando resulta em **2×x^2 = 2×y^2**, logo **x^2 = y^2**.\nCom a restrição **x^2+y^2=1** temos duas possibilidades:\n1) **x = y** → **2×x^2 = 1** → **x = y = ± √(1/2)**\n2) **x = -y** → **2×x^2 = 1** → **x = ± √(1/2), y = ∓ √(1/2)**\nSubstituindo em **U**:\nPara **x = y = √(1/2)**: **U = 3×(1/2)+4×(1/2)+2×(1/2)= (1.5+2+1)=4.5**\nPara **x = y = -√(1/2)** o mesmo valor ocorre porque **U** depende de quadrados.\nPara **x = √(1/2), y = -√(1/2)**: **U = 3×(1/2)-4×(1/2)+2×(1/2)= (1.5-2+1)=0.5**\nPortanto o máximo de **U** é **4.5**, atingido nos pontos **( √(1/2), √(1/2) )** e **( -√(1/2), -√(1/2) )**.",
+    "difficulty": 8.2,
+    "topic": "Avançado"
   }
 ]
