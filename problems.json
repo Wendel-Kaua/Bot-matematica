@@ -498,5 +498,11 @@
     "answer": "Passo 1: Igualar as distâncias e eliminar a raiz quadrada multiplicando por 25.\n**25[(x-2)^2+(y-3)^2] = (4x+3y-12)^2**\nPasso 2: Expandir os termos.\n**25[x^2+y^2-4x-6y+13] = 16x^2+24xy+9y^2-96x-72y+144**\nPasso 3: Distribuir o 25 e reorganizar.\n**25x^2+25y^2-100x-150y+325 = 16x^2+24xy+9y^2-96x-72y+144**\nPasso 4: Trazer tudo para o lado esquerdo.\n**9x^2 -24xy +16y^2 -4x -78y +181 = 0**\nPasso 5: Identificar o tipo de lugar geométrico. O discriminante B^2-4AC = (-24)^2-4·9·16 = 576-576 = 0, portanto a curva é uma parábola.\nConclusão: O lugar geométrico dos pontos P é a parábola descrita por **9x^2 -24xy +16y^2 -4x -78y +181 = 0**.",
     "difficulty": 6.5,
     "topic": "Lugares Geométricos"
+  },
+  {
+    "question": "Considere o triângulo ABC cujos lados têm as seguintes medidas: **AB = 13** , **AC = 15** e **BC = 16**.\nO ponto D está sobre o lado BC, de modo que **BD = 7** e **CD = 9**.\nUsando o teorema de Stewart, encontre o comprimento da ceviana **AD**.\n**AB^2·CD + AC^2·BD = BC(AD^2 + BD·CD)**",
+    "answer": "Aplicamos o teorema de Stewart ao ceviano AD:\n**AB^2·CD + AC^2·BD = BC(AD^2 + BD·CD)**\nSubstituindo os valores conhecidos:\n**13^2·9 + 15^2·7 = 16(AD^2 + 7·9)**\nCalculamos cada termo:\n13^2·9 = 169·9 = 1521\n15^2·7 = 225·7 = 1575\nSoma esquerda = 1521 + 1575 = 3096\nO termo BD·CD = 7·9 = 63\nAssim:\n**3096 = 16(AD^2 + 63)**\nDividindo por 16:\nAD^2 + 63 = 3096 / 16 = 193.5\nIsolando AD^2:\nAD^2 = 193.5 - 63 = 130.5 = 261/2\nPortanto:\n**AD = √(130.5) = √(261/2) = √522 / 2 ≈ 11.43**\nO comprimento da ceviana AD é aproximadamente 11,43 unidades.",
+    "difficulty": 6.5,
+    "topic": "Teorema De Stewart"
   }
 ]
