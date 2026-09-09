@@ -546,5 +546,11 @@
     "answer": "Passo a passo:\n1. Substituindo os pontos na forma geral obtém‑se o sistema:\n**a + b + c = 3**\n**16a + 4b + c = 27**\n2. A abscissa do vértice de uma parábola é x_v = -b/(2a). Como x_v=2,\n**-b/(2a) = 2**  →  **b = -4a**.\n3. Substituindo b = -4a no primeiro e no segundo enunciado:\n   • **a -4a + c = 3**  →  **-3a + c = 3**  →  **c = 3 + 3a**.\n   • **16a + 4(-4a) + c = 27**  →  **c = 27**.\n4. Igualando as duas expressões para c:\n**3 + 3a = 27**  →  **3a = 24**  →  **a = 8**.\n5. Calculando b e c:\n**b = -4a = -32**,   **c = 27**.\nPortanto a função procurada é:\n**f(x)=8x^2 - 32x + 27**.\n6. Para achar as raízes resolvemos f(x)=0.\n   O discriminante:\n**Δ = b^2 - 4ac = (-32)^2 - 4·8·27 = 1024 - 864 = 160**.\n   As raízes são dadas por:\n**x = [ -b ± √Δ ]/(2a) = [32 ± √160]/16**.\n   Como √160 = 4√10, simplificando:\n**x = (32 ± 4√10)/16 = (8 ± √10)/4 = 2 ± √10/4**.\n   Aproximadamente:\n**x₁ ≈ 1.21**, **x₂ ≈ 2.79**.\nAssim, a, b, c são 8, -32 e 27, e as raízes reais da equação f(x)=0 são 2 ± √10/4.",
     "difficulty": 7.5,
     "topic": "Função Quadratica"
+  },
+  {
+    "question": "Uma colônia de bactérias tem seu número de indivíduos descrito pela função exponencial **P(t) = P0·2^(t/5)**, onde P0 é a população inicial e t é o tempo em horas.\n\nNo instante inicial a população é de:\n**P0 = 800**\n\nPara atingir as metas de população, as equações são:\n**5000 = 800·2^(t/5)**\n**20000 = 800·2^(t/5)**\n\nDetermine o tempo t necessário para que a população atinja cada um desses valores, usando logaritmos.",
+    "answer": "**5000 = 800·2^(t/5)**\nIsolando a potência: **2^(t/5) = 5000/800 = 6.25**\nAplicando logaritmo base 2: **t/5 = log2(6.25)**\nPortanto: **t = 5·log2(6.25)**\nCalculando log2(6.25): **log2(6.25) = ln(6.25)/ln(2) ≈ 1.8326/0.6931 ≈ 2.64**\nAssim, **t ≈ 5·2.64 ≈ 13.2** horas.\n\nPara 20000 bactérias:\n**20000 = 800·2^(t/5)**\n**2^(t/5) = 20000/800 = 25**\n**t/5 = log2(25)**\n**t = 5·log2(25)**\n**log2(25) = ln(25)/ln(2) ≈ 3.2189/0.6931 ≈ 4.64**\n**t ≈ 5·4.64 ≈ 23.2** horas.\n\nPortanto, os tempos são aproximadamente **13.2 h** para 5000 bactérias e **23.2 h** para 20000 bactérias.",
+    "difficulty": 7.5,
+    "topic": "Função Exponencial E Logarítmica"
   }
 ]
