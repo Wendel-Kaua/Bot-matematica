@@ -504,5 +504,11 @@
     "answer": "Aplicamos o teorema de Stewart ao ceviano AD:\n**AB^2·CD + AC^2·BD = BC(AD^2 + BD·CD)**\nSubstituindo os valores conhecidos:\n**13^2·9 + 15^2·7 = 16(AD^2 + 7·9)**\nCalculamos cada termo:\n13^2·9 = 169·9 = 1521\n15^2·7 = 225·7 = 1575\nSoma esquerda = 1521 + 1575 = 3096\nO termo BD·CD = 7·9 = 63\nAssim:\n**3096 = 16(AD^2 + 63)**\nDividindo por 16:\nAD^2 + 63 = 3096 / 16 = 193.5\nIsolando AD^2:\nAD^2 = 193.5 - 63 = 130.5 = 261/2\nPortanto:\n**AD = √(130.5) = √(261/2) = √522 / 2 ≈ 11.43**\nO comprimento da ceviana AD é aproximadamente 11,43 unidades.",
     "difficulty": 6.5,
     "topic": "Teorema De Stewart"
+  },
+  {
+    "question": "Contexto: Em um triângulo ABC, conhecemos dois lados e o ângulo formado por eles. \nDados: AB = 8 cm, AC = 5 cm e ∠BAC = 60°. \nPergunta: Calcule o comprimento do lado BC usando a lei dos cossenos.\n\n**BC^2 = AB^2 + AC^2 - 2*AB*AC*cos(∠BAC)**\n\n**BC = √(AB^2 + AC^2 - 2*AB*AC*cos(∠BAC))**",
+    "answer": "Passo 1 – Substituir os valores conhecidos na fórmula da lei dos cossenos:\n**BC^2 = 8^2 + 5^2 - 2*8*5*cos 60°**\n\nPasso 2 – Calcular os termos:\n8^2 = 64, 5^2 = 25, cos 60° = 0,5, então 2*8*5*cos 60° = 80*0,5 = 40.\n\nPasso 3 – Efetuar a soma e subtração:\n**BC^2 = 64 + 25 - 40 = 49**\n\nPasso 4 – Tirar a raiz quadrada:\n**BC = √49 = 7 cm**\n\nPortanto, o lado BC mede 7 centímetros.  \n(Se desejar, a área do triângulo pode ser encontrada por **Área = ½*AB*AC*sin 60° = ½*8*5*√3/2 = 10√3 ≈ 17,3 cm²**, mas o pedido principal era o comprimento de BC.)",
+    "difficulty": 4.5,
+    "topic": "Lei Dos Cossenos"
   }
 ]
