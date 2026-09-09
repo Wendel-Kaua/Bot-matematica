@@ -570,5 +570,11 @@
     "answer": "Primeiro contamos as combinações com sabores diferentes: \n**C(3,2) = 3**.\nEm seguida somamos as combinações onde os dois sucos são do mesmo sabor: há um para cada sabor, portanto **3**.\nO total é \n**3 + 3 = 6** combinações distintas.\nAssim, há **6** possibilidades diferentes.",
     "difficulty": 2.0,
     "topic": "Trivial"
+  },
+  {
+    "question": "Um colecionador tem 3 tipos de selos: A, B e C. Cada selo do tipo A vale 3 pontos, cada B vale 5 pontos e cada C vale 7 pontos. Ele possui um total de 58 pontos e tem exatamente 4 selos a mais do tipo B que do tipo A. Quantos selos de cada tipo ele tem?\n**3a + 5b + 7c = 58**\n**b = a + 4**",
+    "answer": "Denotemos por a, b e c o número de selos dos tipos A, B e C, respectivamente.\nDa condição \"b = a + 4\" temos:\n**b = a + 4**\nSubstituímos b na equação dos pontos:\n**3a + 5(a + 4) + 7c = 58**\nDesenvolvendo:\n**3a + 5a + 20 + 7c = 58**\n**8a + 7c = 38**\nIsolamos c:\n**7c = 38 - 8a**\n**c = (38 - 8a) / 7**\nComo a, b e c devem ser inteiros não‑negativos, procuramos valores de a que tornem (38‑8a) múltiplo de 7.\nTestando a = 0,1,2,3,…:\n- a = 3 → 38‑8·3 = 14, que é múltiplo de 7.\nEntão c = 14/7 = 2 e b = a + 4 = 7.\nVerificando:\n**3·3 + 5·7 + 7·2 = 9 + 35 + 14 = 58**\nPortanto, o colecionador tem 3 selos do tipo A, 7 selos do tipo B e 2 selos do tipo C.",
+    "difficulty": 4.0,
+    "topic": "Trivial"
   }
 ]
