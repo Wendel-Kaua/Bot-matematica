@@ -582,5 +582,11 @@
     "answer": "Passo 1 – Altura do tetraedro regular.\nEm um tetraedro regular a altura h relativa à base BCD é\n**h = a·√6/3**.\n\nPasso 2 – Relação entre GA e h.\nO segmento GA está na direção da altura, logo GA = h.\n\nPasso 3 – Posição de P.\nDe **PG = (1/3)·GA** segue que **AP = GA - PG = (2/3)·GA**.\n\nPasso 4 – Altura de P sobre a base BCD.\nA altura de P, h_P, é proporcional à distância AP:\n**h_P = (AP/GA)·h = (2/3)·h**.\n\nPasso 5 – Volume proporcional.\nMantendo a mesma base BCD, o volume varia linearmente com a altura:\n**V_PBCD = (h_P/h)·V_ABCD**.\nSubstituindo h_P/h = 2/3 e V_ABCD = a^3·√2/12,\n**V_PBCD = (2/3)·(a^3·√2/12) = a^3·√2/18**.\n\nPortanto, o volume solicitado é **V_PBCD = a^3·√2/18**.",
     "difficulty": 9.2,
     "topic": "Geometria Espacial"
+  },
+  {
+    "question": "Joana aplicou R$ 12.000,00 em um fundo que rende juros compostos de 3,5% ao mês.\n\nO capital inicial (C) é R$ 12.000,00, a taxa mensal (i) é 3,5% = 0,035 e o tempo (n) é 5 anos, ou 60 meses.\n\nA fórmula do montante (M) para juros compostos é:\n**M = C * (1 + i)^n**\n\nQual será o montante acumulado ao final dos 5 anos?",
+    "answer": "Passo a passo:\n1. Identificar os valores:\n   C = 12000\n   i = 0,035\n   n = 60\n2. Substituir na fórmula:\n**M = 12000 * (1 + 0,035)^60**\n3. Calcular o fator de acumulação:\n   (1 + 0,035)^60 ≈ 7,87 (usando logaritmo ou calculadora)\n4. Multiplicar pelo capital:\n   M ≈ 12000 * 7,87 ≈ 94.440\n5. Arredondar para centavos:\n   Montante final é aproximadamente R$ 94.440,00.\n\nPortanto, ao final de 5 anos Joana terá cerca de R$ 94.440,00 acumulados.",
+    "difficulty": 7.5,
+    "topic": "Juros"
   }
 ]
