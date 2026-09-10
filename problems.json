@@ -576,5 +576,11 @@
     "answer": "Denotemos por a, b e c o número de selos dos tipos A, B e C, respectivamente.\nDa condição \"b = a + 4\" temos:\n**b = a + 4**\nSubstituímos b na equação dos pontos:\n**3a + 5(a + 4) + 7c = 58**\nDesenvolvendo:\n**3a + 5a + 20 + 7c = 58**\n**8a + 7c = 38**\nIsolamos c:\n**7c = 38 - 8a**\n**c = (38 - 8a) / 7**\nComo a, b e c devem ser inteiros não‑negativos, procuramos valores de a que tornem (38‑8a) múltiplo de 7.\nTestando a = 0,1,2,3,…:\n- a = 3 → 38‑8·3 = 14, que é múltiplo de 7.\nEntão c = 14/7 = 2 e b = a + 4 = 7.\nVerificando:\n**3·3 + 5·7 + 7·2 = 9 + 35 + 14 = 58**\nPortanto, o colecionador tem 3 selos do tipo A, 7 selos do tipo B e 2 selos do tipo C.",
     "difficulty": 4.0,
     "topic": "Trivial"
+  },
+  {
+    "question": "Considere um tetraedro regular ABCD com aresta a.\nO centro G do tetraedro coincide com o circuncentro.\nSeja P um ponto do segmento AG tal que **PG = (1/3)·GA**.\n\nSabendo que o volume do tetraedro regular é **V_ABCD = a^3·√2/12**, calcule o volume do tetraedro PBCD.\n\nPergunta: qual é **V_PBCD** em função de a?",
+    "answer": "Passo 1 – Altura do tetraedro regular.\nEm um tetraedro regular a altura h relativa à base BCD é\n**h = a·√6/3**.\n\nPasso 2 – Relação entre GA e h.\nO segmento GA está na direção da altura, logo GA = h.\n\nPasso 3 – Posição de P.\nDe **PG = (1/3)·GA** segue que **AP = GA - PG = (2/3)·GA**.\n\nPasso 4 – Altura de P sobre a base BCD.\nA altura de P, h_P, é proporcional à distância AP:\n**h_P = (AP/GA)·h = (2/3)·h**.\n\nPasso 5 – Volume proporcional.\nMantendo a mesma base BCD, o volume varia linearmente com a altura:\n**V_PBCD = (h_P/h)·V_ABCD**.\nSubstituindo h_P/h = 2/3 e V_ABCD = a^3·√2/12,\n**V_PBCD = (2/3)·(a^3·√2/12) = a^3·√2/18**.\n\nPortanto, o volume solicitado é **V_PBCD = a^3·√2/18**.",
+    "difficulty": 9.2,
+    "topic": "Geometria Espacial"
   }
 ]
