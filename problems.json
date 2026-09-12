@@ -588,5 +588,11 @@
     "answer": "Passo a passo:\n1. Identificar os valores:\n   C = 12000\n   i = 0,035\n   n = 60\n2. Substituir na fórmula:\n**M = 12000 * (1 + 0,035)^60**\n3. Calcular o fator de acumulação:\n   (1 + 0,035)^60 ≈ 7,87 (usando logaritmo ou calculadora)\n4. Multiplicar pelo capital:\n   M ≈ 12000 * 7,87 ≈ 94.440\n5. Arredondar para centavos:\n   Montante final é aproximadamente R$ 94.440,00.\n\nPortanto, ao final de 5 anos Joana terá cerca de R$ 94.440,00 acumulados.",
     "difficulty": 7.5,
     "topic": "Juros"
+  },
+  {
+    "question": "Um triângulo escaleno tem lados de comprimentos conhecidos.\n\n**a = 13 cm**\n**b = 14 cm**\n**c = 15 cm**\n\nCalcule:\n1) O raio da circunferência inscrita no triângulo.\n2) A área da região limitada pela circunferência circunscrita e a circunferência inscrita (anel circular).",
+    "answer": "1) Calcule o semiperímetro:\n**s = (a + b + c)/2**\nSubstituindo os valores: **s = (13 + 14 + 15)/2 = 21 cm**.\n\n2) Área do triângulo pelo método de Herão:\n**A = √[s(s-a)(s-b)(s-c)]**\nSubstituindo: **A = √[21·8·7·6] = √[7056] = 84 cm²**.\n\n3) Raio da circunferência inscrita:\n**r = A / s**\n**r = 84 / 21 = 4 cm**.\n\n4) Raio da circunferência circunscrita:\n**R = (a·b·c) / (4·A)**\n**R = (13·14·15) / (4·84) = 2730 / 336 = 8.125 cm**\n\n5) Área do anel entre as duas circunferências:\n**Área_anel = π·(R² - r²)**\n**Área_anel = π·(8.125² - 4²) = π·(66.0156 - 16) = π·50.0156 ≈ 157.2 cm²**.\n\nPortanto, o raio da incircle é **4 cm** e a área do anel é aproximadamente **157.2 cm²**.",
+    "difficulty": 7.5,
+    "topic": "Geometria"
   }
 ]
