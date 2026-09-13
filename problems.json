@@ -600,5 +600,11 @@
     "answer": "Primeiro, substituímos a condição a ≥ 2 por a' = a - 2, onde a' ≥ 0.\n\n**a' + b + c = 10**\n\nSem considerar o limite superior de bananas, o número de soluções não‑negativas de a' + b + c = 10 é dado por combinações com reposição:\n\n**C(10+3-1,3-1) = C(12,2) = 66**\n\nAgora excluímos as soluções em que b ≥ 6. Definimos b' = b - 6 (b' ≥ 0). O somatório torna‑se:\n\n**a' + b' + c = 4**\n\nO número de soluções desse caso é:\n\n**C(4+3-1,3-1) = C(6,2) = 15**\n\nPortanto, as combinações válidas são:\n\n**66 - 15 = 51**\n\nLogo, existem **51** maneiras diferentes de montar a cesta satisfazendo todas as restrições.",
     "difficulty": 5.5,
     "topic": "Qualquer Coisa"
+  },
+  {
+    "question": "Considere a sequência (a_n) definida por:\n**a_1 = 2**\n**a_{n+1} = 3 a_n + 2^n,   para n ≥ 1**\n\na) Determine a forma fechada de a_n.\n\nb) Calcule S = Σ_{k=1}^{10} a_k / 5^k e indique a parte inteira de S.",
+    "answer": "**Passo 1 – Solução da recorrência**\nA parte homogênea da relação a_{n+1}=3 a_n dá a solução C·3^{n-1}. Para um termo particular procure da forma A·2^{n-1}. Substituindo:\nA·2^{n}=3 A·2^{n-1}+2^{n-1}⇒2A=3A+1⇒A=‑1.\nAssim a solução geral é a_n=C·3^{n-1}-2^{n-1}. Usando a condição inicial a_1=2:\nC·1-1=2⇒C=3.\nPortanto\n**a_n = 3^{n} - 2^{n-1}**\n\n**Passo 2 – Expressão da soma S**\nSubstituindo a_n em S:\n**S = Σ_{k=1}^{10} (3^{k} - 2^{k-1}) / 5^{k}**\n= Σ_{k=1}^{10} (3/5)^{k} - Σ_{k=1}^{10} (1/2)(2/5)^{k}\n= **(3/2)*(1-(3/5)^{10}) - (1/3)*(1-(2/5)^{10})**\n= **7/6 - (3/2)*(3/5)^{10} + (1/3)*(2/5)^{10}**\n≈ 1.158.\n\n**Passo 3 – Parte inteira**\nA parte inteira de S é\n**1**.",
+    "difficulty": 9.3,
+    "topic": "Sequências E Progressões"
   }
 ]
