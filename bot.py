@@ -69,7 +69,14 @@ last_problem_by_channel: dict[int, dict] = {}
 
 def load_problems() -> list[dict]:
     with open(PROBLEMS_FILE, "r", encoding="utf-8") as f:
-        return json.load(f)
+        problems = json.load(f)
+    # Alguns itens do banco podem ter "difficulty"/"topic" salvos com o tipo
+    # errado (ex: número em vez de texto, de uma edição manual do JSON) — isso
+    # quebrava a formatação mais adiante, então normaliza pra string aqui.
+    for p in problems:
+        p["difficulty"] = str(p.get("difficulty", "médio"))
+        p["topic"] = str(p.get("topic", "Matemática"))
+    return problems
 
 
 def get_topics() -> list[str]:
@@ -295,8 +302,11 @@ def save_generated_problem(problem: dict) -> tuple[bool, str]:
         )
 
 
-def _normalizar(texto: str) -> str:
-    """Remove acentos simples pra facilitar comparação de strings (fácil -> facil)."""
+def _normalizar(texto) -> str:
+    """Remove acentos simples pra facilitar comparação de strings (fácil -> facil).
+    Aceita qualquer tipo e converte pra string primeiro, pra nunca quebrar se
+    algum dado vier com o tipo errado (ex: número em vez de texto)."""
+    texto = str(texto)
     substituicoes = str.maketrans("áàâãéêíóôõúçÁÀÂÃÉÊÍÓÔÕÚÇ", "aaaaeeiooouc" + "AAAAEEIOOOUC".lower())
     return texto.translate(substituicoes).lower()
 
