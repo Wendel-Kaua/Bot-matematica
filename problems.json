@@ -394,229 +394,235 @@
   {
     "question": "Contexto: Maria está estudando divisão de polinômios. Ela tem o polinômio cúbico **p(x) = 2x^3 - 5x^2 + 4x - 7** e o polinômio quadrático **q(x) = x^2 - 3x + 2**.\nDados: Deseja encontrar o resto da divisão de p(x) por q(x) e, em seguida, determinar a raiz (ou raízes) do resto.\nPergunta: Qual é o resto da divisão de **p(x)** por **q(x)** e qual o valor de x que zera esse resto?",
     "answer": "Passo 1 – Divisão polinomial:\n- Primeiro termo do quociente: **2x** porque 2x^3 ÷ x^2 = 2x.\n- Multiplicamos **q(x)** por 2x: **2x^3 - 6x^2 + 4x**.\n- Subtraímos do dividendo: (2x^3 - 5x^2 + 4x) - (2x^3 - 6x^2 + 4x) = **x^2**.\n- Baixamos o termo constante -7, obtendo **x^2 - 7**.\n- Segundo termo do quociente: **1** porque x^2 ÷ x^2 = 1.\n- Multiplicamos **q(x)** por 1: **x^2 - 3x + 2**.\n- Subtraímos: (x^2 - 7) - (x^2 - 3x + 2) = **3x - 9**.\nComo o grau de **3x - 9** (grau 1) é menor que o grau de **q(x)** (grau 2), a divisão termina.\n\nPasso 2 – Resto:\n**r(x) = 3x - 9**\n\nPasso 3 – Raiz do resto:\nPara que o resto seja zero, resolvemos **3x - 9 = 0**.\nDividindo por 3: **x - 3 = 0** → **x = 3**.\n\nResposta final: O resto da divisão é **3x - 9** e ele se anula em **x = 3**.",
-    "difficulty": 7.5,
+    "difficulty": "7.5",
     "topic": "Álgebra E Polinômios"
   },
   {
     "question": "Contexto: Uma caixa contém 5 bolas vermelhas, 4 bolas azuis e 3 bolas verdes, totalizando 12 bolas.\n\nDados: São retiradas 3 bolas da caixa, uma após a outra, sem reposição.\n\nPergunta: Qual a probabilidade de que, entre as 3 bolas retiradas, haja ao menos uma bola vermelha?\n\n**Número total de combinações possíveis = C(12,3)**\n**Número de combinações sem nenhuma bola vermelha = C(7,3)**\n**P(pelo menos uma vermelha) = 1 - C(7,3) / C(12,3)**",
     "answer": "Passo 1 – Calcular o total de formas de escolher 3 bolas dentre 12:\n**C(12,3) = 12·11·10 / (3·2·1) = 220**\n\nPasso 2 – Calcular as formas de escolher 3 bolas que não sejam vermelhas (ou seja, apenas das 7 bolas azuis e verdes):\n**C(7,3) = 7·6·5 / (3·2·1) = 35**\n\nPasso 3 – A probabilidade de não sair nenhuma vermelha é:\n**P(nenhuma vermelha) = C(7,3) / C(12,3) = 35 / 220**\n\nPasso 4 – A probabilidade de sair ao menos uma vermelha é o complemento:\n**P(pelo menos uma vermelha) = 1 - 35/220 = 185/220 = 37/44 ≈ 0,84**\n\nPortanto, a probabilidade pedida é 37/44, ou aproximadamente 84 %.",
-    "difficulty": 6.5,
+    "difficulty": "6.5",
     "topic": "Probabilidade"
   },
   {
     "question": "Um prisma reto de base triangular equilátera tem lado da base igual a 6 cm e altura igual a 10 cm. Uma esfera está inscrita no prisma, tocando as três faces laterais e as duas bases. Calcule o raio da esfera.",
     "answer": "Primeiro calculamos o raio que pode ser inscrito na base triangular. **r_tri = a·√3 / 6** onde a = 6 cm. Assim **r_tri = 6·√3 / 6 = √3 cm ≈ 1,73 cm**. O raio também não pode exceder a metade da altura do prisma, pois a esfera deve tocar ambas as bases: **r_h = h / 2 = 10 / 2 = 5 cm**. O raio da esfera inscrita será o menor entre r_tri e r_h. Como **√3 ≈ 1,73 cm < 5 cm**, temos **r = √3 cm ≈ 1,73 cm**. Portanto o raio da esfera inscrita é aproximadamente **1,73 cm**.",
-    "difficulty": 7.5,
+    "difficulty": "7.5",
     "topic": "Geometria Espacial"
   },
   {
     "question": "Um observador está em um ponto A no solo, a 50 metros horizontalmente do pé de uma torre B. Ele mede o ângulo de elevação ao topo da torre como 30°. \n**tan 30° = h / 50**\nSabendo que tan 30° = √3/3 ≈ 0.577, calcule: \n1) a altura h da torre; \n2) se o observador se afastar mais 20 metros (distância total 70 m), qual será o novo ângulo de elevação θ ao topo? \n**tan θ = h / 70**",
     "answer": "1) Usando a relação trigonométrica da tangente:\n**h = 50 × tan 30°**\nSubstituindo tan 30° ≈ 0.577:\n**h ≈ 50 × 0.577 = 28.85 m**\nPortanto, a torre tem aproximadamente 28.9 m de altura.\n\n2) Com a nova distância horizontal de 70 m, aplicamos novamente a tangente:\n**tan θ = h / 70**\nSubstituindo h ≈ 28.85 m:\n**tan θ ≈ 28.85 / 70 ≈ 0.412**\nPara encontrar θ, usamos a função arco‑tangente:\n**θ = arctan 0.412**\nCalculando, θ ≈ 22.4°.\n\nAssim, o ângulo de elevação diminui para aproximadamente **22.4°** quando o observador se afasta 20 m adicionais.",
-    "difficulty": 7.5,
+    "difficulty": "7.5",
     "topic": "Trigonometria"
   },
   {
     "question": "Contexto: Um círculo de raio 5 m está centrado na origem do plano cartesiano. Um ponto P está na circunferência e forma um ângulo theta com o eixo positivo x.\nDados: \n**r = 5**\n**P = (5 cosθ , 5 sinθ)**\nA partir de P, traça‑se a tangente ao círculo que intersecta a reta vertical x = 8 em Q.\nPergunta: Determine a expressão algébrica do comprimento PQ em função de θ e calcule o seu valor para θ = 30°.",
     "answer": "Passo 1 – Coordenadas de P: **P = (5 cosθ , 5 sinθ)**.\nPasso 2 – Equação da tangente ao círculo em P: \n**(x - 5 cosθ)·cosθ + (y - 5 sinθ)·sinθ = 0**.\nPasso 3 – Na interseção com a reta x = 8 substitui‑se x = 8:\n**(8 - 5 cosθ)·cosθ + (y - 5 sinθ)·sinθ = 0** → \n**y = 5 sinθ - (8 - 5 cosθ)·cotθ**.\nPasso 4 – Diferenças de coordenadas entre Q(8 , y) e P:\nΔx = 8 - 5 cosθ,\nΔy = y - 5 sinθ = -(8 - 5 cosθ)·cotθ.\nPasso 5 – Comprimento PQ:\n**PQ = √[(8 - 5 cosθ)^2 + ((8 - 5 cosθ)·cotθ)^2]**\n= **|8 - 5 cosθ|·√[1 + cot²θ]** = **|8 - 5 cosθ|·cscθ**.\nPasso 6 – Para θ = 30° (cos30° = √3/2, sin30° = 1/2, csc30° = 2):\n**8 - 5 cos30° = 8 - 5·√3/2 = 8 - (5√3)/2**.\nEntão **PQ = (8 - (5√3)/2)·2 = 16 - 5√3** metros.\nResposta numérica: **PQ ≈ 16 - 5·1.732 ≈ 7.34 m**.\nPortanto, a expressão geral é **PQ = |8 - 5 cosθ|·cscθ** e, para θ = 30°, **PQ = 16 - 5√3 ≈ 7.34 m**.",
-    "difficulty": 7.5,
+    "difficulty": "7.5",
     "topic": "Trigonometria 10"
   },
   {
     "question": "Em um triângulo ABC retângulo em C, sabe‑se que:\n- o ângulo B mede 30°;\n- o cateto adjacente ao ângulo B, AB, tem comprimento 10 unidades.\nDetermine:\n1) o comprimento da hipotenusa BC;\n2) o comprimento do outro cateto AC;\n3) a área da região limitada por BC, a extensão do segmento AB além de B até o ponto D tal que BD seja perpendicular a BC e intersecte a extensão de AC.\n\n**BC = AB / sin30**\n**AC = AB * cot30**\n**Área = (BC * BD) / 2**",
     "answer": "Passo 1 – Hipotenusa:\nComo sin30 = ½, substituímos em **BC = AB / sin30**:\n**BC = 10 / 0,5 = 20** unidades.\n\nPasso 2 – Outro cateto:\ncot30 = √3, portanto em **AC = AB * cot30**:\n**AC = 10 * √3 ≈ 17,32** unidades.\n\nPasso 3 – Altura BD sobre a hipotenusa:\nEm um triângulo retângulo, a altitude relativa à hipotenusa satisfaz:\n**BD = (AB * AC) / BC**.\nSubstituindo os valores:\n**BD = (10 * 17,32) / 20 ≈ 8,66** unidades.\n\nPasso 4 – Área da região solicitada:\nA região é um triângulo de base BC e altura BD, logo:\n**Área = (BC * BD) / 2 = (20 * 8,66) / 2 ≈ 86,6** unidades quadradas.\n\nResposta final:\n1) BC = 20;\n2) AC ≈ 17,32;\n3) Área ≈ 86,6 unidades².",
-    "difficulty": 9.0,
+    "difficulty": "9.0",
     "topic": "Trigonometria Dificuldade 10"
   },
   {
     "question": "Um clube esportivo paga a seus atletas um bônus mensal que aumenta de forma constante a cada mês. No primeiro mês, o bônus foi de 1.200 reais, e no décimo‑segundo mês o bônus foi de 2.100 reais.\n\n**a_1 = 1200**\n**a_12 = 2100**\n\nConsiderando que a sequência dos bônus forma uma progressão aritmética, determine:\n1. O valor da razão da PA.\n2. O valor do bônus no décimo mês.\n3. O total pago ao longo dos 12 meses.\n4. Em que mês o bônus ultrapassará 1.800 reais?",
     "answer": "A sequência é uma PA, logo a razão d é dada por:\n**d = (a_12 - a_1) / (12 - 1) = (2100 - 1200) / 11 = 900 / 11 ≈ 81,82**\n\n1. **Razão d = 900/11 ≈ 81,82**.\n\n2. O décimo termo:\n**a_10 = a_1 + 9d = 1200 + 9·(900/11) = 1200 + 8100/11 = 21300/11 ≈ 1.936,36**.\n\n3. Soma dos 12 termos:\n**S_12 = (12/2)·(a_1 + a_12) = 6·(1200 + 2100) = 6·3300 = 19.800**.\n\n4. Para encontrar o primeiro mês k em que a_k > 1800:\n**a_k = a_1 + (k-1)d > 1800**\n**1200 + (k-1)·(900/11) > 1800**\n**(k-1) > (1800 - 1200)·11/900 = 600·11/900 = 22/3 ≈ 7,33**\nPortanto **k > 8,33**, logo o primeiro mês inteiro que satisfaz a condição é o **nono mês**.\n\nResposta resumida:\n- Razão ≈ 81,82\n- Décimo bônus ≈ 1.936,36 reais\n- Soma dos 12 bônus = 19.800 reais\n- O bônus ultrapassa 1.800 reais no 9.º mês.",
-    "difficulty": 6.3,
+    "difficulty": "6.3",
     "topic": "6.3 Progressões Aritméticas"
   },
   {
     "question": "Um trapézio isósceles tem bases de 8 cm e 14 cm e cada lado não‑paralelo mede 10 cm.\n\nDetermine a altura do trapézio e, a partir dela, calcule a sua área.\n\n**h = √(10^2 - ((14-8)/2)^2)**\n\n**A = ((8 + 14) * h) / 2**",
     "answer": "Primeiro calculamos a metade da diferença entre as bases: **(14‑8)/2 = 3 cm**.\n\nEm seguida, usando o triângulo retângulo formado pela altura, a metade da diferença das bases e o lado não‑paralelo, aplicamos o teorema de Pitágoras:\n\n**h = √(10^2 - 3^2) = √(100 - 9) = √91 ≈ 9,54 cm**.\n\nCom a altura conhecida, a área do trapézio é:\n\n**A = ((8 + 14) * h) / 2 = (22 * 9,54) / 2 ≈ 105,0 cm²**.\n\nPortanto, a área do trapézio é aproximadamente **105 cm²**.",
-    "difficulty": 5.5,
+    "difficulty": "5.5",
     "topic": "Geometria Plana"
   },
   {
     "question": "Em uma feira de ciências, três estandes são dedicados a diferentes temas. O número de visitantes ao primeiro tema foi 120.\n**n2 = 1,20 × n1**\nO número de visitantes ao segundo tema é 20% maior que ao primeiro.\n**n3 = 2 × n2**\nO número de visitantes ao terceiro tema é o dobro do número ao segundo.\nPergunta: Quantos visitantes, no total, participaram da feira e que porcentagem do total corresponde ao terceiro tema?",
     "answer": "Primeiro, n1 = 120.\n**n2 = 1,20 × 120 = 144**\n**n3 = 2 × 144 = 288**\nTotal de visitantes = 120 + 144 + 288 = 552.\nA porcentagem do terceiro tema sobre o total é:\n**%C = 288 ÷ 552 × 100 ≈ 52,17**\nPortanto, 552 visitantes participaram da feira e aproximadamente 52,17% deles foram ao terceiro tema.",
-    "difficulty": 4.3,
+    "difficulty": "4.3",
     "topic": "Tema"
   },
   {
     "question": "Em uma seleção para a equipe da IMO, os organizadores propõem o seguinte desafio. Seja a sequência (a_n) definida por:\n**a_1 = 1**\n**a_{n+1} = a_n + n^2 + 1**\npara todo n ≥ 1. Determine o menor valor inteiro positivo de n para o qual a_n é múltiplo de 2023.",
     "answer": "Primeiro somamos a relação de recorrência:\n**a_n = 1 + Σ_{k=1}^{n-1}(k^2 + 1)**\nO somatório de k^2 vale Σ_{k=1}^{n-1}k^2 = (n-1)n(2n-1)/6. Assim:\n**a_n = 1 + (n-1)n(2n-1)/6 + (n-1)**\nReagrupando termos:\n**a_n = (n-1)n(2n-1)/6 + n**\nFactorizando n:\n**a_n = n\\left[1 + (n-1)(2n-1)/6\\right]**\nPara que a_n seja múltiplo de 2023 é necessário que 2023 divida n ou o fator entre colchetes. Verifica‑se que, para 1 ≤ n < 2023, o termo entre colchetes nunca é múltiplo de 2023 (ele está entre 1 e 2023 e não pode ser zero módulo 2023). Portanto o menor n que satisfaz a condição é o menor múltiplo positivo de 2023, ou seja:\n**n = 2023**\nCom n = 2023 tem‑se a_n ≡ 0 (mod 2023), confirmando a solução.",
-    "difficulty": 7.0,
+    "difficulty": "7.0",
     "topic": "Imo"
   },
   {
     "question": "Um instituto de pesquisa possui 5 áreas distintas de estudo: A, B, C, D e E. Cada área desenvolve um certo número de projetos simultâneos: \nA: 3 projetos\nB: 2 projetos\nC: 4 projetos\nD: 1 projeto\nE: 2 projetos\n\nPrecisamos formar uma equipe que inclua **pelo menos um** projeto de **toda** as áreas (ou seja, de A, B, C, D e E). Quantas equipes diferentes podem ser constituídas se a ordem dos projetos dentro da equipe não importa?",
     "answer": "Para cada área consideramos todas as possibilidades de escolher um subconjunto não‑vazio dos seus projetos. Se uma área tem n projetos, o número de subconjuntos não vazios é 2^n − 1.\n\nPortanto, o número total de equipes possíveis é o produto desses valores para as cinco áreas:\n**total = (2^3 − 1) × (2^2 − 1) × (2^4 − 1) × (2^1 − 1) × (2^2 − 1)**\n\nCalculando cada fator:\n2^3 − 1 = 8 − 1 = 7\n2^2 − 1 = 4 − 1 = 3\n2^4 − 1 = 16 − 1 = 15\n2^1 − 1 = 2 − 1 = 1\n2^2 − 1 = 4 − 1 = 3\n\nMultiplicando:\n**total = 7 × 3 × 15 × 1 × 3 = 945**\n\nLogo, existem **945** equipes diferentes que contêm ao menos um projeto de cada área.",
-    "difficulty": 7.5,
+    "difficulty": "7.5",
     "topic": "Tudo"
   },
   {
     "question": "Contexto: Uma fábrica produz dois produtos, P e Q. Cada unidade de P usa 3 horas da máquina M1 e 2 horas da máquina M2. Cada unidade de Q usa 4 horas da máquina M1 e 1 hora da máquina M2. A disponibilidade semanal é 240 horas em M1 e 180 horas em M2. O lucro por unidade é 50 reais para P e 70 reais para Q. Além disso, as quantidades produzidas devem obedecer a equação **x^3 - 6x^2 + 11x - 6 = y**.\n\nDados:\n**3x + 4y ≤ 240**\n**2x + y ≤ 180**\n**L = 50x + 70y**\n\nPergunta: Determine as quantidades inteiras de P (x) e Q (y) que maximizam o lucro L respeitando todas as restrições.",
     "answer": "Primeiro factoriza‑se o polinômio da relação entre x e y:\n**x^3 - 6x^2 + 11x - 6 = (x-1)(x-2)(x-3)**\nPortanto\n**y = (x-1)(x-2)(x-3)**\nComo x e y representam quantidades, consideram‑se valores inteiros não‑negativos para x que gerem y ≥ 0. Avaliando:\nx=1 → y=0 ; x=2 → y=0 ; x=3 → y=0 ; x=4 → y=6 ; x=5 → y=24 ; x=6 → y=60 …\nVerifica‑se cada par (x,y) nas restrições de capacidade:\nPara x=4, y=6:\n**3·4 + 4·6 = 36 ≤ 240** e **2·4 + 6 = 14 ≤ 180** – viável.\nLucro: **L = 50·4 + 70·6 = 620**.\nPara x=5, y=24:\n**3·5 + 4·24 = 111 ≤ 240** e **2·5 + 24 = 34 ≤ 180** – viável.\nLucro: **L = 50·5 + 70·24 = 1930**.\nPara x=6, y=60:\n**3·6 + 4·60 = 258 > 240** – inviável (excede M1).\nValores maiores de x produzem y ainda maiores e também violam as restrições.\nAssim, o maior lucro dentro das restrições ocorre em x=5, y=24.\nResposta: produzir 5 unidades de P e 24 unidades de Q, obtendo lucro máximo de 1930 reais.",
-    "difficulty": 9.8,
+    "difficulty": "9.8",
     "topic": "Dificuldade 10/10"
   },
   {
     "question": "Um concurso de matemática propõe o seguinte desafio: você deve encontrar todos os inteiros positivos n que satisfazem simultaneamente as duas condições abaixo.\n**n^2 - 2023·n + 2022 = 0**\n**Σ_{k=1}^{n} k^3 = m·(m+1) , onde m é inteiro positivo**\nAlém disso, n deve ser múltiplo de 7 e menor que 10^4.\nQual(is) valor(es) de n atendem a todas essas exigências?",
     "answer": "Primeiro resolvemos a equação quadrática.\n**n = [2023 ± √(2023^2 - 4·2022)] ÷ 2**\nCalculando o discriminante:\n**2023^2 - 4·2022 = 4092529 - 8088 = 4084441**\nA raiz quadrada de 4084441 é 2021, pois 2021^2 = 4084441.\nEntão:\n**n1 = (2023 + 2021) ÷ 2 = 2022**\n**n2 = (2023 - 2021) ÷ 2 = 1**\nOs candidatos são n=1 e n=2022. O requisito n<10^4 elimina nenhum dos dois, mas n deve ser múltiplo de 7.\n1 não é múltiplo de 7, já 2022 ÷ 7 = 288,8… não é inteiro. Portanto nenhum dos valores obtidos pela quadrática satisfaz a condição de ser múltiplo de 7. Como a primeira condição já determina todos os possíveis n, concluímos que não existe inteiro positivo n que cumpra simultaneamente as três exigências.\nPortanto, **não há solução**.",
-    "difficulty": 9.2,
+    "difficulty": "9.2",
     "topic": "Dificuldade 10/10"
   },
   {
     "question": "Contexto: Uma cultura de bactérias cresce segundo a lei exponencial P(t)=P0*a^t, onde t é o tempo em dias e a é o fator de crescimento diário.\nDados: No instante inicial (t=0) há P0=200 bactérias. Após 3 dias (t=3) a população é de 1600 bactérias.\nPergunta: Determine o valor do fator de crescimento a e calcule quantas bactérias haverá após 7 dias.\n\n**P(t) = P0 × a^t**\n**P(3) = 200 × a^3 = 1600**\n**P(7) = 200 × a^7 = ?**",
     "answer": "Primeiro, usamos a informação de t=3:\n**200 × a^3 = 1600**\nDividindo ambos os lados por 200:\n**a^3 = 8**\nExtraindo a raiz cúbica:\n**a = 2**\nCom a encontrado, calculamos a população em t=7:\n**P(7) = 200 × 2^7**\n**2^7 = 128**\nPortanto:\n**P(7) = 200 × 128 = 25600**\nAssim, o fator de crescimento diário é a = 2 e após 7 dias haverá 25600 bactérias.",
-    "difficulty": 6.5,
+    "difficulty": "6.5",
     "topic": "Função Exponencial"
   },
   {
     "question": "Um barman quer preparar 10 litros de uma bebida especial misturando duas receitas diferentes.\n\n- Receita A contém 30 % de suco e 70 % de água.\n- Receita B contém 50 % de suco, 30 % de água e 20 % de refrigerante.\n\nEle deseja que a mistura final tenha exatamente 40 % de suco e 10 % de refrigerante.\n\nSeja x a quantidade, em litros, da Receita A e y a quantidade, em litros, da Receita B.\n\n**x + y = 10**\n**0.30x + 0.50y = 4**\n**0.20y = 1**\n\nQuantos litros de cada receita devem ser usados?",
     "answer": "1. Use a equação do refrigerante para encontrar y:\n   **0.20y = 1** → y = 1 ÷ 0.20 = 5 L.\n\n2. Substitua y na equação da soma dos volumes:\n   **x + y = 10** → x + 5 = 10 → x = 5 L.\n\n3. Verifique na equação do suco que a solução satisfaz a condição desejada:\n   **0.30x + 0.50y = 0.30·5 + 0.50·5 = 1.5 + 2.5 = 4**, que corresponde a 40 % de 10 L.\n\nPortanto, o barman deve usar **5 litros da Receita A** e **5 litros da Receita B** para obter a mistura desejada.",
-    "difficulty": 6.8,
+    "difficulty": "6.8",
     "topic": "Sla Mistura Um Monte De Coisa Ai"
   },
   {
     "question": "Enunciado: Um código alfanumérico é dado como **rt7uyhu765467ui8uyt598u7y6e02prikr=2**. Considere apenas as letras do código e atribua a cada letra seu valor posicional no alfabeto (a=1, b=2, ..., z=26). Calcule a soma S desses valores. Sabendo que S é o dobro de um número inteiro x, encontre x.\n\nDados:\n**S = 2 × x**",
     "answer": "Passo 1: Listar as letras do código: r, t, u, y, h, u, u, i, u, y, t, u, y, e, p, r, i, k, r.\nPasso 2: Substituir cada letra pelo seu valor posicional:\n**r = 18, t = 20, u = 21, y = 25, h = 8, i = 9, e = 5, p = 16, k = 11**.\nPasso 3: Somar todos os valores:\n**S = 18+20+21+25+8+21+21+9+21+25+20+21+25+5+16+18+9+11+18 = 332**.\nPasso 4: Usar a relação dada:\n**332 = 2 × x**\nPasso 5: Isolar x:\n**x = 332 ÷ 2 = 166**.\nResposta: x = 166.",
-    "difficulty": 5.3,
+    "difficulty": "5.3",
     "topic": "Rt7Uyhu765467Ui8Uyt598U7Y6E02Prikr=2"
   },
   {
     "question": "Contexto: Considere a sequência (t_n) definida recursivamente.\nEquações:\n**t_1 = 3**\n**t_{n+1} = 2 × t_n + 5**\nPergunta: Calcule o valor de t_5 e a soma S_5 = Σ_{k=1}^{5} t_k.",
     "answer": "Primeiro calculamos os termos usando a relação de recorrência.\n**t_2 = 2 × t_1 + 5 = 2 × 3 + 5 = 11**\n**t_3 = 2 × t_2 + 5 = 2 × 11 + 5 = 27**\n**t_4 = 2 × t_3 + 5 = 2 × 27 + 5 = 59**\n**t_5 = 2 × t_4 + 5 = 2 × 59 + 5 = 123**\nAgora a soma dos cinco primeiros termos:\n**S_5 = t_1 + t_2 + t_3 + t_4 + t_5 = 3 + 11 + 27 + 59 + 123 = 223**\nPortanto, t_5 = 123 e S_5 = 223.",
-    "difficulty": 5.5,
+    "difficulty": "5.5",
     "topic": "Tn"
   },
   {
     "question": "Contexto: Considere o ponto fixo A(2,3) e a reta l: 4x + 3y - 12 = 0 no plano cartesiano.\nDados: O conjunto de pontos P(x,y) que satisfazem a condição de que a distância de P a A é igual à distância de P à reta l.\nPergunta: Determine a equação cartesiana do lugar geométrico dos pontos P que verificam essa condição, identifique o tipo de curva e escreva sua equação reduzida.\n\n**Distância(P,A) = √[(x-2)^2+(y-3)^2]**\n**Distância(P,l) = |4x+3y-12| / √(4^2+3^2) = |4x+3y-12| / 5**\n**(x-2)^2+(y-3)^2 = (4x+3y-12)^2 / 25**",
     "answer": "Passo 1: Igualar as distâncias e eliminar a raiz quadrada multiplicando por 25.\n**25[(x-2)^2+(y-3)^2] = (4x+3y-12)^2**\nPasso 2: Expandir os termos.\n**25[x^2+y^2-4x-6y+13] = 16x^2+24xy+9y^2-96x-72y+144**\nPasso 3: Distribuir o 25 e reorganizar.\n**25x^2+25y^2-100x-150y+325 = 16x^2+24xy+9y^2-96x-72y+144**\nPasso 4: Trazer tudo para o lado esquerdo.\n**9x^2 -24xy +16y^2 -4x -78y +181 = 0**\nPasso 5: Identificar o tipo de lugar geométrico. O discriminante B^2-4AC = (-24)^2-4·9·16 = 576-576 = 0, portanto a curva é uma parábola.\nConclusão: O lugar geométrico dos pontos P é a parábola descrita por **9x^2 -24xy +16y^2 -4x -78y +181 = 0**.",
-    "difficulty": 6.5,
+    "difficulty": "6.5",
     "topic": "Lugares Geométricos"
   },
   {
     "question": "Considere o triângulo ABC cujos lados têm as seguintes medidas: **AB = 13** , **AC = 15** e **BC = 16**.\nO ponto D está sobre o lado BC, de modo que **BD = 7** e **CD = 9**.\nUsando o teorema de Stewart, encontre o comprimento da ceviana **AD**.\n**AB^2·CD + AC^2·BD = BC(AD^2 + BD·CD)**",
     "answer": "Aplicamos o teorema de Stewart ao ceviano AD:\n**AB^2·CD + AC^2·BD = BC(AD^2 + BD·CD)**\nSubstituindo os valores conhecidos:\n**13^2·9 + 15^2·7 = 16(AD^2 + 7·9)**\nCalculamos cada termo:\n13^2·9 = 169·9 = 1521\n15^2·7 = 225·7 = 1575\nSoma esquerda = 1521 + 1575 = 3096\nO termo BD·CD = 7·9 = 63\nAssim:\n**3096 = 16(AD^2 + 63)**\nDividindo por 16:\nAD^2 + 63 = 3096 / 16 = 193.5\nIsolando AD^2:\nAD^2 = 193.5 - 63 = 130.5 = 261/2\nPortanto:\n**AD = √(130.5) = √(261/2) = √522 / 2 ≈ 11.43**\nO comprimento da ceviana AD é aproximadamente 11,43 unidades.",
-    "difficulty": 6.5,
+    "difficulty": "6.5",
     "topic": "Teorema De Stewart"
   },
   {
     "question": "Um engenheiro está analisando o ponto de equilíbrio de um sistema cuja equação característica é dada por:\n**3x^3 - 5x^2 + 2x - 4 = 0**\nDetermine todos os valores reais de x que satisfazem a equação.",
     "answer": "**Passo 1 – Aplicar o Teorema dos Raízes Racionais**\nOs possíveis candidatos a raízes racionais são ±1, ±2, ±4, ±1/3, ±2/3, ±4/3. Avaliando‑os na equação:\n- **f(1)=3‑5+2‑4=‑4**\n- **f(2)=24‑20+4‑4=4**\n- **f(-1)=‑3‑5‑2‑4=‑14**\n- **f(4/3)=3(64/27)‑5(16/9)+2(4/3)‑4≈‑3,11**\nNenhum desses valores anula a função, logo não há raiz racional.\n\n**Passo 2 – Reduzir a equação a uma forma depressa (substituição de Tschirnhaus)**\nDividindo a equação por 3 para simplificar:\n**x^3 - (5/3)x^2 + (2/3)x - 4/3 = 0**\nFazemos a mudança de variável **x = y + a**, escolhendo **a = (5/9)** para eliminar o termo quadrático:\nSubstituindo e simplificando obtém‑se a forma depressa\n**y^3 + py + q = 0**\ncom\n**p = (2/3) - (5/3)^2/3 = -19/27**\n**q = -4/3 + (2/3)(5/9) - 2(5/9)^3/27 = -146/729**\n\n**Passo 3 – Aplicar a fórmula de Cardano**\nCalculamos o discriminante\n**Δ = (q/2)^2 + (p/3)^3**\nSubstituindo os valores:\n**Δ = (‑146/1458)^2 + (‑19/81)^3 ≈ 0,0184 > 0**\nComo Δ>0 a equação tem uma única raiz real dada por\n**y = ∛(‑q/2 + √Δ) + ∛(‑q/2 – √Δ)**\nComputando:\n**y ≈ ∛(0,1001 + 0,1357) + ∛(0,1001 – 0,1357) ≈ ∛0,2358 + ∛(‑0,0356) ≈ 0,620 + (‑0,405) ≈ 0,215**\nVoltando à variável original:\n**x = y + a = 0,215 + 5/9 ≈ 0,215 + 0,556 ≈ 0,771**\n(Arredondamento incorreto; refazendo com maior precisão obtém‑se)\nUsando calculadora de alta precisão:\n**x ≈ 1,215**\nPortanto, a única raiz real da equação original é\n**x ≈ 1,215** (aproximado a três casas decimais). As outras duas raízes são complexas conjugadas.\n\n**Conclusão**\nO problema pede apenas os valores reais; assim, a resposta é **x ≈ 1,215**.",
-    "difficulty": 7.5,
+    "difficulty": "7.5",
     "topic": "Equação De Terceiro Grau"
   },
   {
     "question": "Em um triângulo ABC, os lados têm comprimentos AB = 13, AC = 15 e BC = 14. Um ponto D está sobre o lado BC de modo que a razão BD:DC = 3:4. Determine o comprimento da ceviana AD.\n\n**AB^2·DC + AC^2·BD = BC·(AD^2 + BD·DC)**\n**BD = 6**\n**DC = 8**",
     "answer": "Para achar AD usamos o Teorema de Stewart.\n\n1. Primeiro calculamos os segmentos de BC a partir da razão BD:DC = 3:4.\n   **BD = (3/7)·14 = 6**\n   **DC = (4/7)·14 = 8**\n\n2. Substituímos os valores conhecidos na fórmula de Stewart:\n   **AB^2·DC + AC^2·BD = BC·(AD^2 + BD·DC)**\n   **169·8 + 225·6 = 14·(AD^2 + 6·8)**\n\n3. Efetuamos as multiplicações:\n   **169·8 = 1352**\n   **225·6 = 1350**\n   **6·8 = 48**\n   Assim, **1352 + 1350 = 14·(AD^2 + 48)**\n   **2702 = 14·AD^2 + 672**\n\n4. Isolamos AD^2:\n   **14·AD^2 = 2702 – 672 = 2030**\n   **AD^2 = 2030 / 14 = 145**\n\n5. Tiramos a raiz quadrada:\n   **AD = √145**\n   Aproximadamente, AD ≈ 12,04.\n\nPortanto, o comprimento da ceviana AD é **√145** (≈ 12,04).",
-    "difficulty": 8.7,
+    "difficulty": "8.7",
     "topic": "Teorêma De Stewart Dificuldade 9/10"
   },
   {
     "question": "Um triângulo tem lados de comprimentos a = 13, b = 14 e c = 15 unidades. \nUtilizando o teorema de Heron, determine a área desse triângulo. \n**s = (a + b + c) / 2**\n**A = √(s × (s‑a) × (s‑b) × (s‑c))**\nEm seguida, calcule o raio r da circunferência inscrita no triângulo, usando a relação entre área, semiperímetro e raio. \n**r = A / s**\nQual é o valor da área A e do raio r?",
     "answer": "Primeiro calculamos o semiperímetro. \n**s = (13 + 14 + 15) / 2 = 42 / 2 = 21**\nAplicamos o teorema de Heron: \n**A = √(21 × (21‑13) × (21‑14) × (21‑15))**\nOs termos dentro da raiz são: 21‑13 = 8, 21‑14 = 7, 21‑15 = 6. \nPortanto \n**A = √(21 × 8 × 7 × 6) = √(7056) = 84**\nA área do triângulo é 84 unidades².\nPara o raio da circunferência inscrita usamos r = A / s: \n**r = 84 / 21 = 4**\nAssim, o raio da circunferência inscrita vale 4 unidades.\nResumo: Área = 84 e raio = 4.",
-    "difficulty": 6.5,
+    "difficulty": "6.5",
     "topic": "Teorema De Heron"
   },
   {
     "question": "Considere um tabuleiro quadrado 8×8. Cada linha e cada coluna são numeradas de 1 a 8. Queremos colocar 8 torres de forma que nenhuma duas torres se ataquem, ou seja, exatamente uma torre em cada linha e em cada coluna. Além disso, nenhuma torre pode ser colocada em uma casa da diagonal principal nem em uma casa da diagonal secundária.\n**Permutações totais possíveis = 8!**\n**Posições proibidas = {(i,i) | i=1…8} ∪ {(i,9‑i) | i=1…8}**\nQuantas disposições diferentes de 8 torres satisfazem todas as condições acima?",
     "answer": "Para cada disposição admissível corresponde uma permutação σ de {1,…,8} tal que σ(i) indica a coluna da torre na linha i. As restrições impõem\n**σ(i) ≠ i   e   σ(i) ≠ 9‑i   para todo i**.\nUsaremos o princípio da inclusão‑exclusão sobre o conjunto de 16 posições proibidas. Como duas posições proibidas que compartilham a mesma linha ou coluna não podem ser escolhidas simultaneamente, os subconjuntos a serem considerados são exatamente os *matchings* do grafo formado pelos 16 arcos proibidos. Esse grafo é a união de duas correspondências perfeitas e forma um ciclo de 8 arestas.\nO número m_t de matchings de tamanho t em um ciclo C₈ vale:\n**m_t = 8/(8‑t) · C(8‑t, t)**\npara t=0,1,2,3,4. Calculando:\n- t=0: m₀=1\n- t=1: m₁=8\n- t=2: m₂=20\n- t=3: m₃=16\n- t=4: m₄=2\nPela inclusão‑exclusão, o número de permutações que evitam todas as posições proibidas é\n**N = Σ_{t=0}^{4} (-1)^t · m_t · (8‑t)!**\nSubstituindo os valores:\n**N = 1·8! – 8·7! + 20·6! – 16·5! + 2·4!**\n**N = 40320 – 40320 + 14400 – 1920 + 48**\n**N = 12528**\nPortanto, existem **12528** maneiras diferentes de colocar as 8 torres atendendo às restrições.\n\nPasso a passo resumido:\n1. Modelar o problema como permutações de 8 elementos.\n2. Identificar as 16 posições proibidas (duas diagonais).\n3. Contar matchings de tamanho t no ciclo formado pelas proibições (m_t).\n4. Aplicar inclusão‑exclusão: N = Σ (-1)^t m_t (8‑t)!.\n5. Calcular o valor numérico, obtendo **12528** disposições.",
-    "difficulty": 9.2,
+    "difficulty": "9.2",
     "topic": "Análise Combinatória"
   },
   {
     "question": "Considere o triângulo I T A cujos vértices são I(0,0), T(8,0) e A(0,6). Calcule:\n- O comprimento dos lados IT, IA e TA.\n- A área do triângulo.\n- O raio da circunferência inscrita.\n\n**IT = √((8-0)^2 + (0-0)^2) = 8**\n**IA = √((0-0)^2 + (6-0)^2) = 6**\n**TA = √((8-0)^2 + (0-6)^2) = √(64+36) = √100 = 10**\n**Área = (IT * IA)/2 = (8*6)/2 = 24**\n**Semiperímetro s = (IT + IA + TA)/2 = (8+6+10)/2 = 12**\n**r = Área / s = 24/12 = 2**\n\nQual é o valor do raio r da circunferência inscrita?",
     "answer": "Primeiro calculamos os comprimentos dos lados:\n**IT = √((8-0)^2 + (0-0)^2) = 8**\n**IA = √((0-0)^2 + (6-0)^2) = 6**\n**TA = √((8-0)^2 + (0-6)^2) = √100 = 10**\nA área do triângulo retângulo é:\n**Área = (IT * IA)/2 = (8*6)/2 = 24**\nO semiperímetro é:\n**s = (IT + IA + TA)/2 = (8+6+10)/2 = 12**\nO raio da circunferência inscrita segue r = Área / s, portanto:\n**r = 24 / 12 = 2**\nAssim, o raio da circunferência inscrita é 2 unidades.",
-    "difficulty": 5.5,
+    "difficulty": "5.5",
     "topic": "Ita"
   },
   {
     "question": "Um engenheiro precisa otimizar a energia potencial de uma estrutura elástica. A energia potencial é modelada por **U(x,y)=3×x^2+4×x×y+2×y^2**. O ponto (x,y) deve pertencer ao círculo unitário, descrito por **C(x,y): x^2+y^2=1**. Determine os valores de (x,y) que maximizam **U** sob a restrição dada e calcule o valor máximo de **U**.",
     "answer": "Para maximizar **U** com a restrição **C** usamos o multiplicador de Lagrange.\n**L(x,y,λ)=3×x^2+4×x×y+2×y^2-λ( x^2+y^2-1 )**\nDerivamos em relação a x, y e λ e igualamos a zero:\n**∂L/∂x = 6×x+4×y-2λ×x = 0**\n**∂L/∂y = 4×x+4×y-2λ×y = 0**\n**∂L/∂λ = -( x^2+y^2-1 ) = 0**\nDas duas primeiras equações isolamos λ:\nDe **∂L/∂x**: **λ = (6×x+4×y)/(2×x)**\nDe **∂L/∂y**: **λ = (4×x+4×y)/(2×y)**\nIgualando as expressões para λ obtém‑se **(6×x+4×y)/x = (4×x+4×y)/y**.\nMultiplicando por xy e simplificando resulta em **2×x^2 = 2×y^2**, logo **x^2 = y^2**.\nCom a restrição **x^2+y^2=1** temos duas possibilidades:\n1) **x = y** → **2×x^2 = 1** → **x = y = ± √(1/2)**\n2) **x = -y** → **2×x^2 = 1** → **x = ± √(1/2), y = ∓ √(1/2)**\nSubstituindo em **U**:\nPara **x = y = √(1/2)**: **U = 3×(1/2)+4×(1/2)+2×(1/2)= (1.5+2+1)=4.5**\nPara **x = y = -√(1/2)** o mesmo valor ocorre porque **U** depende de quadrados.\nPara **x = √(1/2), y = -√(1/2)**: **U = 3×(1/2)-4×(1/2)+2×(1/2)= (1.5-2+1)=0.5**\nPortanto o máximo de **U** é **4.5**, atingido nos pontos **( √(1/2), √(1/2) )** e **( -√(1/2), -√(1/2) )**.",
-    "difficulty": 8.2,
+    "difficulty": "8.2",
     "topic": "Avançado"
   },
   {
     "question": "Considere a função quadrática \n**f(x)=ax^2+bx+c**\nque passa pelos pontos (1,3) e (4,27) e cujo vértice tem abscissa x=2.\n\nDetermine os coeficientes a, b e c da função e calcule as raízes reais da equação f(x)=0.",
     "answer": "Passo a passo:\n1. Substituindo os pontos na forma geral obtém‑se o sistema:\n**a + b + c = 3**\n**16a + 4b + c = 27**\n2. A abscissa do vértice de uma parábola é x_v = -b/(2a). Como x_v=2,\n**-b/(2a) = 2**  →  **b = -4a**.\n3. Substituindo b = -4a no primeiro e no segundo enunciado:\n   • **a -4a + c = 3**  →  **-3a + c = 3**  →  **c = 3 + 3a**.\n   • **16a + 4(-4a) + c = 27**  →  **c = 27**.\n4. Igualando as duas expressões para c:\n**3 + 3a = 27**  →  **3a = 24**  →  **a = 8**.\n5. Calculando b e c:\n**b = -4a = -32**,   **c = 27**.\nPortanto a função procurada é:\n**f(x)=8x^2 - 32x + 27**.\n6. Para achar as raízes resolvemos f(x)=0.\n   O discriminante:\n**Δ = b^2 - 4ac = (-32)^2 - 4·8·27 = 1024 - 864 = 160**.\n   As raízes são dadas por:\n**x = [ -b ± √Δ ]/(2a) = [32 ± √160]/16**.\n   Como √160 = 4√10, simplificando:\n**x = (32 ± 4√10)/16 = (8 ± √10)/4 = 2 ± √10/4**.\n   Aproximadamente:\n**x₁ ≈ 1.21**, **x₂ ≈ 2.79**.\nAssim, a, b, c são 8, -32 e 27, e as raízes reais da equação f(x)=0 são 2 ± √10/4.",
-    "difficulty": 7.5,
+    "difficulty": "7.5",
     "topic": "Função Quadratica"
   },
   {
     "question": "Uma colônia de bactérias tem seu número de indivíduos descrito pela função exponencial **P(t) = P0·2^(t/5)**, onde P0 é a população inicial e t é o tempo em horas.\n\nNo instante inicial a população é de:\n**P0 = 800**\n\nPara atingir as metas de população, as equações são:\n**5000 = 800·2^(t/5)**\n**20000 = 800·2^(t/5)**\n\nDetermine o tempo t necessário para que a população atinja cada um desses valores, usando logaritmos.",
     "answer": "**5000 = 800·2^(t/5)**\nIsolando a potência: **2^(t/5) = 5000/800 = 6.25**\nAplicando logaritmo base 2: **t/5 = log2(6.25)**\nPortanto: **t = 5·log2(6.25)**\nCalculando log2(6.25): **log2(6.25) = ln(6.25)/ln(2) ≈ 1.8326/0.6931 ≈ 2.64**\nAssim, **t ≈ 5·2.64 ≈ 13.2** horas.\n\nPara 20000 bactérias:\n**20000 = 800·2^(t/5)**\n**2^(t/5) = 20000/800 = 25**\n**t/5 = log2(25)**\n**t = 5·log2(25)**\n**log2(25) = ln(25)/ln(2) ≈ 3.2189/0.6931 ≈ 4.64**\n**t ≈ 5·4.64 ≈ 23.2** horas.\n\nPortanto, os tempos são aproximadamente **13.2 h** para 5000 bactérias e **23.2 h** para 20000 bactérias.",
-    "difficulty": 7.5,
+    "difficulty": "7.5",
     "topic": "Função Exponencial E Logarítmica"
   },
   {
     "question": "Considere a equação quadrática:\n**x^2 - (a+4)x + (2a+3) = 0**\n\nDetermine todos os valores reais de **a** para que a equação possua duas raízes reais distintas e ambas positivas.\n\nPara garantir duas raízes reais distintas e positivas, devemos exigir:\n**Δ = (a+4)^2 - 4·(2a+3) > 0**\n**Soma = a+4 > 0**\n**Produto = 2a+3 > 0**",
     "answer": "Para a equação **x^2 - (a+4)x + (2a+3) = 0** calculamos o discriminante:\n**Δ = (a+4)^2 - 4·(2a+3)**\nDesenvolvendo:\n**Δ = a^2 + 8a + 16 - 8a - 12 = a^2 + 4**\nComo **a^2 + 4 > 0** para todo a∈ℝ, a condição de duas raízes distintas está sempre satisfeita.\n\nAs raízes serão positivas se a soma e o produto forem positivos:\n**Soma = a+4 > 0** → **a > -4**\n**Produto = 2a+3 > 0** → **a > -3/2**\n\nA condição mais restritiva é **a > -3/2**. Portanto, todos os valores reais de **a** maiores que -1,5 atendem ao pedido.\n\nResposta: **a > -3/2**",
-    "difficulty": 7.5,
+    "difficulty": "7.5",
     "topic": "A"
   },
   {
     "question": "Joana está projetando um jardim retangular. Ela quer que um dos lados seja exatamente 1 metro maior que o outro. Sabendo que o perímetro total do jardim é 30 metros, determine as dimensões do jardim e calcule sua área.\n\n**2(x + (x+1)) = 30**",
     "answer": "Primeiro, denote o lado menor por x (em metros). O lado maior será x+1.\n\nO perímetro de um retângulo é dado por **P = 2(lado1 + lado2)**. Substituindo P = 30 e os lados:\n\n**2(x + (x+1)) = 30**\n\nDistribuindo:\n\n**2(2x+1) = 30** → **4x + 2 = 30**\n\nIsolando x:\n\n**4x = 28** → **x = 7**\n\nPortanto, os lados são **7 m** e **7+1 = 8 m**.\n\nA área A de um retângulo é **A = base × altura**:\n\n**A = 7 × 8 = 56 m²**\n\nAssim, o jardim mede 7 metros por 8 metros e sua área é 56 metros quadrados.",
-    "difficulty": 3.0,
+    "difficulty": "3.0",
     "topic": "1"
   },
   {
     "question": "Considere uma lanchonete que vende três sabores de suco: A, B e C. Cada cliente pode escolher exatamente duas porções, podendo ser do mesmo sabor ou de sabores diferentes.\n\n**Número de pares diferentes de sabores distintos = 3**\n**C(3,2) = 3**\n**Número de pares iguais = 3** (AA, BB, CC)\n\nQuantas combinações distintas de duas porções podem ser feitas?",
     "answer": "Primeiro contamos as combinações com sabores diferentes: \n**C(3,2) = 3**.\nEm seguida somamos as combinações onde os dois sucos são do mesmo sabor: há um para cada sabor, portanto **3**.\nO total é \n**3 + 3 = 6** combinações distintas.\nAssim, há **6** possibilidades diferentes.",
-    "difficulty": 2.0,
+    "difficulty": "2.0",
     "topic": "Trivial"
   },
   {
     "question": "Um colecionador tem 3 tipos de selos: A, B e C. Cada selo do tipo A vale 3 pontos, cada B vale 5 pontos e cada C vale 7 pontos. Ele possui um total de 58 pontos e tem exatamente 4 selos a mais do tipo B que do tipo A. Quantos selos de cada tipo ele tem?\n**3a + 5b + 7c = 58**\n**b = a + 4**",
     "answer": "Denotemos por a, b e c o número de selos dos tipos A, B e C, respectivamente.\nDa condição \"b = a + 4\" temos:\n**b = a + 4**\nSubstituímos b na equação dos pontos:\n**3a + 5(a + 4) + 7c = 58**\nDesenvolvendo:\n**3a + 5a + 20 + 7c = 58**\n**8a + 7c = 38**\nIsolamos c:\n**7c = 38 - 8a**\n**c = (38 - 8a) / 7**\nComo a, b e c devem ser inteiros não‑negativos, procuramos valores de a que tornem (38‑8a) múltiplo de 7.\nTestando a = 0,1,2,3,…:\n- a = 3 → 38‑8·3 = 14, que é múltiplo de 7.\nEntão c = 14/7 = 2 e b = a + 4 = 7.\nVerificando:\n**3·3 + 5·7 + 7·2 = 9 + 35 + 14 = 58**\nPortanto, o colecionador tem 3 selos do tipo A, 7 selos do tipo B e 2 selos do tipo C.",
-    "difficulty": 4.0,
+    "difficulty": "4.0",
     "topic": "Trivial"
   },
   {
     "question": "Considere um tetraedro regular ABCD com aresta a.\nO centro G do tetraedro coincide com o circuncentro.\nSeja P um ponto do segmento AG tal que **PG = (1/3)·GA**.\n\nSabendo que o volume do tetraedro regular é **V_ABCD = a^3·√2/12**, calcule o volume do tetraedro PBCD.\n\nPergunta: qual é **V_PBCD** em função de a?",
     "answer": "Passo 1 – Altura do tetraedro regular.\nEm um tetraedro regular a altura h relativa à base BCD é\n**h = a·√6/3**.\n\nPasso 2 – Relação entre GA e h.\nO segmento GA está na direção da altura, logo GA = h.\n\nPasso 3 – Posição de P.\nDe **PG = (1/3)·GA** segue que **AP = GA - PG = (2/3)·GA**.\n\nPasso 4 – Altura de P sobre a base BCD.\nA altura de P, h_P, é proporcional à distância AP:\n**h_P = (AP/GA)·h = (2/3)·h**.\n\nPasso 5 – Volume proporcional.\nMantendo a mesma base BCD, o volume varia linearmente com a altura:\n**V_PBCD = (h_P/h)·V_ABCD**.\nSubstituindo h_P/h = 2/3 e V_ABCD = a^3·√2/12,\n**V_PBCD = (2/3)·(a^3·√2/12) = a^3·√2/18**.\n\nPortanto, o volume solicitado é **V_PBCD = a^3·√2/18**.",
-    "difficulty": 9.2,
+    "difficulty": "9.2",
     "topic": "Geometria Espacial"
   },
   {
     "question": "Joana aplicou R$ 12.000,00 em um fundo que rende juros compostos de 3,5% ao mês.\n\nO capital inicial (C) é R$ 12.000,00, a taxa mensal (i) é 3,5% = 0,035 e o tempo (n) é 5 anos, ou 60 meses.\n\nA fórmula do montante (M) para juros compostos é:\n**M = C * (1 + i)^n**\n\nQual será o montante acumulado ao final dos 5 anos?",
     "answer": "Passo a passo:\n1. Identificar os valores:\n   C = 12000\n   i = 0,035\n   n = 60\n2. Substituir na fórmula:\n**M = 12000 * (1 + 0,035)^60**\n3. Calcular o fator de acumulação:\n   (1 + 0,035)^60 ≈ 7,87 (usando logaritmo ou calculadora)\n4. Multiplicar pelo capital:\n   M ≈ 12000 * 7,87 ≈ 94.440\n5. Arredondar para centavos:\n   Montante final é aproximadamente R$ 94.440,00.\n\nPortanto, ao final de 5 anos Joana terá cerca de R$ 94.440,00 acumulados.",
-    "difficulty": 7.5,
+    "difficulty": "7.5",
     "topic": "Juros"
   },
   {
     "question": "Um triângulo escaleno tem lados de comprimentos conhecidos.\n\n**a = 13 cm**\n**b = 14 cm**\n**c = 15 cm**\n\nCalcule:\n1) O raio da circunferência inscrita no triângulo.\n2) A área da região limitada pela circunferência circunscrita e a circunferência inscrita (anel circular).",
     "answer": "1) Calcule o semiperímetro:\n**s = (a + b + c)/2**\nSubstituindo os valores: **s = (13 + 14 + 15)/2 = 21 cm**.\n\n2) Área do triângulo pelo método de Herão:\n**A = √[s(s-a)(s-b)(s-c)]**\nSubstituindo: **A = √[21·8·7·6] = √[7056] = 84 cm²**.\n\n3) Raio da circunferência inscrita:\n**r = A / s**\n**r = 84 / 21 = 4 cm**.\n\n4) Raio da circunferência circunscrita:\n**R = (a·b·c) / (4·A)**\n**R = (13·14·15) / (4·84) = 2730 / 336 = 8.125 cm**\n\n5) Área do anel entre as duas circunferências:\n**Área_anel = π·(R² - r²)**\n**Área_anel = π·(8.125² - 4²) = π·(66.0156 - 16) = π·50.0156 ≈ 157.2 cm²**.\n\nPortanto, o raio da incircle é **4 cm** e a área do anel é aproximadamente **157.2 cm²**.",
-    "difficulty": 7.5,
+    "difficulty": "7.5",
     "topic": "Geometria"
   },
   {
     "question": "Um fazendeiro tem 3 tipos de frutas: maçãs, bananas e cerejas. Ele quer montar cestas contendo exatamente 12 frutas, com ao menos 2 maçãs e no máximo 5 bananas.\n\n**a + b + c = 12**\n**a ≥ 2**\n**b ≤ 5**\n**a , b , c ≥ 0**\n\nQuantas diferentes combinações de quantidades de frutas podem ser feitas?",
     "answer": "Primeiro, substituímos a condição a ≥ 2 por a' = a - 2, onde a' ≥ 0.\n\n**a' + b + c = 10**\n\nSem considerar o limite superior de bananas, o número de soluções não‑negativas de a' + b + c = 10 é dado por combinações com reposição:\n\n**C(10+3-1,3-1) = C(12,2) = 66**\n\nAgora excluímos as soluções em que b ≥ 6. Definimos b' = b - 6 (b' ≥ 0). O somatório torna‑se:\n\n**a' + b' + c = 4**\n\nO número de soluções desse caso é:\n\n**C(4+3-1,3-1) = C(6,2) = 15**\n\nPortanto, as combinações válidas são:\n\n**66 - 15 = 51**\n\nLogo, existem **51** maneiras diferentes de montar a cesta satisfazendo todas as restrições.",
-    "difficulty": 5.5,
+    "difficulty": "5.5",
     "topic": "Qualquer Coisa"
   },
   {
     "question": "Considere a sequência (a_n) definida por:\n**a_1 = 2**\n**a_{n+1} = 3 a_n + 2^n,   para n ≥ 1**\n\na) Determine a forma fechada de a_n.\n\nb) Calcule S = Σ_{k=1}^{10} a_k / 5^k e indique a parte inteira de S.",
     "answer": "**Passo 1 – Solução da recorrência**\nA parte homogênea da relação a_{n+1}=3 a_n dá a solução C·3^{n-1}. Para um termo particular procure da forma A·2^{n-1}. Substituindo:\nA·2^{n}=3 A·2^{n-1}+2^{n-1}⇒2A=3A+1⇒A=‑1.\nAssim a solução geral é a_n=C·3^{n-1}-2^{n-1}. Usando a condição inicial a_1=2:\nC·1-1=2⇒C=3.\nPortanto\n**a_n = 3^{n} - 2^{n-1}**\n\n**Passo 2 – Expressão da soma S**\nSubstituindo a_n em S:\n**S = Σ_{k=1}^{10} (3^{k} - 2^{k-1}) / 5^{k}**\n= Σ_{k=1}^{10} (3/5)^{k} - Σ_{k=1}^{10} (1/2)(2/5)^{k}\n= **(3/2)*(1-(3/5)^{10}) - (1/3)*(1-(2/5)^{10})**\n= **7/6 - (3/2)*(3/5)^{10} + (1/3)*(2/5)^{10}**\n≈ 1.158.\n\n**Passo 3 – Parte inteira**\nA parte inteira de S é\n**1**.",
-    "difficulty": 9.3,
+    "difficulty": "9.3",
     "topic": "Sequências E Progressões"
   },
   {
     "question": "Considere um triângulo ABC inscrito em um círculo de centro O. Os comprimentos dos lados são AB=13 cm, BC=14 cm e CA=15 cm. Dentro do triângulo, um ponto P satisfaz PA=9 cm, PB=10 cm e PC=11 cm.\n\nDetermine:\n1) o raio R do círculo circunscrito ao triângulo e, a partir dele, a área da região limitada pelo círculo que fica fora do triângulo (área do anel);\n2) a medida do ângulo ∠APB.\n\n**Dados do triângulo:**\n**AB = 13**\n**BC = 14**\n**CA = 15**\n\n**Distâncias de P:**\n**PA = 9**\n**PB = 10**\n**PC = 11**",
     "answer": "**Passo 1 – Área do triângulo (Heron).**\nSemiperímetro s = (13+14+15)/2 = 21 cm.\nΔ = √[s(s‑AB)(s‑BC)(s‑CA)] = √[21·7·6·8] = √7056 = 84 cm².\n\n**Passo 2 – Raio do círculo circunscrito.**\nFórmula: R = (AB·BC·CA) / (4·Δ).\nAB·BC·CA = 13·14·15 = 2730.\n4·Δ = 336.\nR = 2730/336 = 455/56 ≈ 8.125 cm.\n\n**Passo 3 – Área do círculo e do anel.**\nÁrea do círculo = π·R² = π·(455/56)².\nÁrea do anel = Área do círculo – Δ = **π·(455/56)² − 84** cm².\nValor numérico aproximado: (455/56)² ≈ 66.058, logo área do círculo ≈ 66.058·π ≈ 207.5 cm² e área do anel ≈ 207.5 − 84 = 123.5 cm².\n\n**Passo 4 – Ângulo ∠APB usando a lei dos cossenos no triângulo APB.**\nLados conhecidos: PA = 9, PB = 10, AB = 13.\ncos∠APB = (PA² + PB² − AB²) / (2·PA·PB)\n= (9² + 10² − 13²) / (2·9·10)\n= (81 + 100 − 169) / 180 = 12/180 = 1/15.\nPortanto ∠APB = arccos(1/15).\nValor aproximado: ∠APB ≈ 86.2°.\n\n**Resposta final:**\n1) R = 455/56 cm (≈8.125 cm) e área do anel = **π·(455/56)² − 84** cm² (≈123.5 cm²). \n2) ∠APB = **arccos(1/15)** (≈86.2°).",
-    "difficulty": 9.2,
+    "difficulty": "9.2",
     "topic": "Geometria Plana"
   },
   {
     "question": "Considere a função totiente de Euler φ(n), que conta quantos inteiros positivos menores ou iguais a n são coprimos com n.\n\nDados: \n**φ(n) = n/3**\n\nDetermine todos os inteiros positivos n que satisfazem a igualdade acima.",
     "answer": "Para resolver **φ(n) = n/3** usamos a fórmula multiplicativa da função totiente.\n\n1. Para um número da forma p^a (p primo) vale:\n**φ(p^a) = p^{a-1}(p-1)**\n\n2. Se n tem fatoração prima n = ∏ p_i^{a_i}, então:\n**φ(n) = n∏_{p|n}(1-1/p)**\n\nAplicando ao problema:\n**n∏_{p|n}(1-1/p) = n/3**  ⇒  **∏_{p|n}(1-1/p) = 1/3**\n\nO produto ∏(1-1/p) só pode assumir valores racionais cujos denominadores são produtos de primos que aparecem em n. Precisamos, portanto, encontrar um conjunto de primos cujo produto de (p-1)/p seja exatamente 1/3.\n\nObservamos que:\n- Para p=2, (1-1/2)=1/2.\n- Para p=3, (1-1/3)=2/3.\nO produto **(1/2)·(2/3) = 1/3**.\nQualquer outro primo q≥5 tem (1-1/q) > 4/5, de modo que introduzi‑lo faria o produto menor que 1/3, o que é impossível.\n\nPortanto, os únicos primos que podem dividir n são 2 e 3, e ambos devem aparecer, pois apenas 1/2 ou 2/3 não dão 1/3.\n\n3. Seja n = 2^{a}·3^{b} com a≥1 e b≥1. Então:\n**∏_{p|n}(1-1/p) = (1-1/2)(1-1/3) = 1/2·2/3 = 1/3**,\nindependentemente dos expoentes a e b.\n\n4. Verificando a fórmula de φ para esse n:\n**φ(n) = φ(2^{a})·φ(3^{b}) = 2^{a-1}(2-1)·3^{b-1}(3-1) = 2^{a-1}·3^{b-1}·2 = 2^{a}·3^{b-1}**\nMultiplicando por 3:\n**3·φ(n) = 3·2^{a}·3^{b-1} = 2^{a}·3^{b} = n**\nLogo **φ(n) = n/3** para todo a≥1, b≥1.\n\nConclusão: todos os inteiros positivos da forma\n**n = 2^{a}·3^{b}**, onde a≥1 e b≥1, satisfazem a condição pedida, e não há outras soluções.\n\nAssim, a resposta completa é:\n**{ n ∈ ℕ⁺ | n = 2^{a}·3^{b}, a≥1, b≥1 }**.",
-    "difficulty": 9.2,
+    "difficulty": "9.2",
     "topic": "Teoria Dos Números"
+  },
+  {
+    "question": "Um baralho padrão contém 52 cartas, 13 de cada naipe (ouros, copas, espadas e paus). As cartas são embaralhadas e são retiradas 5 cartas sem reposição. Qual é a probabilidade de que as 5 cartas contenham exatamente dois naipes diferentes e que, além disso, o conjunto contenha ao menos um ás?",
+    "answer": "Primeiro conta‑se o número total de mãos de 5 cartas: C(52,5)=2.598.960. Para mãos com exatamente dois naipes, escolhem‑se os dois naipes (C(4,2)=6) e depois escolhe‑se 5 cartas dos 26 disponíveis, excluindo as que são todas de um mesmo naipe (2·C(13,5)). Isso dá 6·(C(26,5)-2·C(13,5))=379.236 mãos. Repetindo o cálculo retirando os quatro ases (restam 48 cartas, 12 por naipe) obtém‑se 6·(C(24,5)-2·C(12,5))=245.520 mãos que têm exatamente dois naipes e nenhum ás. Portanto, mãos que satisfazem as duas condições são 379.236‑245.520=133.716. A probabilidade é 133.716/2.598.960, que simplifica para 11.143/216.580≈0,0515 (cerca de 5,15%).",
+    "difficulty": "difícil",
+    "topic": "PROBABILIDADE"
   }
 ]
