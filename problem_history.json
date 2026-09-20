@@ -1,12 +1,18 @@
 {
   "1544530823611682906": {
-    "next_id": 2,
+    "next_id": 3,
     "history": {
       "1": {
         "question": "Um baralho padrão contém 52 cartas, 13 de cada naipe (ouros, copas, espadas e paus). As cartas são embaralhadas e são retiradas 5 cartas sem reposição. Qual é a probabilidade de que as 5 cartas contenham exatamente dois naipes diferentes e que, além disso, o conjunto contenha ao menos um ás?",
         "answer": "Primeiro conta‑se o número total de mãos de 5 cartas: C(52,5)=2.598.960. Para mãos com exatamente dois naipes, escolhem‑se os dois naipes (C(4,2)=6) e depois escolhe‑se 5 cartas dos 26 disponíveis, excluindo as que são todas de um mesmo naipe (2·C(13,5)). Isso dá 6·(C(26,5)-2·C(13,5))=379.236 mãos. Repetindo o cálculo retirando os quatro ases (restam 48 cartas, 12 por naipe) obtém‑se 6·(C(24,5)-2·C(12,5))=245.520 mãos que têm exatamente dois naipes e nenhum ás. Portanto, mãos que satisfazem as duas condições são 379.236‑245.520=133.716. A probabilidade é 133.716/2.598.960, que simplifica para 11.143/216.580≈0,0515 (cerca de 5,15%).",
         "difficulty": "difícil",
         "topic": "PROBABILIDADE"
+      },
+      "2": {
+        "question": "Em um hexágono regular, cada vértice será pintado com uma das três cores: vermelho, verde ou azul. Duas colorações são consideradas equivalentes se uma pode ser obtida da outra por uma rotação do hexágono (não por reflexão). Quantas colorações distintas existem?",
+        "answer": "Usando o lema de Burnside, consideramos as 6 rotações do hexágono. Para a rotação identidade (0°) há 3^6 = 729 colorações fixas. Rotação de 60° ou 300° forma um ciclo de comprimento 6, fixando apenas 3 colorações cada. Rotação de 120° ou 240° forma dois ciclos de comprimento 3, fixando 3^2 = 9 colorações cada. Rotação de 180° forma três ciclos de comprimento 2, fixando 3^3 = 27 colorações. A média dos fixos é (729 + 2·3 + 2·9 + 27)/6 = 780/6 = 130. Portanto, existem 130 colorações distintas.",
+        "difficulty": "difícil",
+        "topic": "MATEMÁTICA"
       }
     }
   }
