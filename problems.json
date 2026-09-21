@@ -630,5 +630,11 @@
     "answer": "Usando o lema de Burnside, consideramos as 6 rotações do hexágono. Para a rotação identidade (0°) há 3^6 = 729 colorações fixas. Rotação de 60° ou 300° forma um ciclo de comprimento 6, fixando apenas 3 colorações cada. Rotação de 120° ou 240° forma dois ciclos de comprimento 3, fixando 3^2 = 9 colorações cada. Rotação de 180° forma três ciclos de comprimento 2, fixando 3^3 = 27 colorações. A média dos fixos é (729 + 2·3 + 2·9 + 27)/6 = 780/6 = 130. Portanto, existem 130 colorações distintas.",
     "difficulty": "difícil",
     "topic": "MATEMÁTICA"
+  },
+  {
+    "question": "Um professor escolhe 8 números distintos entre 1 e 20 e os dispõe em uma fila de modo que a sequência seja alternada: a_1 < a_2 > a_3 < a_4 > a_5 < a_6 > a_7 < a_8. Quantas sequências diferentes podem ser obtidas?",
+    "answer": "Primeiro escolhemos os 8 números: C(20,8)=125970. Para cada conjunto de 8 valores, o número de permutações que obedecem ao padrão alternado é o número de Euler E_8=1385. Logo, total = 125970 × 1385 = 174468450.",
+    "difficulty": "difícil",
+    "topic": "MATEMÁTICA"
   }
 ]
