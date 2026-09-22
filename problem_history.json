@@ -1,6 +1,6 @@
 {
   "1544530823611682906": {
-    "next_id": 4,
+    "next_id": 5,
     "history": {
       "1": {
         "question": "Um baralho padrão contém 52 cartas, 13 de cada naipe (ouros, copas, espadas e paus). As cartas são embaralhadas e são retiradas 5 cartas sem reposição. Qual é a probabilidade de que as 5 cartas contenham exatamente dois naipes diferentes e que, além disso, o conjunto contenha ao menos um ás?",
@@ -19,6 +19,12 @@
         "answer": "Primeiro escolhemos os 8 números: C(20,8)=125970. Para cada conjunto de 8 valores, o número de permutações que obedecem ao padrão alternado é o número de Euler E_8=1385. Logo, total = 125970 × 1385 = 174468450.",
         "difficulty": "difícil",
         "topic": "MATEMÁTICA"
+      },
+      "4": {
+        "question": "Um professor tem 8 alunos, sendo 3 meninas e 5 meninos. Ele vai escolher aleatoriamente uma fila ordenada de 5 alunos para apresentar projetos, sem reposição. Qual a probabilidade de que exatamente 2 das 3 meninas estejam na fila e que o primeiro da fila seja um menino?",
+        "answer": "O número total de filas ordenadas de 5 alunos entre 8 é P(8,5)=8·7·6·5·4=6720. Para as filas desejadas: escolhe‑se o primeiro aluno (menino) de 5 maneiras; dos 7 restantes, escolhem‑se exatamente 2 meninas (C(3,2)=3) e 2 meninos (C(4,2)=6) e esses 4 alunos podem ser arranjados nas 4 posições restantes de 4!=24 maneiras. Favoráveis =5·3·6·24=2160. Assim, a probabilidade =2160/6720=9/28.",
+        "difficulty": "difícil",
+        "topic": "PROBABILIDADE"
       }
     }
   }
