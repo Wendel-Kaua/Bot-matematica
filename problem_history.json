@@ -1,6 +1,6 @@
 {
   "1544530823611682906": {
-    "next_id": 5,
+    "next_id": 6,
     "history": {
       "1": {
         "question": "Um baralho padrão contém 52 cartas, 13 de cada naipe (ouros, copas, espadas e paus). As cartas são embaralhadas e são retiradas 5 cartas sem reposição. Qual é a probabilidade de que as 5 cartas contenham exatamente dois naipes diferentes e que, além disso, o conjunto contenha ao menos um ás?",
@@ -25,6 +25,12 @@
         "answer": "O número total de filas ordenadas de 5 alunos entre 8 é P(8,5)=8·7·6·5·4=6720. Para as filas desejadas: escolhe‑se o primeiro aluno (menino) de 5 maneiras; dos 7 restantes, escolhem‑se exatamente 2 meninas (C(3,2)=3) e 2 meninos (C(4,2)=6) e esses 4 alunos podem ser arranjados nas 4 posições restantes de 4!=24 maneiras. Favoráveis =5·3·6·24=2160. Assim, a probabilidade =2160/6720=9/28.",
         "difficulty": "difícil",
         "topic": "PROBABILIDADE"
+      },
+      "5": {
+        "difficulty": "difícil",
+        "topic": "Probabilidade",
+        "question": "Calcule a probabilidade de que um número escolhido aleatoriamente dentre os divisores positivos de 10⁹⁹ seja um número inteiro múltiplo de 10⁸⁸.",
+        "answer": "9/625 (144 múltiplos de 10⁸⁸ entre os 104 divisores de 10⁹⁹... na verdade 144/10.404 = 9/625, considerando os 10.404 divisores)"
       }
     }
   }
