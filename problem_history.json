@@ -1,6 +1,6 @@
 {
   "1544530823611682906": {
-    "next_id": 6,
+    "next_id": 7,
     "history": {
       "1": {
         "question": "Um baralho padrão contém 52 cartas, 13 de cada naipe (ouros, copas, espadas e paus). As cartas são embaralhadas e são retiradas 5 cartas sem reposição. Qual é a probabilidade de que as 5 cartas contenham exatamente dois naipes diferentes e que, além disso, o conjunto contenha ao menos um ás?",
@@ -31,6 +31,12 @@
         "topic": "Probabilidade",
         "question": "Calcule a probabilidade de que um número escolhido aleatoriamente dentre os divisores positivos de 10⁹⁹ seja um número inteiro múltiplo de 10⁸⁸.",
         "answer": "9/625 (144 múltiplos de 10⁸⁸ entre os 104 divisores de 10⁹⁹... na verdade 144/10.404 = 9/625, considerando os 10.404 divisores)"
+      },
+      "6": {
+        "difficulty": "difícil",
+        "topic": "OBMEP - Nível 1",
+        "question": "Ana tem o dobro da idade que Beto tinha quando Ana tinha a idade que Beto tem hoje. Se a soma das idades atuais é 35 anos, quantos anos tem Ana?",
+        "answer": "20 anos (Beto tem 15, Ana tem 20 — problema clássico de razão de idades)"
       }
     }
   }
