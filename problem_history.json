@@ -1,6 +1,6 @@
 {
   "1544530823611682906": {
-    "next_id": 7,
+    "next_id": 8,
     "history": {
       "1": {
         "question": "Um baralho padrão contém 52 cartas, 13 de cada naipe (ouros, copas, espadas e paus). As cartas são embaralhadas e são retiradas 5 cartas sem reposição. Qual é a probabilidade de que as 5 cartas contenham exatamente dois naipes diferentes e que, além disso, o conjunto contenha ao menos um ás?",
@@ -37,6 +37,12 @@
         "topic": "OBMEP - Nível 1",
         "question": "Ana tem o dobro da idade que Beto tinha quando Ana tinha a idade que Beto tem hoje. Se a soma das idades atuais é 35 anos, quantos anos tem Ana?",
         "answer": "20 anos (Beto tem 15, Ana tem 20 — problema clássico de razão de idades)"
+      },
+      "7": {
+        "question": "Em um baralho padrão de 52 cartas, com 4 naipes e 13 cartas em cada naipe, são retiradas 5 cartas sem reposição. Qual a probabilidade de que as 5 cartas contenham exatamente 3 naipes diferentes?",
+        "answer": "Número total de combinações = C(52,5)=2.598.960. Escolhemos os 3 naipes que aparecerão: C(4,3)=4. Para esses 3 naipes distribuímos 5 cartas de modo que cada naipe apareça ao menos uma vez. As soluções de x1+x2+x3=5 com xi≥1 são (3,1,1) (e suas permutações) e (2,2,1) (e suas permutações), totalizando 6 casos. Para (3,1,1): C(13,3)·C(13,1)·C(13,1)=286·13·13=48.334 combinações; há 3 permutações → 145.002. Para (2,2,1): C(13,2)·C(13,2)·C(13,1)=78·78·13=79.092 combinações; há 3 permutações → 237.276. Total por conjunto de 3 naipes = 382.278. Multiplicando pelos 4 conjuntos de naipes, combinações favoráveis = 1.529.112. Assim, P = 1.529.112 / 2.598.960 = 63.713 / 108.290 ≈ 0,5885 (ou 58,85%).",
+        "difficulty": "difícil",
+        "topic": "PROBABILIDADE"
       }
     }
   }
