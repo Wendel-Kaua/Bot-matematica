@@ -642,5 +642,11 @@
     "answer": "O número total de filas ordenadas de 5 alunos entre 8 é P(8,5)=8·7·6·5·4=6720. Para as filas desejadas: escolhe‑se o primeiro aluno (menino) de 5 maneiras; dos 7 restantes, escolhem‑se exatamente 2 meninas (C(3,2)=3) e 2 meninos (C(4,2)=6) e esses 4 alunos podem ser arranjados nas 4 posições restantes de 4!=24 maneiras. Favoráveis =5·3·6·24=2160. Assim, a probabilidade =2160/6720=9/28.",
     "difficulty": "difícil",
     "topic": "PROBABILIDADE"
+  },
+  {
+    "question": "Em um baralho padrão de 52 cartas, com 4 naipes e 13 cartas em cada naipe, são retiradas 5 cartas sem reposição. Qual a probabilidade de que as 5 cartas contenham exatamente 3 naipes diferentes?",
+    "answer": "Número total de combinações = C(52,5)=2.598.960. Escolhemos os 3 naipes que aparecerão: C(4,3)=4. Para esses 3 naipes distribuímos 5 cartas de modo que cada naipe apareça ao menos uma vez. As soluções de x1+x2+x3=5 com xi≥1 são (3,1,1) (e suas permutações) e (2,2,1) (e suas permutações), totalizando 6 casos. Para (3,1,1): C(13,3)·C(13,1)·C(13,1)=286·13·13=48.334 combinações; há 3 permutações → 145.002. Para (2,2,1): C(13,2)·C(13,2)·C(13,1)=78·78·13=79.092 combinações; há 3 permutações → 237.276. Total por conjunto de 3 naipes = 382.278. Multiplicando pelos 4 conjuntos de naipes, combinações favoráveis = 1.529.112. Assim, P = 1.529.112 / 2.598.960 = 63.713 / 108.290 ≈ 0,5885 (ou 58,85%).",
+    "difficulty": "difícil",
+    "topic": "PROBABILIDADE"
   }
 ]
