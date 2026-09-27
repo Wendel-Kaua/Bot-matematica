@@ -1,6 +1,6 @@
 {
   "1544530823611682906": {
-    "next_id": 9,
+    "next_id": 10,
     "history": {
       "1": {
         "question": "Um baralho padrão contém 52 cartas, 13 de cada naipe (ouros, copas, espadas e paus). As cartas são embaralhadas e são retiradas 5 cartas sem reposição. Qual é a probabilidade de que as 5 cartas contenham exatamente dois naipes diferentes e que, além disso, o conjunto contenha ao menos um ás?",
@@ -49,6 +49,12 @@
         "answer": "A soma é S = n(n+1)/2. Exigir S = k^2 leva a n(n+1)=2k^2. Ponha x = 2n+1 e y = 2k; então x^2-2y^2 = -1, equação de Pell. As soluções positivas são obtidas recursivamente a partir de (x1,y1)=(1,1): x_{m+1}=3x_m+4y_m, y_{m+1}=2x_m+3y_m. Convertendo, n = (x-1)/2. Para n<2000 obtêm‑se n = 1, 8, 49, 288, 1681.",
         "difficulty": "difícil",
         "topic": "ARITMÉTICA"
+      },
+      "9": {
+        "question": "Em um triângulo ABC isósceles, AB = AC. O ponto D está no lado BC de modo que BD = 2·DC. A circunferência circunscrita ao triângulo ABD intersecta o segmento AC em E (E ≠ A). Sabendo que ∠BAC = 40°, determine a medida do ângulo AED em graus.",
+        "answer": "O ângulo AED mede 30°. (Esboço: como AB = AC, ∠ABC = ∠ACB = (180°-40°)/2 = 70°. Com BD = 2·DC, usa‑se a relação de segmentos em um círculo para obter que ∠BAD = 20°. Então, na circunferência, o arco BD subtende ∠AED = ½·arco BD = 30°.)",
+        "difficulty": "difícil",
+        "topic": "GEOMETRIA"
       }
     }
   }
