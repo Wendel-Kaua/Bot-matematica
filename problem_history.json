@@ -1,6 +1,6 @@
 {
   "1544530823611682906": {
-    "next_id": 10,
+    "next_id": 11,
     "history": {
       "1": {
         "question": "Um baralho padrão contém 52 cartas, 13 de cada naipe (ouros, copas, espadas e paus). As cartas são embaralhadas e são retiradas 5 cartas sem reposição. Qual é a probabilidade de que as 5 cartas contenham exatamente dois naipes diferentes e que, além disso, o conjunto contenha ao menos um ás?",
@@ -55,6 +55,12 @@
         "answer": "O ângulo AED mede 30°. (Esboço: como AB = AC, ∠ABC = ∠ACB = (180°-40°)/2 = 70°. Com BD = 2·DC, usa‑se a relação de segmentos em um círculo para obter que ∠BAD = 20°. Então, na circunferência, o arco BD subtende ∠AED = ½·arco BD = 30°.)",
         "difficulty": "difícil",
         "topic": "GEOMETRIA"
+      },
+      "10": {
+        "question": "Considere todas as permutações dos números de 1 a 12. Escolhe‑se aleatoriamente, com a mesma probabilidade, uma dessas permutações. Qual é a probabilidade de que (i) nenhum número fique na sua posição original (isto é, a permutação é uma derivação) e (ii) o número 1 apareça antes do número 2 na ordem da permutação? Apresente a resposta como fração irredutível.",
+        "answer": "O número total de permutações é 12! = 479001600. O número de derivações de 12 elementos é !12 = 176214841. Pela simetria, em metade das derivações o 1 precede o 2. Assim, o número favorável é !12/2 = 176214841 ÷ 2 = 176214841 (pois já consideramos a metade). A probabilidade é (!12)/(2·12!) = 176214841/958003200, fração já irredutível.",
+        "difficulty": "difícil",
+        "topic": "PROBABILIDADE"
       }
     }
   }
