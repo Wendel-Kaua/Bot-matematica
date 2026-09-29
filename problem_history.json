@@ -1,6 +1,6 @@
 {
   "1544530823611682906": {
-    "next_id": 11,
+    "next_id": 12,
     "history": {
       "1": {
         "question": "Um baralho padrão contém 52 cartas, 13 de cada naipe (ouros, copas, espadas e paus). As cartas são embaralhadas e são retiradas 5 cartas sem reposição. Qual é a probabilidade de que as 5 cartas contenham exatamente dois naipes diferentes e que, além disso, o conjunto contenha ao menos um ás?",
@@ -61,6 +61,12 @@
         "answer": "O número total de permutações é 12! = 479001600. O número de derivações de 12 elementos é !12 = 176214841. Pela simetria, em metade das derivações o 1 precede o 2. Assim, o número favorável é !12/2 = 176214841 ÷ 2 = 176214841 (pois já consideramos a metade). A probabilidade é (!12)/(2·12!) = 176214841/958003200, fração já irredutível.",
         "difficulty": "difícil",
         "topic": "PROBABILIDADE"
+      },
+      "11": {
+        "question": "Em quantos números diferentes de sete algarismos, formados por algarismos distintos entre 0 e 9, o primeiro algarismo não pode ser zero e a soma dos algarismos é múltipla de 9?",
+        "answer": "Primeiro observe que escolher 7 algarismos equivale a omitir 3 algarismos. Como a soma total de 0 a 9 é 45 (≡0 mod 9), a soma dos 7 escolhidos será múltiplo de 9 se e somente se a soma dos 3 omitidos for múltipla de 9. Contando os subconjuntos de 3 algarismos com soma ≡0 (mod 9) obtêm‑se 14 possibilidades: 8 contendo exatamente um zero (0 ou 9) e 6 sem zeros. Quando o zero está omitido (4 desses 8 casos), o conjunto de 7 algarismos não tem zero, gerando 7! = 5040 números. Nos demais 10 casos o zero está presente, e o primeiro algarismo pode ser escolhido entre os 6 que não são zero, dando 6·6! = 4320 números. Total = 4·5040 + 10·4320 = 20 160 + 43 200 = 63 360. Assim, há 63 360 números que satisfazem as condições.",
+        "difficulty": "difícil",
+        "topic": "MATEMÁTICA"
       }
     }
   }
