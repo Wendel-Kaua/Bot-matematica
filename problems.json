@@ -684,5 +684,11 @@
     "answer": "Para que as raízes sejam reais distintas é necessário D>0, onde D=m^2-6m+1. Para que ambas sejam <1 precisamos de soma=m-1<2 (isto é, m<3) e produto=m<1, logo m≤0. Além disso as raízes devem ser racionais, portanto D tem que ser um quadrado perfeito. Escrevendo D=(m-3)^2-8=t^2 e fatorando (m-3-t)(m-3+t)=8, obtêm‑se as possibilidades (2,4) e (-4,-2). Apenas o par (-4,-2) fornece m inteiro que satisfaz m≤0, resultando m=0. Assim, o único valor inteiro que cumpre todas as condições é m=0.",
     "difficulty": "difícil",
     "topic": "FUNÇÕES QUADRÁTICAS"
+  },
+  {
+    "question": "Sejam a, b, c números reais diferentes que satisfazem a + b + c = 6, ab + bc + ca = 11 e abc = 6. Calcule o valor de a^5 + b^5 + c^5.",
+    "answer": "276. Usando as identidades de Newton: s1=6, s2=14, s3=36, s4=98 e então s5 = 6·98 − 11·36 + 6·14 = 276.",
+    "difficulty": "difícil",
+    "topic": "ÁLGEBRA"
   }
 ]
